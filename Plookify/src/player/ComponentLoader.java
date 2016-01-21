@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Ishrat
+ * @author tunazzinaIshrat
  */
 public class ComponentLoader {
     public static void main(String[] args) {
