@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Alen
+ * @author Alen is the best
  */
 public class ComponentLoader {
     public static void main(String[] args) {
