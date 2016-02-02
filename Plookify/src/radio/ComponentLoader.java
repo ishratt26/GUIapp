@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package playlist;
-import javax.swing.JOptionPane;
- /*
+package radio;
+
+/**
  *
- * @author monicadzhaleva
+ * @author gabrieluliano
  */
 public class ComponentLoader {
-    public static void main(String[] args)
-    {
-    JOptionPane.showMessageDialog(null,"The application works");
-    }
+    
 }
