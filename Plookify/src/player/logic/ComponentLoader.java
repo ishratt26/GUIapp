@@ -6,6 +6,7 @@
 package player;
 
 import javax.swing.JOptionPane;
+import player.gui.TrackPlayerController;
 
 /**
  *
@@ -14,5 +15,8 @@ import javax.swing.JOptionPane;
 public class ComponentLoader {
     public static void main(String[] args) {
         JOptionPane.showMessageDialog(null, "The application works.");
+        TrackPlayerController c = new TrackPlayerController();
+        
+        c.play();
     }
 }
