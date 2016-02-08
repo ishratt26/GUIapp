@@ -3,20 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package player;
+package social;
 
 import javax.swing.JOptionPane;
-import player.gui.TrackPlayerController;
 
 /**
  *
- * @author tunazzinaIshrat
+ * @author Muhammad-Rayhaan
  */
 public class ComponentLoader {
     public static void main(String[] args) {
         JOptionPane.showMessageDialog(null, "The application works.");
-        TrackPlayerController c = new TrackPlayerController();
-        
-        c.play();
     }
 }

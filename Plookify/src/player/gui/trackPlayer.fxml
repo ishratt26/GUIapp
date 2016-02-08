@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" onMouseClicked="#play" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="player.gui.TrackPlayerController">
+   <children>
+      <ImageView fitHeight="45.0" fitWidth="279.0" layoutY="355.0" onMouseClicked="#play" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resources/Schermata%202016-02-08%20alle%2011.43.45.png" />
+         </image>
+      </ImageView>
+      <Region layoutX="39.0" layoutY="360.0" onMouseClicked="#play" prefHeight="35.0" prefWidth="35.0" />
+      <Region layoutY="360.0" onMouseClicked="#rewind" prefHeight="35.0" prefWidth="35.0" />
+      <Region layoutX="80.0" layoutY="365.0" prefHeight="25.0" prefWidth="24.0" />
+   </children>
+</AnchorPane>

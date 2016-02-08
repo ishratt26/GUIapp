@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package radio;
+package player;
+
+import javafx.application.Application;
 
 /**
  *
- * @author gabrieluliano
+ * @author tunazzinaIshrat
  */
-public class ComponentLoader {
+public class Main {
     
 }
