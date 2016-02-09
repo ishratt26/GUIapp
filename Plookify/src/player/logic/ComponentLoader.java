@@ -5,6 +5,7 @@
  */
 package player;
 
+import javafx.application.Application;
 import javax.swing.JOptionPane;
 import player.gui.TrackPlayerController;
 
@@ -12,7 +13,8 @@ import player.gui.TrackPlayerController;
  *
  * @author tunazzinaIshrat
  */
-public class ComponentLoader {
+public class ComponentLoader extends Application {
+    
     public static void main(String[] args) {
         JOptionPane.showMessageDialog(null, "The application works.");
         TrackPlayerController c = new TrackPlayerController();
