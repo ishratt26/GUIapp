@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -9,15 +10,23 @@
 <?import javafx.scene.layout.*?>
 
 
-<AnchorPane id="AnchorPane" onMouseClicked="#play" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="player.gui.TrackPlayerController">
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="player.gui.TrackPlayerController">
    <children>
-      <ImageView fitHeight="45.0" fitWidth="279.0" layoutY="355.0" onMouseClicked="#play" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../resources/Schermata%202016-02-08%20alle%2011.43.45.png" />
-         </image>
-      </ImageView>
-      <Region layoutX="39.0" layoutY="360.0" onMouseClicked="#play" prefHeight="35.0" prefWidth="35.0" />
-      <Region layoutY="360.0" onMouseClicked="#rewind" prefHeight="35.0" prefWidth="35.0" />
-      <Region layoutX="80.0" layoutY="365.0" prefHeight="25.0" prefWidth="24.0" />
+      <AnchorPane id="AnchorPane" onMouseClicked="#play" prefHeight="146.0" prefWidth="215.0">
+         <children>
+            <ImageView fitHeight="107.0" fitWidth="193.0" layoutX="10.0" layoutY="39.0" onMouseClicked="#play" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../resources/Schermata%202016-02-08%20alle%2011.43.45.png" />
+               </image>
+            </ImageView>
+            <Button blendMode="OVERLAY" layoutX="83.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#play" opacity="0.0" prefHeight="31.0" prefWidth="34.0" text="play">
+               <effect>
+                  <Blend mode="OVERLAY" opacity="0.0" />
+               </effect>
+            </Button>
+            <Button blendMode="OVERLAY" layoutX="32.0" layoutY="60.0" mnemonicParsing="false" onMouseClicked="#rewind" opacity="0.0" prefHeight="26.0" prefWidth="34.0" text="rewind" />
+            <Button layoutX="134.0" layoutY="61.0" mnemonicParsing="false" onMouseClicked="#forward" opacity="0.0" prefHeight="23.0" prefWidth="26.0" text="forward" />
+         </children>
+      </AnchorPane>
    </children>
-</AnchorPane>
+</VBox>
