@@ -3,9 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package player;
+package player.logic;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import player.gui.TrackPlayerController;
 
@@ -16,9 +20,21 @@ import player.gui.TrackPlayerController;
 public class ComponentLoader extends Application {
     
     public static void main(String[] args) {
-        JOptionPane.showMessageDialog(null, "The application works.");
-        TrackPlayerController c = new TrackPlayerController();
-        
-        c.play();
+        launch(args);
     }
+    
+    @Override
+    public void start(Stage stage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("trackPlayer.fxml"));
+        stage.setTitle("Track Player");
+        stage.setScene(new Scene(root, 400, 400));
+        stage.show();
+        
+      
+    }
+    
+
+    
+    
+    
 }
