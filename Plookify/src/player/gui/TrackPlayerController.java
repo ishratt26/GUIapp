@@ -5,18 +5,15 @@
  */
 package player.gui;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
-import static javafx.application.Application.launch;
-import static javafx.application.ConditionalFeature.FXML;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javax.swing.JOptionPane;
 
 /**
@@ -29,7 +26,6 @@ public class TrackPlayerController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    
     @FXML
     private Button play;
     @FXML
@@ -37,23 +33,33 @@ public class TrackPlayerController implements Initializable {
     @FXML
     private Button forward;
     
+    String path = "/Users/Ishrat/Desktop/Software Engineering Project/NetBeansProjects/SE21/Plookify/src/resources/furElise.mp3";
+    Media media = new Media(new File(path).toURI().toString());
+    MediaPlayer player = new MediaPlayer(media);
+    
+    
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+       
+    }  
+    
+    
     
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("View is now loaded!");
-    }
     
     @FXML
     public void handleButtonAction(ActionEvent e) {
         if (e.getSource() == play) {
-            JOptionPane.showMessageDialog(null, "Play!");
+            System.out.println("Play!");
+            player.play();
         }
         else if(e.getSource() == rewind){
-            JOptionPane.showMessageDialog(null, "Rewind!");
+            System.out.println("Rewind!");
         }
         else if(e.getSource() == forward){
-            JOptionPane.showMessageDialog(null, "Forward!");
+            System.out.println("Forward!");
         }
     }
+    
 }
