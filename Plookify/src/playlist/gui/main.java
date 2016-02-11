@@ -1,9 +1,12 @@
 package playlist.gui;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 /**
@@ -11,6 +14,8 @@ import javafx.stage.Stage;
  * @author 
  */
 public class main extends Application {
+    @FXML
+    private Button NewPlaylist;
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -28,5 +33,5 @@ public class main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+  
 }
