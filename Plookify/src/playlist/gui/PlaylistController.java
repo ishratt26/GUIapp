@@ -26,7 +26,18 @@ public class PlaylistController implements Initializable {
     }  
     public void addPlaylists()
     {
-        JOptionPane.showMessageDialog(null,"Hello!");
+        System.out.println("Add works");
     }
+
+    /**
+     *Search in player
+     */
+    public void searchPlayer()
+    {
+             System.out.println("Search works");
+
+    }
+    
+    
     
 }
