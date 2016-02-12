@@ -1,29 +1,147 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.effect.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.image.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="979.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <ImageView fitHeight="687.0" fitWidth="979.0" layoutY="-1.0">
-         <image>
-            <Image url="@../../resources/playlistbg.jpg" />
-         </image>
-      </ImageView>
-      <ScrollPane layoutX="119.0" layoutY="43.0" prefHeight="592.0" prefWidth="846.0" />
-      <Button fx:id="Home" layoutY="67.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="118.0" style="-fx-opacity: 0;" text="Home" />
-      <Button fx:id="Playlists" layoutX="3.0" layoutY="110.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="118.0" style="-fx-opacity: 0;" text="Playlists" />
-      <Button fx:id="Messages" layoutX="3.0" layoutY="162.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="118.0" style="-fx-opacity: 0;" text="Messages" />
-      <Button fx:id="Radio" layoutX="3.0" layoutY="204.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="118.0" style="-fx-opacity: 0;" text="Radio" />
-      <Button fx:id="Upgrade" layoutX="3.0" layoutY="240.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="118.0" style="-fx-opacity: 0;" text="Upgrade" />
-      <Button fx:id="NewPlaylist" layoutX="-5.0" layoutY="597.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="133.0" text="NewPlaylist" />
-      <Button fx:id="Back" layoutY="641.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="36.0" style="-fx-opacity: 0;" text="Back" />
-      <Button fx:id="PlayPause" layoutX="41.0" layoutY="641.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="36.0" style="-fx-opacity: 0;" text="PlayPause" />
-      <Button fx:id="Nexy" layoutX="77.0" layoutY="641.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="36.0" style="-fx-opacity: 0;" text="Next" />
-   </children>
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="playlist.gui.PlaylistController">
+   <left>
+      <AnchorPane prefHeight="495.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="27.0" fitWidth="84.0" layoutX="30.0" layoutY="185.0">
+               <image>
+                  <Image url="@../../resources/playlist.png" />
+               </image>
+            </ImageView>
+            <VBox layoutY="1.0" prefHeight="492.0" prefWidth="159.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="172.0" text="Home">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Big Caslon Medium" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="179.0" text="Playlist">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Big Caslon Medium" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="179.0" text="Messages">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Big Caslon Medium" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="179.0" text="Radio">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Big Caslon Medium" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="179.0" text="Upgrade">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Big Caslon Medium" size="13.0" />
+                     </font>
+                  </Button>
+                  <MenuBar prefHeight="29.0" prefWidth="94.0">
+                    <menus>
+                      <Menu mnemonicParsing="false" text="Friends">
+                        <items>
+                          <MenuItem mnemonicParsing="false" text="Public" />
+                        </items>
+                      </Menu>
+                      <Menu mnemonicParsing="false" text="Private">
+                        <items>
+                          <MenuItem mnemonicParsing="false" text="Hidden" />
+                        </items>
+                      </Menu>
+                    </menus>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </MenuBar>
+                  <Button mnemonicParsing="false" onAction="#addPlaylists" prefHeight="43.0" prefWidth="150.0" text="Add Playlist ">
+                     <VBox.margin>
+                        <Insets top="239.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Big Caslon Medium" size="13.0" />
+                     </font>
+                  </Button>
+               </children></VBox>
+         </children>
+      </AnchorPane>
+   </left>
+   <top>
+      <AnchorPane prefHeight="44.0" prefWidth="600.0" style="-fx-background-color: FFFFFF;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="44.0" fitWidth="136.0" layoutX="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="39.0" fitWidth="115.0" layoutX="5.0" layoutY="2.0">
+               <image>
+                  <Image url="@../../resources/logo.png" />
+               </image>
+            </ImageView>
+            <TextField layoutX="134.0" layoutY="9.0" promptText="Search" />
+         </children>
+      </AnchorPane>
+   </top>
+   <bottom>
+      <AnchorPane prefHeight="54.0" prefWidth="800.0" style="-fx-background-color: FFFFFF;" BorderPane.alignment="CENTER">
+         <effect>
+            <ColorInput height="50.3" width="255.0">
+               <paint>
+                  <LinearGradient endX="0.3894230769230769" endY="1.0">
+                     <stops>
+                        <Stop color="#cdcdcd" />
+                        <Stop color="#cdcdcd" offset="0.00749063670411985" />
+                        <Stop color="WHITE" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </paint>
+            </ColorInput>
+         </effect>
+      </AnchorPane>
+   </bottom>
+   <center>
+      <AnchorPane prefHeight="401.0" prefWidth="650.0" BorderPane.alignment="CENTER">
+         <children>
+            <ScrollPane layoutX="6.0" layoutY="259.0" prefHeight="243.0" prefWidth="650.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="259.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+              </content>
+            </ScrollPane>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="303.0" fitWidth="517.0" layoutX="-1.0">
+               <image>
+                  <Image url="@../../resources/mainimage.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </center>
+   <right>
+      <AnchorPane prefHeight="502.0" prefWidth="138.0" BorderPane.alignment="CENTER" />
+   </right>
+</BorderPane>

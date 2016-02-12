@@ -1,28 +1,31 @@
 package playlist.gui;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
-
 /**
  *
- * @author 
+ * @Monika Dzhaleva 
  */
+
 public class main extends Application {
-    @FXML
-    private Button NewPlaylist;
     
+    
+    
+    @FXML
+    Button NewPlaylist;
     @Override
     public void start(Stage stage) throws Exception {
+        
         Parent root = FXMLLoader.load(getClass().getResource("playlist.fxml"));
         
         Scene scene = new Scene(root);
-        
+        stage.setTitle("Playlist");
         stage.setScene(scene);
         stage.show();
     }
