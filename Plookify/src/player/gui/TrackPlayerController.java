@@ -33,6 +33,8 @@ public class TrackPlayerController implements Initializable {
     @FXML
     private Button forward;
     
+    boolean isPlaying = false;
+    
     String path = "/Users/Ishrat/Desktop/Software Engineering Project/NetBeansProjects/SE21/Plookify/src/resources/furElise.mp3";
     Media media = new Media(new File(path).toURI().toString());
     MediaPlayer player = new MediaPlayer(media);
@@ -51,8 +53,13 @@ public class TrackPlayerController implements Initializable {
     @FXML
     public void handleButtonAction(ActionEvent e) {
         if (e.getSource() == play) {
-            System.out.println("Play!");
-            player.play();
+            if(isPlaying==false){
+                 isPlaying = true;
+                player.play();
+            }
+            else{
+                player.pause();
+            }
         }
         else if(e.getSource() == rewind){
             System.out.println("Rewind!");
