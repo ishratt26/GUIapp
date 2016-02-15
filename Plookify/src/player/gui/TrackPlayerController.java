@@ -64,7 +64,6 @@ public class TrackPlayerController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        duration = player.getMedia().getDuration();
         player.currentTimeProperty().addListener(new InvalidationListener() {
             public void invalidated(Observable ov) {
                 updateValues();
