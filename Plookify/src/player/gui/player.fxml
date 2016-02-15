@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.media.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="player.gui.TrackPlayerController">
+   <left>
+      <AnchorPane prefHeight="495.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="27.0" fitWidth="84.0" layoutX="30.0" layoutY="185.0">
+               <image>
+                  <Image url="@../../resources/playlist.png" />
+               </image>
+            </ImageView>
+            <VBox layoutY="1.0" prefHeight="492.0" prefWidth="159.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="172.0" text="Home">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Big Caslon Medium" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="179.0" text="Playlist">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Big Caslon Medium" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="179.0" text="Messages">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Big Caslon Medium" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="179.0" text="Radio">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Big Caslon Medium" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="179.0" text="Upgrade">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Big Caslon Medium" size="13.0" />
+                     </font>
+                  </Button>
+                  <MenuBar prefHeight="29.0" prefWidth="94.0">
+                    <menus>
+                      <Menu mnemonicParsing="false" text="Friends">
+                        <items>
+                          <MenuItem mnemonicParsing="false" text="Public" />
+                        </items>
+                      </Menu>
+                      <Menu mnemonicParsing="false" text="Private">
+                        <items>
+                          <MenuItem mnemonicParsing="false" text="Hidden" />
+                        </items>
+                      </Menu>
+                    </menus>
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </MenuBar>
+                  <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="150.0" text="Add Playlist ">
+                     <VBox.margin>
+                        <Insets top="218.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Big Caslon Medium" size="13.0" />
+                     </font>
+                  </Button>
+               </children></VBox>
+         </children>
+      </AnchorPane>
+   </left>
+   <top>
+      <AnchorPane prefHeight="44.0" prefWidth="600.0" style="-fx-background-color: FFFFFF;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="44.0" fitWidth="136.0" layoutX="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="39.0" fitWidth="115.0" layoutX="5.0" layoutY="2.0">
+               <image>
+                  <Image url="@../../resources/logo.png" />
+               </image>
+            </ImageView>
+            <TextField layoutX="134.0" layoutY="9.0" promptText="Search" />
+            <ImageView fitHeight="33.0" fitWidth="113.0" layoutX="646.0" layoutY="5.0">
+               <image>
+                  <Image url="@../../resources/button.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="401.0" prefWidth="650.0" BorderPane.alignment="CENTER">
+         <children>
+            <ScrollPane hbarPolicy="NEVER" layoutY="302.0" prefHeight="199.0" prefWidth="516.0" style="-fx-background-color: dedede;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="302.0">
+               <content>
+                  <TableView prefHeight="200.0" prefWidth="499.0">
+                    <columns>
+                      <TableColumn prefWidth="226.0" text="Track" />
+                      <TableColumn prefWidth="156.0" text="Artist" />
+                        <TableColumn minWidth="0.0" prefWidth="116.0" text="Length" />
+                    </columns>
+                  </TableView>
+               </content></ScrollPane>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="303.0" fitWidth="517.0" layoutX="-1.0">
+               <image>
+                  <Image url="@../../resources/mainimage.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </center>
+   <right>
+      <AnchorPane prefHeight="502.0" prefWidth="138.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="29.0" fitWidth="108.0" layoutX="14.0">
+               <image>
+                  <Image url="@../../resources/userpanel.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="85.0" fitWidth="85.0" layoutX="27.0" layoutY="31.0">
+               <image>
+                  <Image url="@../../resources/UGM-default-user.png" />
+               </image>
+               <effect>
+                  <DropShadow blurType="ONE_PASS_BOX" color="#aeaeae" radius="9.24" width="17.96" />
+               </effect>
+            </ImageView>
+         </children></AnchorPane>
+   </right>
+   <bottom>
+      <AnchorPane prefHeight="55.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="302.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="45.0" fitWidth="48.0" layoutX="115.0" layoutY="4.0" opacity="0.85">
+               <image>
+                  <Image url="@../../resources/play.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="43.0" layoutX="72.0" layoutY="6.0" opacity="0.36">
+               <image>
+                  <Image url="@../../resources/pause.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="44.0" fitWidth="44.0" layoutX="171.0" layoutY="4.0" opacity="0.33">
+               <image>
+                  <Image url="@../../resources/forward.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="39.0" layoutX="23.0" layoutY="6.0" opacity="0.39">
+               <image>
+                  <Image url="@../../resources/back.png" />
+               </image>
+            </ImageView>
+            <Slider fx:id="timeSlider" blockIncrement="15.0" layoutX="290.0" layoutY="20.0" prefHeight="16.0" prefWidth="510.0" snapToTicks="true">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <effect>
+                  <DropShadow color="#55e8ff" />
+               </effect>
+            </Slider>
+            <Label fx:id="timeElapsed" layoutX="215.0" layoutY="11.0" prefHeight="34.0" prefWidth="86.0" />
+            <Button fx:id="play" layoutX="124.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleButtonAction" opacity="0.0" prefHeight="17.0" prefWidth="19.0" />
+            <Button fx:id="pause" layoutX="75.0" layoutY="8.0" mnemonicParsing="false" onAction="#handleButtonAction" opacity="0.0" prefHeight="37.0" prefWidth="37.0" />
+            <Button fx:id="rewind" layoutX="24.0" layoutY="8.0" mnemonicParsing="false" onAction="#handleButtonAction" opacity="0.0" prefHeight="37.0" prefWidth="37.0" />
+            <Button fx:id="forward" layoutX="175.0" layoutY="8.0" mnemonicParsing="false" onAction="#handleButtonAction" opacity="0.0" prefHeight="37.0" prefWidth="37.0" />
+         </children>
+      </AnchorPane>
+   </bottom>
+</BorderPane>

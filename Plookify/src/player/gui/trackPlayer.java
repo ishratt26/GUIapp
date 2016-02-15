@@ -19,10 +19,10 @@ public class trackPlayer extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("trackPlayer.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("player.fxml"));
         
         Scene scene = new Scene(root);
-        
+        stage.setTitle("Track Player");
         stage.setScene(scene);
         stage.show();
     }
