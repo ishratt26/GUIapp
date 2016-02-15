@@ -25,7 +25,7 @@
             </ImageView>
             <VBox layoutY="1.0" prefHeight="492.0" prefWidth="159.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="172.0" text="Home">
+                  <Button fx:id="Home" mnemonicParsing="false" prefHeight="26.0" prefWidth="172.0" text="Home">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
@@ -33,7 +33,7 @@
                         <Font name="Big Caslon Medium" size="13.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="179.0" text="Playlist">
+                  <Button fx:id="Playlist" mnemonicParsing="false" prefHeight="26.0" prefWidth="179.0" text="Playlist">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -49,7 +49,7 @@
                         <Font name="Big Caslon Medium" size="13.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="179.0" text="Radio">
+                  <Button fx:id="Radio" mnemonicParsing="false" prefHeight="26.0" prefWidth="179.0" text="Radio">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -57,7 +57,7 @@
                         <Font name="Big Caslon Medium" size="13.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="179.0" text="Upgrade">
+                  <Button fx:id="Upgrade" mnemonicParsing="false" prefHeight="26.0" prefWidth="179.0" text="Upgrade">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -65,23 +65,23 @@
                         <Font name="Big Caslon Medium" size="13.0" />
                      </font>
                   </Button>
-                  <MenuBar prefHeight="29.0" prefWidth="94.0">
-                    <menus>
-                      <Menu mnemonicParsing="false" text="Friends">
-                        <items>
-                          <MenuItem mnemonicParsing="false" text="Public" />
-                        </items>
-                      </Menu>
-                      <Menu mnemonicParsing="false" text="Private">
-                        <items>
-                          <MenuItem mnemonicParsing="false" text="Hidden" />
-                        </items>
-                      </Menu>
-                    </menus>
+                  <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="Friends">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        </content>
+                      </Tab>
+                        <Tab text="Private">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                           </content>
+                        </Tab>
+                    </tabs>
                      <VBox.margin>
                         <Insets top="30.0" />
                      </VBox.margin>
-                  </MenuBar>
+                  </TabPane>
                   <Button mnemonicParsing="false" onAction="#addPlaylists" prefHeight="43.0" prefWidth="150.0" text="Add Playlist ">
                      <VBox.margin>
                         <Insets top="218.0" />
@@ -104,7 +104,7 @@
                </image>
             </ImageView>
             <TextField layoutX="134.0" layoutY="9.0" onAction="#searchPlayer" promptText="Search" />
-            <ImageView fitHeight="33.0" fitWidth="113.0" layoutX="646.0" layoutY="5.0">
+            <ImageView fx:id="Upgrade" fitHeight="33.0" fitWidth="113.0" layoutX="678.0" layoutY="5.0">
                <image>
                   <Image url="@../../resources/button.png" />
                </image>
@@ -167,7 +167,7 @@
                   <Image url="@../../resources/back.png" />
                </image>
             </ImageView>
-            <Slider layoutX="221.0" layoutY="18.0" prefHeight="16.0" prefWidth="564.0">
+            <Slider layoutX="280.0" layoutY="18.0" prefHeight="16.0" prefWidth="505.0">
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
@@ -175,6 +175,11 @@
                   <DropShadow color="#55e8ff" />
                </effect>
             </Slider>
+            <ImageView fitHeight="43.0" fitWidth="43.0" layoutX="220.0" layoutY="6.0" opacity="0.54">
+               <image>
+                  <Image url="@../../resources/reload.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </bottom>
