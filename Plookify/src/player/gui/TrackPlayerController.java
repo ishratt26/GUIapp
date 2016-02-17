@@ -45,6 +45,8 @@ public class TrackPlayerController implements Initializable {
     @FXML
     private Button forward;
     @FXML
+    private Button reload;
+    @FXML
     private Slider timeSlider;
     @FXML
     private Label timeElapsed;
@@ -52,7 +54,7 @@ public class TrackPlayerController implements Initializable {
     private Duration duration;
     
     
-    String path = "/Users/Ishrat/Desktop/Software Engineering Project/NetBeansProjects/SE21/Plookify/src/resources/furElise.mp3";
+    String path = "/Users/Ishrat/Desktop/Software Engineering Project/NetBeansProjects/SE21/Plookify/src/resources/SeeYouAgain.mp3";
     Media media = new Media(new File(path).toURI().toString());
     MediaPlayer player = new MediaPlayer(media);
     Status status = player.getStatus();
@@ -99,6 +101,9 @@ public class TrackPlayerController implements Initializable {
         else if(e.getSource() == forward){
             player.seek(player.getCurrentTime().multiply(1.5));
         }
+        else if(e.getSource() == reload){
+            player.seek(player.getStartTime());
+        }
         
         
     }
@@ -121,41 +126,41 @@ public class TrackPlayerController implements Initializable {
     }
     
     private static String formatTime(Duration elapsed, Duration duration) {
-    int intElapsed = (int) floor(elapsed.toSeconds());
-    int elapsedHours = intElapsed / (60 * 60);
-    if (elapsedHours > 0) {
-    intElapsed -= elapsedHours * 60 * 60;
-    }
-    int elapsedMinutes = intElapsed / 60;
-    int elapsedSeconds = intElapsed - elapsedHours * 60 * 60 - elapsedMinutes * 60;
+        int intElapsed = (int) floor(elapsed.toSeconds());
+        int elapsedHours = intElapsed / (60 * 60);
+        if (elapsedHours > 0) {
+            intElapsed -= elapsedHours * 60 * 60;
+        }
+        int elapsedMinutes = intElapsed / 60;
+        int elapsedSeconds = intElapsed - elapsedHours * 60 * 60 - elapsedMinutes * 60;
 
-    if (duration.greaterThan(Duration.ZERO)) {
-    int intDuration = (int) floor(duration.toSeconds());
-    int durationHours = intDuration / (60 * 60);
-    if (durationHours > 0) {
-    intDuration -= durationHours * 60 * 60;
-    }
-    int durationMinutes = intDuration / 60;
-    int durationSeconds = intDuration - durationHours * 60 * 60
-    - durationMinutes * 60;
-    if (durationHours > 0) {
-    return format("%d:%02d:%02d/%d:%02d:%02d",
-    elapsedHours, elapsedMinutes, elapsedSeconds,
-    durationHours, durationMinutes, durationSeconds);
-    } else {
-    return format("%02d:%02d/%02d:%02d",
-    elapsedMinutes, elapsedSeconds, durationMinutes,
-    durationSeconds);
-    }
-    } else {
-    if (elapsedHours > 0) {
-    return format("%d:%02d:%02d", elapsedHours,
-    elapsedMinutes, elapsedSeconds);
-    } else {
-    return format("%02d:%02d", elapsedMinutes,
-    elapsedSeconds);
-    }
-    }
+        if (duration.greaterThan(Duration.ZERO)) {
+            int intDuration = (int) floor(duration.toSeconds());
+            int durationHours = intDuration / (60 * 60);
+            if (durationHours > 0) {
+                intDuration -= durationHours * 60 * 60;
+            }
+            int durationMinutes = intDuration / 60;
+            int durationSeconds = intDuration - durationHours * 60 * 60
+                    - durationMinutes * 60;
+            if (durationHours > 0) {
+                return format("%d:%02d:%02d/%d:%02d:%02d",
+                        elapsedHours, elapsedMinutes, elapsedSeconds,
+                        durationHours, durationMinutes, durationSeconds);
+            } else {
+                return format("%02d:%02d/%02d:%02d",
+                        elapsedMinutes, elapsedSeconds, durationMinutes,
+                        durationSeconds);
+            }
+        } else {
+            if (elapsedHours > 0) {
+                return format("%d:%02d:%02d", elapsedHours,
+                        elapsedMinutes, elapsedSeconds);
+            } else {
+                return format("%02d:%02d", elapsedMinutes,
+                        elapsedSeconds);
+            }
+        }
     }
     
 }
