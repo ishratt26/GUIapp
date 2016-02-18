@@ -17,7 +17,7 @@ public class Main extends Application {
         stage = MainStage.getStage();
         TrackScene scene = new TrackScene();
 
-        MainStage.loadScene(scene.getScene(), "Playlist");
+        MainStage.loadScene(scene.getScene(), "Track Player");
         stage.show();
     }
 }
