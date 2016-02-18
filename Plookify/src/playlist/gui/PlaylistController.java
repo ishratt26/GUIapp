@@ -5,6 +5,9 @@
  */
 package playlist.gui;
 
+import account.gui.MainStage;
+import account.gui.register.RegisterScene;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,11 +15,16 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javax.swing.JOptionPane;
+import javafx.stage.Stage;
+import playlist.gui.addplaylist.AddPlaylistScene;
 
 /**
  * FXML Controller class
@@ -78,9 +86,6 @@ public class PlaylistController implements Initializable {
     }
     
     
-    
-    
-    
 public void artistFind()
 {
      Connection c = null;
@@ -115,7 +120,6 @@ public void artistFind()
     }
 
     public void addPlaylists() {
-        System.out.println("Add works");
     }
 
     /**
@@ -138,5 +142,10 @@ public void artistFind()
     public void Upgrade() {
 
     }
-
+    //ADD PLAYLIST
+        @FXML protected void AddPlaylistScene() {
+        MainStage.loadScene(new AddPlaylistScene().getScene(), "AddPlaylist");
+    }
+    
+  
 }
