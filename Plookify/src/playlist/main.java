@@ -1,4 +1,4 @@
-package playlist.gui;
+package playlist;
 
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -22,7 +22,7 @@ public class main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         
-        Parent root = FXMLLoader.load(getClass().getResource("playlist.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("gui/playlist.fxml"));
         
         Scene scene = new Scene(root);
         stage.setTitle("Playlist");
