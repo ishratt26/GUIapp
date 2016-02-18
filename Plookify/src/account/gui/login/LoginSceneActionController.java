@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import player.gui.trackPlayer;
 
 public class LoginSceneActionController {
 
@@ -20,7 +21,7 @@ public class LoginSceneActionController {
         loginHandler = new Login();
     }
 
-    @FXML protected void submitButton() {
+    @FXML protected void submitButton() throws Exception {
         String errors = errorCheck(usernameTextField.getText(), passwordTextField.getText());
         if (errors.equals("")) {
             usernameTextField.setStyle("");
@@ -28,6 +29,8 @@ public class LoginSceneActionController {
             errorText.setText("");
             //TODO: GO TO THE MAIN WINDOW
             loginHandler.login(usernameTextField.getText(), passwordTextField.getText());
+            
+            //MainStage.loadScene(new trackPlayer().getScene(), "Plookify");
         } else {
             errorText.setText("");
             usernameTextField.setStyle("-fx-text-box-border: red ; -fx-focus-color: red ;");

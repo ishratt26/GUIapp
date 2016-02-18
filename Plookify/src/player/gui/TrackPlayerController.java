@@ -21,6 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
@@ -36,6 +37,8 @@ public class TrackPlayerController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    @FXML
+    private AnchorPane mainPane;
     @FXML
     private Button play;
     @FXML
@@ -54,7 +57,7 @@ public class TrackPlayerController implements Initializable {
     private Duration duration;
     
     
-    String path = "/Users/Ishrat/Desktop/Software Engineering Project/NetBeansProjects/SE21/Plookify/src/resources/SeeYouAgain.mp3";
+    String path = "/Users/Ishrat/Desktop/Software Engineering Project/NetBeansProjects/SE21/Plookify/src/resources/songs/SeeYouAgain.mp3";
     Media media = new Media(new File(path).toURI().toString());
     MediaPlayer player = new MediaPlayer(media);
     Status status = player.getStatus();
