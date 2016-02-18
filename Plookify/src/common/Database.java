@@ -13,41 +13,85 @@ package common;
  */
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Database {
-  public static void main( String args[] )
-  {
-    Connection c = null;
-    Statement stmt = null;
-    try {
-      Class.forName("org.sqlite.JDBC");
-      c = DriverManager.getConnection("jdbc:sqlite:../SE21/Plookify/src/resources/plookifyDB.sqlite");//connection to db, (db should be located in src)
-      c.setAutoCommit(false);
-      System.out.println("Here: " + c.getCatalog());
-      System.out.println("Opened database successfully");
+    
+    private static final Database INSTANCE = new Database();
 
-      stmt = c.createStatement();
-      ResultSet rs = stmt.executeQuery( "select * from track;" );//(as if it's typing into terminal)
-      while ( rs.next() ) { //resultset displays each entry from selected table row by row
-         int id = rs.getInt("trackID"); //stores db column values into 
-         String  name = rs.getString("trackName");
-         int album  = rs.getInt("trackLength");
-         int  artist = rs.getInt("trackArtist");
-         int genre = rs.getInt("trackGenre");
-         System.out.println( "ID = " + id );
-         System.out.println( "NAME = " + name );
-         System.out.println( "ALBUM = " + album );
-         System.out.println( "ARTIST = " + artist );
-         System.out.println( "GENRE = " + genre );
-         System.out.println();
-      }
-      rs.close();
-      stmt.close();
-      c.close();
-    } catch ( Exception e ) {
-      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-      System.exit(0);
-    }
-    System.out.println("Operation done successfully");
-  }
+    private Connection connection = null;
+    
+    Database() {
+
+		
+		
+		try {
+			connection = DriverManager.getConnection("jdbc:sqlite:../SE21/Plookify/src/resources/plookifyDB.sqlite");
+		}
+		catch (SQLException ex) {
+			ex.printStackTrace();
+			throw new RuntimeException("Database connection failed!", ex);
+		}
+	}
+	
+	public void test_database(){
+		
+		Statement statement;
+		try {
+			statement = connection.createStatement();
+			statement.setQueryTimeout(10);
+			
+		}
+		catch (SQLException ex) {
+			System.err.println(ex.getMessage());
+		}
+		finally {
+			if (connection != null){
+				try{
+					connection.close();
+				}
+				catch(SQLException ex){
+					System.err.println(ex.getMessage());
+				}
+			}
+		}
+	}
+        
+        public ArrayList<Track> getTrack(String query) {
+            ArrayList<Track> tracks = new ArrayList<Track>();
+            Statement statement;
+		try {
+			statement = connection.createStatement();
+			statement.setQueryTimeout(10);
+                        ResultSet rs = statement.executeQuery(query);
+                        while (rs.next()) {
+                            tracks.add(new Track(rs.getInt("trackID"), rs.getString("trackName"), rs.getInt("trackArtist"), rs.getInt("trackGenre"), rs.getInt("trackLength"), rs.getString("trackPath")));
+                        }
+                        rs.close();
+                        statement.close();
+		}
+		catch (SQLException ex) {
+			System.err.println(ex.getMessage());
+		}
+		finally {
+			if (connection != null){
+				try{
+					connection.close();
+				}
+				catch(SQLException ex){
+					System.err.println(ex.getMessage());
+				}
+			}
+		}
+                return tracks;
+        }
+        
+	public static Database getInstance() {
+		return INSTANCE;
+	}
+	
+	public Connection getConnection(){
+		return this.connection;
+	}
+        
 }

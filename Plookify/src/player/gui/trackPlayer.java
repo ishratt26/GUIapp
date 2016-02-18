@@ -26,6 +26,13 @@ public class trackPlayer extends Application {
         stage.setScene(scene);
         stage.show();
     }
+    
+    public Scene getScene() throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("player.fxml"));
+        
+        Scene scene = new Scene(root);
+        return scene;
+    }
 
     /**
      * @param args the command line arguments

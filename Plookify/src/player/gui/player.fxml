@@ -113,7 +113,7 @@
       </AnchorPane>
    </top>
    <center>
-      <AnchorPane prefHeight="401.0" prefWidth="650.0" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="mainPane" prefHeight="401.0" prefWidth="650.0" BorderPane.alignment="CENTER">
          <children>
             <ScrollPane hbarPolicy="NEVER" layoutY="302.0" prefHeight="199.0" prefWidth="516.0" style="-fx-background-color: dedede;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="302.0">
                <content>
