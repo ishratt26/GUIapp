@@ -1,6 +1,8 @@
 package account;
 
-import account.gui.LoginScene;
+import account.gui.MainStage;
+import account.gui.login.LoginScene;
+import account.gui.register.RegisterScene;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -12,10 +14,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
+        stage = MainStage.getStage();
         LoginScene scene = new LoginScene();
-        stage.setTitle("Plookify - Login");
 
-        stage.setScene(scene.getScene());
+        MainStage.loadScene(scene.getScene(), "Login");
         stage.show();
     }
 }

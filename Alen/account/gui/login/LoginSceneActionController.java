@@ -1,7 +1,8 @@
-package account.gui;
+package account.gui.login;
 
+import account.gui.MainStage;
+import account.gui.register.RegisterScene;
 import account.logic.Login;
-import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -42,6 +43,10 @@ public class LoginSceneActionController {
         passwordTextField.setStyle("");
         errorText.setText("");
         usernameTextField.requestFocus();
+    }
+
+    @FXML protected void registerScene() {
+        MainStage.loadScene(new RegisterScene().getScene(), "Register");
     }
 
     public String errorCheck(String username, String password) {

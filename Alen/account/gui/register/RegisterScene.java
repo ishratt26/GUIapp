@@ -1,20 +1,19 @@
-package account.gui;
+package account.gui.register;
 
-import account.logic.Login;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import java.io.IOException;
 
-public class LoginScene {
+public class RegisterScene {
 
     private Scene scene;
 
-    public LoginScene() {
+    public RegisterScene() {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("LoginScene.fxml"));
-            scene = new Scene(root, 400, 600);
+            Parent root = FXMLLoader.load(getClass().getResource("RegisterScene.fxml"));
+            scene = new Scene(root, 600, 700);
         } catch (IOException e) {
             e.printStackTrace();
         }

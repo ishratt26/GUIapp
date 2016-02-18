@@ -1,6 +1,5 @@
-package account.gui;
+package account.gui.login;
 
-import account.logic.Login;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
