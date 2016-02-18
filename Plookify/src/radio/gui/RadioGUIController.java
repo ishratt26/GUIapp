@@ -5,20 +5,43 @@
  */
 package radio.gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import java.sql.*;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
  *
  * @author gabrieluliano
  */
-public class RadioGUIController implements Initializable {
 
-    public static void main( String args[] )
-    {
+
+public class RadioGUIController extends Application implements Initializable {
+    
+    @FXML
+    TextField radioSearch;
+    
+    @FXML
+    public void importSearch(ActionEvent e){
+    String a = radioSearch.getText();
+    rSearch(a);
+    //return a;
+    }
+//    
+    public void rSearch(String name){
+  
     Connection c = null;
     Statement stmt = null;
     try {
@@ -27,42 +50,42 @@ public class RadioGUIController implements Initializable {
       c.setAutoCommit(false);
       System.out.println("Here: " + c.getCatalog());
       System.out.println("Opened database successfully");
-
-      stmt = c.createStatement();
-      String a = "Adele";
-      ResultSet rs = stmt.executeQuery( "select artistID from artist where artistName ='Adele';");//(as if it's typing into terminal)
-      while ( rs.next() ) {
       
-            //resultset displays each entry from selected table row by row
-        /*  int aID = rs.getInt("artistID");
-          ResultSet rd = stmt.executeQuery("select trackGenre from track where trackArtist = aID;");
-            while(rd.next()){
-                */
-            
-            //}
-                  
-        /* int id = rs.getInt("trackID"); //stores db column values into 
-         String  name = rs.getString("trackName");
-         int album  = rs.getInt("trackLength");
-         int  artist = rs.getInt("trackArtist");
-         int genre = rs.getInt("trackGenre");
-         System.out.println( "ID = " + id );
-         System.out.println( "NAME = " + name );
-         System.out.println( "ALBUM = " + album );
-         System.out.println( "ARTIST = " + artist );
-         System.out.println( "GENRE = " + genre );
-         System.out.println();
-          */
+      stmt = c.createStatement();
+      String a ="A";
+      ResultSet q1 = stmt.executeQuery( "select artistID from artist where artistName ='"+name+"';");//(as if it's typing into terminal)
+      while ( q1.next() ) {
+          int id = q1.getInt("artistID");
+          ResultSet q2 = stmt.executeQuery( "select trackGenre from track where trackArtist ="+id+";");
+          int gen = q2.getInt("trackGenre");
+          
+            ResultSet q3 = stmt.executeQuery( "select trackName from track where trackGenre ="+gen+";");
+            while(q3.next()){
+                String traks = q3.getString("trackName");
+                System.out.println(traks);
+            }
       }
-      rs.close();
+      q1.close();
       stmt.close();
       c.close();
     } catch ( Exception e ) {
       System.err.println( e.getClass().getName() + ": " + e.getMessage() );
       System.exit(0);
     }
+    
+    }
+    
+    
+    
+    public static void main( String args[] ) throws Exception
+    {
+        launch(args);
+        Application.launch(RadioGUIController.class, (java.lang.String[])null);
+        //new RadioGUIController().launch();
+        
     System.out.println("Operation done successfully");
     }
+    
     /**
      * Initializes the controller class.
      */
@@ -70,5 +93,13 @@ public class RadioGUIController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("radioGUI.fxml"));
+        Scene scene = new Scene(pane);
+        stage.setScene(scene);
+        stage.show();
+    }
     
 }
