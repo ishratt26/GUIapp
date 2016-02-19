@@ -1,4 +1,4 @@
-package playlist.gui;
+package radio;
 
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -7,33 +7,27 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-/**
- *
- * 
- */
+
 
 public class main extends Application {
     
+   
     
-    
-    @FXML Button NewPlaylist;
+    @FXML  Button searchButton;
     
     @Override
-    public void start(Stage stage) throws Exception 
-    {
+    public void start(Stage stage) throws Exception {
         
-        Parent root = FXMLLoader.load(getClass().getResource("playlist.fxml"));
-        
+        Parent root = FXMLLoader.load(getClass().getResource("radio.fxml"));
         Scene scene = new Scene(root);
-        stage.setTitle("Playlist");
+        stage.setTitle("radio");
         stage.setScene(scene);
         stage.show();
-    }
-
-    
-    public static void main(String[] args) 
-    {
-        launch(args);
+        
+           
     }
   
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
