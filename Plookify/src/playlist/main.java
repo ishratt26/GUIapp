@@ -1,6 +1,6 @@
 package playlist;
 
-import account.gui.MainStage;
+import playlist.gui.MainStage;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.stage.Stage;
