@@ -8,6 +8,7 @@ import playlist.gui.PlaylistScene;
 
 public class main extends Application {
 
+    
     public static void main(String[] args) {
         launch(args);
     }

@@ -14,7 +14,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="playlist.gui.PlaylistController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="501.0" prefWidth="147.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="playlist.gui.PlaylistController">
    <left>
       <AnchorPane prefHeight="495.0" prefWidth="150.0" BorderPane.alignment="CENTER">
          <children>
@@ -32,6 +32,17 @@
                      <font>
                         <Font name="Big Caslon Medium" size="13.0" />
                      </font>
+                     <effect>
+                        <DropShadow color="#6df3ff" radius="6.205" width="5.82" />
+                     </effect>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0" startX="0.9182692307692307">
+                           <stops>
+                              <Stop color="#448f9e" />
+                              <Stop color="#303a40" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
                   </Button>
                   <Button fx:id="Playlist" mnemonicParsing="false" prefHeight="26.0" prefWidth="179.0" text="Playlist">
                      <VBox.margin>
@@ -40,6 +51,17 @@
                      <font>
                         <Font name="Big Caslon Medium" size="13.0" />
                      </font>
+                     <effect>
+                        <DropShadow color="#6df3ff" radius="6.205" width="5.82" />
+                     </effect>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0" startX="0.9182692307692307">
+                           <stops>
+                              <Stop color="#448f9e" />
+                              <Stop color="#303a40" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
                   </Button>
                   <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="179.0" text="Messages">
                      <VBox.margin>
@@ -48,6 +70,17 @@
                      <font>
                         <Font name="Big Caslon Medium" size="13.0" />
                      </font>
+                     <effect>
+                        <DropShadow color="#6df3ff" radius="6.205" width="5.82" />
+                     </effect>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0" startX="0.9182692307692307">
+                           <stops>
+                              <Stop color="#448f9e" />
+                              <Stop color="#303a40" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
                   </Button>
                   <Button fx:id="Radio" mnemonicParsing="false" prefHeight="26.0" prefWidth="179.0" text="Radio">
                      <VBox.margin>
@@ -56,6 +89,17 @@
                      <font>
                         <Font name="Big Caslon Medium" size="13.0" />
                      </font>
+                     <effect>
+                        <DropShadow color="#6df3ff" radius="6.205" width="5.82" />
+                     </effect>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0" startX="0.9182692307692307">
+                           <stops>
+                              <Stop color="#448f9e" />
+                              <Stop color="#303a40" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
                   </Button>
                   <Button fx:id="Upgrade" mnemonicParsing="false" prefHeight="26.0" prefWidth="179.0" text="Upgrade">
                      <VBox.margin>
@@ -64,17 +108,34 @@
                      <font>
                         <Font name="Big Caslon Medium" size="13.0" />
                      </font>
+                     <effect>
+                        <DropShadow color="#6df3ff" radius="6.205" width="5.82" />
+                     </effect>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0" startX="0.9182692307692307">
+                           <stops>
+                              <Stop color="#448f9e" />
+                              <Stop color="#303a40" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
                   </Button>
-                  <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane prefHeight="264.0" prefWidth="150.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
-                      <Tab text="Friends">
+                      <Tab onSelectionChanged="#run" text="Friends">
                         <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="157.0" prefWidth="150.0">
+                                 <children>
+                                    <ListView fx:id="friendsList" layoutY="6.0" prefHeight="231.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children></AnchorPane>
                         </content>
                       </Tab>
                         <Tab text="Private">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <ListView fx:id="privatelist" prefHeight="231.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children></AnchorPane>
                            </content>
                         </Tab>
                     </tabs>
@@ -82,105 +143,9 @@
                         <Insets top="30.0" />
                      </VBox.margin>
                   </TabPane>
-                  <Button mnemonicParsing="false" onAction="#AddPlaylistScene" prefHeight="43.0" prefWidth="150.0" text="Add Playlist ">
-                     <VBox.margin>
-                        <Insets top="218.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font name="Big Caslon Medium" size="13.0" />
-                     </font>
-                  </Button>
+                  <Button mnemonicParsing="false" onAction="#AddPlaylistScene" prefHeight="26.0" prefWidth="167.0" text="Add Playlist" />
                </children></VBox>
          </children>
       </AnchorPane>
    </left>
-   <top>
-      <AnchorPane prefHeight="44.0" prefWidth="600.0" style="-fx-background-color: FFFFFF;" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fitHeight="44.0" fitWidth="136.0" layoutX="-2.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fitHeight="39.0" fitWidth="115.0" layoutX="5.0" layoutY="2.0">
-               <image>
-                  <Image url="@../../resources/logo.png" />
-               </image>
-            </ImageView>
-            <TextField layoutX="134.0" layoutY="9.0" onAction="#searchPlayer" promptText="Search" />
-            <ImageView fx:id="Upgrade" fitHeight="33.0" fitWidth="113.0" layoutX="678.0" layoutY="5.0">
-               <image>
-                  <Image url="@../../resources/button.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
-   </top>
-   <center>
-      <AnchorPane prefHeight="401.0" prefWidth="650.0" BorderPane.alignment="CENTER">
-         <children>
-            <ScrollPane hbarPolicy="NEVER" layoutY="302.0" prefHeight="199.0" prefWidth="516.0" style="-fx-background-color: dedede;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="302.0" />
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fitHeight="303.0" fitWidth="517.0" layoutX="-1.0">
-               <image>
-                  <Image url="@../../resources/mainimage.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
-   </center>
-   <right>
-      <AnchorPane prefHeight="502.0" prefWidth="138.0" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fitHeight="29.0" fitWidth="108.0" layoutX="14.0">
-               <image>
-                  <Image url="@../../resources/userpanel.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="85.0" fitWidth="85.0" layoutX="27.0" layoutY="31.0">
-               <image>
-                  <Image url="@../../resources/UGM-default-user.png" />
-               </image>
-               <effect>
-                  <DropShadow blurType="ONE_PASS_BOX" color="#aeaeae" radius="9.24" width="17.96" />
-               </effect>
-            </ImageView>
-         </children></AnchorPane>
-   </right>
-   <bottom>
-      <AnchorPane prefHeight="55.0" prefWidth="800.0" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="302.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fitHeight="45.0" fitWidth="48.0" layoutX="115.0" layoutY="4.0" opacity="0.85">
-               <image>
-                  <Image url="@../../resources/play.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="40.0" fitWidth="43.0" layoutX="72.0" layoutY="6.0" opacity="0.36">
-               <image>
-                  <Image url="@../../resources/pause.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="44.0" fitWidth="44.0" layoutX="171.0" layoutY="4.0" opacity="0.33">
-               <image>
-                  <Image url="@../../resources/forward.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="40.0" fitWidth="39.0" layoutX="23.0" layoutY="6.0" opacity="0.39">
-               <image>
-                  <Image url="@../../resources/back.png" />
-               </image>
-            </ImageView>
-            <Slider layoutX="280.0" layoutY="18.0" prefHeight="16.0" prefWidth="505.0">
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-               <effect>
-                  <DropShadow color="#55e8ff" />
-               </effect>
-            </Slider>
-            <ImageView fitHeight="43.0" fitWidth="43.0" layoutX="220.0" layoutY="6.0" opacity="0.54">
-               <image>
-                  <Image url="@../../resources/reload.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
-   </bottom>
 </BorderPane>

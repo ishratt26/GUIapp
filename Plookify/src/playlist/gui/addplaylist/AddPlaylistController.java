@@ -5,9 +5,13 @@
  */
 package playlist.gui.addplaylist;
 
-import account.gui.MainStage;
+import playlist.gui.MainStage;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -50,6 +54,29 @@ public class AddPlaylistController implements Initializable {
     tracks.add(input);
           
     listview.setItems(tracks);
+    
+    //DATABASE CONNECTION
+        ObservableList<String> data=FXCollections.observableArrayList();
+        Connection c = null;
+        Statement stmt = null;
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:/Users/monicadzhaleva/NetBeansProjects/SE21/Plookify/SE21/Plookify/src/resources/plookifyDB.sqlite");//connection to db, (db should be located in src)
+            c.setAutoCommit(false);
+            System.out.println("Here: " + c.getCatalog());
+            System.out.println("Opened database successfully");
+            stmt = c.createStatement();
+                           String sql = "INSERT INTO playlist(playlistName) VALUES ('"+input+"');";
+                            stmt.executeUpdate(sql);
+              
+            stmt.close();
+            c.commit();
+            c.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        System.out.println("Operation done successfully");
           }
     
     public void backMain() throws IOException
