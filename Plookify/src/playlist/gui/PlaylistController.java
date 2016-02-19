@@ -5,8 +5,7 @@
  */
 package playlist.gui;
 
-import account.gui.MainStage;
-import account.gui.register.RegisterScene;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
