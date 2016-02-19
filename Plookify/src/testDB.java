@@ -19,7 +19,7 @@ public class testDB {
     Statement stmt = null;
     try {
       Class.forName("org.sqlite.JDBC");
-      c = DriverManager.getConnection("jdbc:sqlite:../SE21/Plookify/src/resources/plookifyDB.sqlite");//connection to db, (db should be located in src)
+      c = DriverManager.getConnection("jdbc:sqlite:plookifyDB.sqlite");//connection to db, (db should be located in src)
       c.setAutoCommit(false);
       System.out.println("Here: " + c.getCatalog());
       System.out.println("Opened database successfully");
