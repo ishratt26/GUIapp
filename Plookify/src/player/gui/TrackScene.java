@@ -13,7 +13,7 @@ public class TrackScene {
     public TrackScene() {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("TrackScene.fxml"));
-            scene = new Scene(root, 800, 600);
+            scene = new Scene(root);
         } catch (IOException e) {
             e.printStackTrace();
         }

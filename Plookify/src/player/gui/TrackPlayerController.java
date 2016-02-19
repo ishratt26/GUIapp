@@ -37,8 +37,7 @@ public class TrackPlayerController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    @FXML
-    private AnchorPane mainPane;
+
     @FXML
     private Button play;
     @FXML
@@ -57,7 +56,7 @@ public class TrackPlayerController implements Initializable {
     private Duration duration;
     
     
-    String path = "/Users/Ishrat/Desktop/Software Engineering Project/NetBeansProjects/SE21/Plookify/src/resources/songs/SeeYouAgain.mp3";
+    String path = "build/classes/resources/songs/SeeYouAgain.mp3";
     Media media = new Media(new File(path).toURI().toString());
     MediaPlayer player = new MediaPlayer(media);
     Status status = player.getStatus();
