@@ -11,10 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 
-/**
- *
- * @author ReiValera
- */
+
 public class main extends Application 
 {
     private static Stage stage;
