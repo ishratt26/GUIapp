@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import playlist.gui.addplaylist.AddPlaylistController;
 
 
 
@@ -16,6 +17,8 @@ public class main extends Application
 {
     private static Stage stage;
     private static BorderPane mainLayout;
+
+ 
     @Override
     public void start(Stage stage) throws Exception 
     {
@@ -24,10 +27,11 @@ public class main extends Application
         common();
         playlist();
         player();
+        homeScreen();
         //radio();
 //social();
     }
-    private void common() throws IOException
+    public static void common() throws IOException
     {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(main.class.getResource("gui/GUI.fxml"));
@@ -35,8 +39,9 @@ public class main extends Application
         Scene scene = new Scene(mainLayout);
         stage.setScene(scene);
         stage.show();
+        stage.setResizable(false);
     }
-    private void playlist() throws IOException
+    public static void playlist() throws IOException
     {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(playlist.main.class.getResource("gui/PlaylistScene.fxml"));
@@ -45,6 +50,22 @@ public class main extends Application
         
     }
    
+       public static void addingPlaylist() throws IOException
+    {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(playlist.main.class.getResource("gui/addplaylist/addPlaylist.fxml"));
+        AnchorPane playlist = loader.load();
+        mainLayout.setCenter(playlist);
+        
+    }
+       
+       public static void homeScreen() throws IOException 
+       {
+             FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(common.main.class.getResource("gui/homeScreen.fxml"));
+        AnchorPane playlist = loader.load();
+        mainLayout.setCenter(playlist);
+       }
     public void player() throws IOException
     {
         FXMLLoader loader = new FXMLLoader();
