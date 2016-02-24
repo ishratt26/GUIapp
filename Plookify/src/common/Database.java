@@ -21,12 +21,10 @@ public class Database {
 
     private Connection connection = null;
     
-    Database() {
-
-		
+    Database() {	
 		
 		try {
-			connection = DriverManager.getConnection("jdbc:sqlite:../SE21/Plookify/src/resources/plookifyDB.sqlite");
+			connection = DriverManager.getConnection("jdbc:sqlite:plookifyDB.sqlite");
 		}
 		catch (SQLException ex) {
 			ex.printStackTrace();

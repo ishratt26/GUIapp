@@ -16,7 +16,7 @@ public class FindTracks {
     public static void main(String[] args) {
         Database db = new Database();
         
-        ArrayList<Track> tracks = db.getTrack("SELECT * FROM track WHERE trackName = 'Jumpman'");
+        ArrayList<Track> tracks = db.getTrack("SELECT * FROM track ");
         for (int i = 0; i < tracks.size(); i++)
             System.out.println(tracks.get(i).getTrackID() + " " + tracks.get(i).getTrackName());
     }
