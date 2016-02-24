@@ -1,6 +1,6 @@
 package playlist;
 
-import account.gui.MainStage;
+import playlist.gui.MainStage;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.stage.Stage;
@@ -8,6 +8,7 @@ import playlist.gui.PlaylistScene;
 
 public class main extends Application {
 
+    
     public static void main(String[] args) {
         launch(args);
     }

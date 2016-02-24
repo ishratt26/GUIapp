@@ -16,6 +16,11 @@ public class playlist {
     private int playlistID;
     private String playlistName;
     
+    public playlist(String playlistN)
+    {
+        playlistName=playlistN;
+    }
+    
     public int getID()
     {
         return playlistID;

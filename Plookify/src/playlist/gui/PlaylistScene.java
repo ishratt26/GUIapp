@@ -13,7 +13,7 @@ public class PlaylistScene {
     public PlaylistScene() {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("PlaylistScene.fxml"));
-            scene = new Scene(root, 800, 600);
+            scene = new Scene(root);
         } catch (IOException e) {
             e.printStackTrace();
         }
