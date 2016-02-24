@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import player.gui.trackPlayer;
 
-public class LoginSceneActionController {
+public class LoginSceneController {
 
     private Login loginHandler;
 
@@ -17,7 +17,7 @@ public class LoginSceneActionController {
     @FXML private PasswordField passwordTextField;
     @FXML private Text errorText;
 
-    public LoginSceneActionController() {
+    public LoginSceneController() {
         loginHandler = new Login();
     }
 

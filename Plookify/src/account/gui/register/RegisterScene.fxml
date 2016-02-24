@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="account.gui.register.RegisterSceneController">
    <content>
       <GridPane hgap="10.0" prefHeight="700.0" prefWidth="600.0" vgap="10.0">
         <columnConstraints>
@@ -39,14 +39,14 @@
                   <Font size="18.0" />
                </font>
             </Text>
-            <TextField promptText="First Name" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-            <TextField promptText="Last Name" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-            <TextField promptText="Contact Address" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5" />
-            <TextField promptText="Telephone Number" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="6" />
-            <TextField promptText="Email Address" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="7" />
-            <TextField promptText="Username" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-            <PasswordField promptText="Password" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="8" />
-            <PasswordField promptText="Confirm Password" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="9" />
+            <TextField fx:id="usernameTextField" promptText="Username" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+            <TextField fx:id="firstNameTextField" promptText="First Name" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+            <TextField fx:id="lastNameTextField" promptText="Last Name" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+            <TextField fx:id="addressTextField" promptText="Contact Address" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+            <TextField fx:id="numberTextField" promptText="Telephone Number" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="6" />
+            <TextField fx:id="emailTextField" promptText="Email Address" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="7" />
+            <PasswordField fx:id="passwordField" promptText="Password" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="8" />
+            <PasswordField fx:id="passwordConfirmField" promptText="Confirm Password" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="9" />
             <ImageView fitHeight="98.0" fitWidth="455.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.columnSpan="2">
                <image>
                   <Image url="@../../../logo.png" />
@@ -55,16 +55,19 @@
                   <Insets left="20.0" />
                </GridPane.margin>
             </ImageView>
-            <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="375.0" text="Register" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="13" />
+            <Button fx:id="submitButton" mnemonicParsing="false" onAction="#submitButton" prefHeight="100.0" prefWidth="375.0" text="Register" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="13" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="11">
                <children>
                   <Label />
-                  <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="150.0" text="Free">
+                  <RadioButton fx:id="freeRadioButton" mnemonicParsing="false" onAction="#radioButtonControl" prefHeight="17.0" prefWidth="150.0" selected="true" text="Free">
                      <HBox.margin>
                         <Insets left="50.0" />
                      </HBox.margin>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="subscriptionType" />
+                     </toggleGroup>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="150.0" text="Premium" />
+                  <RadioButton fx:id="premiumRadioButton" mnemonicParsing="false" onAction="#radioButtonControl" prefHeight="17.0" prefWidth="150.0" text="Premium" toggleGroup="$subscriptionType" />
                </children>
                <opaqueInsets>
                   <Insets />

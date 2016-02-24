@@ -24,7 +24,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javax.swing.JOptionPane;
 import javafx.stage.Stage;
-import playlist.gui.addplaylist.AddPlaylistScene;
+//import playlist.gui.addplaylist.AddPlaylistScene;
 
 /**
  * FXML Controller class
