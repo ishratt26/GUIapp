@@ -74,6 +74,14 @@ public class main extends Application
         Pane player = loader.load();
         mainLayout.setBottom(player);
     }
+    
+    public static  void TrackScreen() throws IOException
+    {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(player.Main.class.getResource("gui/TrackList.fxml"));
+        Pane player = loader.load();
+        mainLayout.setCenter(player);
+    }
     /*
     public static void radio() throws IOException
     {

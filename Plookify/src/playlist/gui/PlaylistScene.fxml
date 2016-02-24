@@ -44,7 +44,7 @@
                         </LinearGradient>
                      </textFill>
                   </Button>
-                  <Button fx:id="Playlist" mnemonicParsing="false" prefHeight="26.0" prefWidth="179.0" text="Tracks">
+                  <Button fx:id="Playlist" mnemonicParsing="false" onAction="#TrackScene" prefHeight="26.0" prefWidth="179.0" text="Tracks">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>

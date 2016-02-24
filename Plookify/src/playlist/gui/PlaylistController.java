@@ -112,5 +112,8 @@ public class PlaylistController implements Initializable {
       @FXML protected void HomeScene() throws IOException {
         main.homeScreen();
         }
+       @FXML protected void TrackScene() throws IOException {
+        main.TrackScreen();
+        }
     
 }
