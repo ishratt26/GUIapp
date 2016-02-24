@@ -10,14 +10,14 @@ public class AddPlaylistScene {
 
     private Scene scene;
 
-    public AddPlaylistScene() {
+    public AddPlaylistScene() throws IOException {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("addPlaylist.fxml"));
             scene = new Scene(root, 800, 600);
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+        }
 
     public Scene getScene() {
         return scene;

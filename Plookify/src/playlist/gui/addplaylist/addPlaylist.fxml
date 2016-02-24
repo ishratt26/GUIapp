@@ -6,42 +6,37 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="playlist.gui.addplaylist.AddPlaylistController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#showtracks" prefHeight="551.0" prefWidth="529.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="playlist.gui.addplaylist.AddPlaylistController">
    <children>
-      <ImageView fitHeight="138.0" fitWidth="438.0" layoutX="175.0">
+      <ImageView fitHeight="129.0" fitWidth="408.0" layoutX="55.0" layoutY="10.0">
          <image>
             <Image url="@../../../resources/addplaylist.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="46.0" fitWidth="200.0" layoutX="36.0" layoutY="154.0">
+      <ImageView fitHeight="40.0" fitWidth="197.0" layoutX="29.0" layoutY="141.0">
          <image>
             <Image url="@../../../resources/playlistname.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="46.0" fitWidth="200.0" layoutX="33.0" layoutY="231.0">
+      <ImageView fitHeight="40.0" fitWidth="197.0" layoutX="29.0" layoutY="200.0">
          <image>
             <Image url="@../../../resources/selectsongs.png" />
          </image>
       </ImageView>
-      <TextField fx:id="playlistfield" layoutX="258.0" layoutY="149.0" onAction="#addplaylist" prefHeight="57.0" prefWidth="212.0" promptText="Playlist name">
+      <TextField fx:id="playlistfield" layoutX="232.0" layoutY="141.0" onAction="#addplaylist" prefHeight="40.0" prefWidth="161.0" promptText="Playlist name">
          <font>
-            <Font name="Big Caslon Medium" size="21.0" />
+            <Font name="Big Caslon Medium" size="18.0" />
          </font>
       </TextField>
-      <ListView fx:id="listview" layoutX="258.0" layoutY="289.0" prefHeight="148.0" prefWidth="521.0" />
-      <Button fx:id="addbutton" layoutX="637.0" layoutY="482.0" mnemonicParsing="false" onAction="#addplaylist" prefHeight="67.0" prefWidth="142.0" text="Add">
+      <ListView  fx:id="listview" layoutX="14.0" layoutY="255.0" prefHeight="197.0" prefWidth="506.0" />
+      <Button fx:id="addbutton" layoutX="185.0" layoutY="464.0" mnemonicParsing="false" onAction="#addplaylist" prefHeight="67.0" prefWidth="142.0" text="Add">
          <font>
             <Font name="Big Caslon Medium" size="31.0" />
          </font>
       </Button>
-      <Button layoutX="33.0" layoutY="482.0" mnemonicParsing="false" onAction="#backMain" prefHeight="67.0" prefWidth="142.0" text="Back">
+      <TextField layoutX="232.0" layoutY="200.0" onAction="#showtracks" prefHeight="40.0" prefWidth="161.0" promptText="Search for tracks">
          <font>
-            <Font name="Big Caslon Medium" size="31.0" />
-         </font>
-      </Button>
-      <TextField layoutX="257.0" layoutY="223.0" prefHeight="57.0" prefWidth="212.0" promptText="Search for tracks">
-         <font>
-            <Font name="Big Caslon Medium" size="21.0" />
+            <Font name="Big Caslon Medium" size="18.0" />
          </font>
       </TextField>
    </children>

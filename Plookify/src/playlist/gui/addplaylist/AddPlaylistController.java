@@ -5,6 +5,7 @@
  */
 package playlist.gui.addplaylist;
 
+import common.main;
 import playlist.gui.MainStage;
 import java.io.IOException;
 import java.net.URL;
@@ -13,12 +14,15 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import playlist.gui.PlaylistScene;
 import playlist.playlist;
@@ -44,6 +48,7 @@ public class AddPlaylistController implements Initializable {
         // TODO
     }    
     
+    //ADD A PLAYLIST
    public void addplaylist() throws IOException
    {
        
@@ -51,12 +56,11 @@ public class AddPlaylistController implements Initializable {
      playlist playl=new playlist(input);
      System.out.println(playl.getName()); 
      ObservableList<String> tracks=FXCollections.observableArrayList();
-    tracks.add(input);
-          
-    listview.setItems(tracks);
+     ObservableList<String> data=FXCollections.observableArrayList();
+
     
     //DATABASE CONNECTION
-        ObservableList<String> data=FXCollections.observableArrayList();
+
         Connection c = null;
         Statement stmt = null;
         try {
@@ -66,9 +70,11 @@ public class AddPlaylistController implements Initializable {
             System.out.println("Here: " + c.getCatalog());
             System.out.println("Opened database successfully");
             stmt = c.createStatement();
-                           String sql = "INSERT INTO playlist(playlistName) VALUES ('"+input+"');";
-                            stmt.executeUpdate(sql);
-              
+
+     //INSERT INTO DATABASE
+             String sql = "INSERT INTO playlist(playlistName) VALUES ('"+input+"');";
+             stmt.executeUpdate(sql);
+                            
             stmt.close();
             c.commit();
             c.close();
@@ -77,10 +83,58 @@ public class AddPlaylistController implements Initializable {
             System.exit(0);
         }
         System.out.println("Operation done successfully");
+                      refreshScreen();
+                        
           }
-    
-    public void backMain() throws IOException
+   
+   
+   //SHOW TRACKS
+    public void showtracks() throws IOException
    {
-        MainStage.loadScene(new PlaylistScene().getScene(), "Playlist");
-   }
+     ObservableList<String> tracks=FXCollections.observableArrayList();
+             ListView<String> selected = new ListView<>();
+
+            listview.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+           
+            listview.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+    @Override
+    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+        System.out.println(newValue);
+    }
+});
+
+            //DATABASE CONNECTION
+        Connection c = null;
+        Statement stmt = null;
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:/Users/monicadzhaleva/NetBeansProjects/SE21/Plookify/SE21/Plookify/src/resources/plookifyDB.sqlite");//connection to db, (db should be located in src)
+            c.setAutoCommit(false);
+            System.out.println("Here: " + c.getCatalog());
+            System.out.println("Opened database successfully");
+            stmt = c.createStatement();
+    //ADD TRACKS
+               ResultSet q1 = stmt.executeQuery("select trackName from track;");//(as if it's typing into terminal)
+               while (q1.next()) {
+                String track = q1.getString("trackName");
+                System.out.println(track);
+                tracks.addAll(track);
+                listview.setItems(tracks);
+               }                            
+            stmt.close();
+            c.commit();
+            c.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        System.out.println("Operation done successfully");                        
+          }
+   
+   
+    
+   @FXML public void refreshScreen() throws IOException {
+            main.playlist();
+        }
+    
 }

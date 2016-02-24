@@ -66,12 +66,13 @@ public class main extends Application
         AnchorPane playlist = loader.load();
         mainLayout.setCenter(playlist);
        }
+       
     public void player() throws IOException
     {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(player.Main.class.getResource("gui/TrackScene.fxml"));
-        Pane radio = loader.load();
-        mainLayout.setBottom(radio);
+        Pane player = loader.load();
+        mainLayout.setBottom(player);
     }
     /*
     public static void radio() throws IOException

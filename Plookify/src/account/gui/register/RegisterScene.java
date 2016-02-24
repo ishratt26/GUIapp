@@ -13,7 +13,7 @@ public class RegisterScene {
     public RegisterScene() {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("RegisterScene.fxml"));
-            scene = new Scene(root, 600, 700);
+            scene = new Scene(root, 800, 600);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -25,7 +25,7 @@
             </ImageView>
             <VBox layoutY="1.0" prefHeight="492.0" prefWidth="159.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
                <children>
-                  <Button fx:id="Home" mnemonicParsing="false" prefHeight="26.0" prefWidth="172.0" text="Home">
+                  <Button fx:id="Home" mnemonicParsing="false" onAction="#HomeScene" prefHeight="26.0" prefWidth="172.0" text="Home">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
@@ -44,7 +44,7 @@
                         </LinearGradient>
                      </textFill>
                   </Button>
-                  <Button fx:id="Playlist" mnemonicParsing="false" prefHeight="26.0" prefWidth="179.0" text="Playlist">
+                  <Button fx:id="Playlist" mnemonicParsing="false" prefHeight="26.0" prefWidth="179.0" text="Tracks">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>

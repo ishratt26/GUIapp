@@ -6,6 +6,7 @@
 package playlist.gui;
 
 
+import common.main;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -104,10 +105,12 @@ public class PlaylistController implements Initializable {
     public void Upgrade() {
 
     }
-    //ADD PLAYLIST
-        @FXML protected void AddPlaylistScene() {
-        MainStage.loadScene(new AddPlaylistScene().getScene(), "AddPlaylist");
-    }
+        @FXML protected void AddPlaylistScene() throws IOException {
+        main.addingPlaylist();
+        }
     
-  
+      @FXML protected void HomeScene() throws IOException {
+        main.homeScreen();
+        }
+    
 }
