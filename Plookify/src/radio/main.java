@@ -1,33 +1,25 @@
 package radio;
 
+import radio.gui.mStage;
+import radio.gui.loadScene;
+import account.gui.MainStage;
+import account.gui.login.LoginScene;
 import javafx.application.Application;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 
 public class main extends Application {
     
-   
-    
-    @FXML  Button searchButton;
-    
-    @Override
-    public void start(Stage stage) throws Exception {
-        
-        Parent root = FXMLLoader.load(getClass().getResource("radio.fxml"));
-        Scene scene = new Scene(root);
-        stage.setTitle("radio");
-        stage.setScene(scene);
-        stage.show();
-        
-           
-    }
-  
     public static void main(String[] args) {
         launch(args);
+    }
+        
+    @Override
+    public void start(Stage stage) {
+        stage = mStage.getStage();
+        loadScene scene = new loadScene();
+
+        mStage.loadScene(scene.getScene(), "Radio");
+        stage.show();
     }
 }
