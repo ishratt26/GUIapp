@@ -11,7 +11,6 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
-import player.gui.TrackList;
 import player.gui.TrackScene;
 
 public class Main extends Application {
@@ -26,9 +25,7 @@ public class Main extends Application {
     public void start(Stage stage) {
         stage = MainStage.getStage();
         TrackScene scene = new TrackScene();
-        TrackList list = new TrackList();
         MainStage.loadScene(scene.getScene(), "Track Player");
-        //MainStage.loadScene(list.getScene(), "Tracks");
         stage.show();
         
     }

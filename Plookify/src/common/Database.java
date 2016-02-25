@@ -21,7 +21,7 @@ public class Database {
 
     private Connection connection = null;
     
-    Database() {	
+    public Database() {	
 		
 		try {
 			connection = DriverManager.getConnection("jdbc:sqlite:plookifyDB.sqlite");
