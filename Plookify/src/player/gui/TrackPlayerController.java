@@ -59,19 +59,19 @@ public class TrackPlayerController implements Initializable {
     
     public Duration duration;
     
-    private final String SONG_DIR = "/Users/Ishrat/Desktop/Software Engineering Project/NetBeansProjects/Plookify/build/classes/resources/songs/";
+   /* private final String SONG_DIR = "songs/";
     final List<MediaPlayer> players = new ArrayList<>();
         
     final File dir =  new File(SONG_DIR);
     
-    private MediaPlayer currentPlayer;
+    private MediaPlayer currentPlayer;*/
 
     
-    /*String path = "build/classes/resources/songs/SeeYouAgain.mp3";
+    String path = "songs/SeeYouAgain.mp3";
     Media media = new Media(new File(path).toURI().toString());
     MediaPlayer player = new MediaPlayer(media);
     Status status = player.getStatus();
-    */
+    
     
    
     
@@ -81,7 +81,7 @@ public class TrackPlayerController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         
-        if (!dir.exists() || !dir.isDirectory()) {
+        /*if (!dir.exists() || !dir.isDirectory()) {
             System.out.println("Cannot find audio source directory: " + dir);
             Platform.exit();
             return;
@@ -97,14 +97,14 @@ public class TrackPlayerController implements Initializable {
                 return false;
             }
         })) {
-            players.add(createPlayer("file:///" + (dir + "\\" + file).replace("\\", "/").replaceAll(" ", "%20")));
+            players.add(createPlayer("file:/" + (dir + "\\" + file).replace("\\", "/").replaceAll(" ", "%20")));
         }
         if (players.isEmpty()) {
             System.out.println("No audio found in " + dir);
             Platform.exit();
             return;
         }
-
+        
         
         
       
@@ -136,7 +136,7 @@ public class TrackPlayerController implements Initializable {
     
     @FXML
     public void handleButtonAction(ActionEvent e) {
-        MediaPlayer player = getPlayer();
+       // MediaPlayer player = getPlayer();
         setTimer(player);
         
         if (e.getSource() == play) {
@@ -148,11 +148,11 @@ public class TrackPlayerController implements Initializable {
         }    
         else if(e.getSource() == rewind){
             player.stop();
-            skipBack(player);
+            //skipBack(player);
         }
         else if(e.getSource() == forward){
             player.stop();
-            skip(player);
+            //skip(player);
             //player.seek(player.getCurrentTime().multiply(1.5));
         }
         else if(e.getSource() == reload){
@@ -175,16 +175,16 @@ public class TrackPlayerController implements Initializable {
     
     public void skip(MediaPlayer curPlayer){
         
-        MediaPlayer nextPlayer = players.get((players.indexOf(curPlayer) + 1) % players.size());
+        /*MediaPlayer nextPlayer = players.get((players.indexOf(curPlayer) + 1) % players.size());
         setPlayer(nextPlayer);
         nextPlayer.play();
         setTimer(nextPlayer);
-        updateSlider(nextPlayer);
+        updateSlider(nextPlayer);*/
     
     }
     
     public void skipBack(MediaPlayer curPlayer){
-        MediaPlayer current = curPlayer;
+       /* MediaPlayer current = curPlayer;
         if(players.indexOf(current)==0)
         {
             setPlayer(current);
@@ -199,7 +199,7 @@ public class TrackPlayerController implements Initializable {
         
         current.play();
         setTimer(current);
-        updateSlider(current);
+        updateSlider(current);*/
     
     }
     
@@ -208,7 +208,7 @@ public class TrackPlayerController implements Initializable {
             Platform.runLater(new Runnable() {
 
                 public void run() {
-                    Duration currentTime = getPlayer().getCurrentTime();
+                    Duration currentTime = player.getCurrentTime();
                     timeElapsed.setText(formatTime(currentTime, duration));
                     timeSlider.setDisable(duration.isUnknown());
                     if (!timeSlider.isDisabled() && duration.greaterThan(Duration.ZERO) && !timeSlider.isValueChanging()) {
@@ -258,13 +258,13 @@ public class TrackPlayerController implements Initializable {
         }
     }
 
-    private void setPlayer(MediaPlayer player) {
+    /*private void setPlayer(MediaPlayer player) {
         currentPlayer = player;
     }
 
     private MediaPlayer getPlayer() {
         return currentPlayer;
-    }
+    }*/
     
     private void setTimer(MediaPlayer player){
         player.currentTimeProperty().addListener(new InvalidationListener() {
