@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.media.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="480.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="basicweather.FXMLDocumentController">
+   <children>
+      <Label fx:id="advise" alignment="CENTER" contentDisplay="CENTER" layoutX="106.0" layoutY="354.0" prefHeight="58.0" prefWidth="110.0" text="Advise" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <Button fx:id="week" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="446.0" mnemonicParsing="false" text="Button" textAlignment="CENTER" GridPane.rowIndex="6" />
+      <Label fx:id="location" alignment="CENTER" contentDisplay="CENTER" layoutX="116.0" layoutY="20.0" prefHeight="40.0" prefWidth="89.0" text="Location" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.columnSpan="2">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="tomorrow" layoutX="257.0" layoutY="446.0" mnemonicParsing="false" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+      <ImageView fitHeight="113.0" fitWidth="136.0" layoutX="93.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Label fx:id="temp" alignment="CENTER" layoutX="127.0" layoutY="265.0" prefHeight="40.0" prefWidth="68.0" text="Temp" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Label fx:id="day" alignment="CENTER" contentDisplay="CENTER" layoutX="132.0" layoutY="60.0" prefHeight="26.0" prefWidth="58.0" text="Day" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Button fx:id="addLocation" layoutX="257.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="58.0" text="Button" GridPane.columnIndex="2" />
+      <MenuButton fx:id="menu" layoutX="8.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="58.0">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+      </MenuButton>
+   </children>
+</AnchorPane>
