@@ -82,6 +82,15 @@ public class main extends Application
         Pane player = loader.load();
         mainLayout.setCenter(player);
     }
+    
+    public static void SearchScene() throws IOException
+    {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(common.main.class.getResource("gui/Search.fxml"));
+        AnchorPane searchList = loader.load();
+        mainLayout.setCenter(searchList);
+        
+    }
     /*
     public static void radio() throws IOException
     {

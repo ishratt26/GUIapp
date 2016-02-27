@@ -21,7 +21,7 @@
                   <Image url="@../../resources/logo.png" />
                </image>
             </ImageView>
-            <TextField layoutX="152.0" layoutY="10.0" promptText="Search tracks" />
+            <TextField fx:id="searchField" layoutX="152.0" layoutY="10.0" onKeyPressed="#handleKeyPress" promptText="Search tracks" />
             <ImageView fitHeight="37.0" fitWidth="92.0" layoutX="694.0" layoutY="5.0">
                <image>
                   <Image url="@../../resources/button.png" />
@@ -32,6 +32,24 @@
                   <Image url="@../../resources/animation4.gif" />
                </image>
             </ImageView>
+            <RadioButton fx:id="byName" layoutX="321.0" layoutY="18.0" mnemonicParsing="false" onAction="#handleRadioButtons" prefHeight="14.0" prefWidth="67.0" text="by Name">
+               <font>
+                  <Font name="Lucida Sans Demibold" size="10.0" />
+               </font>
+               <toggleGroup>
+                  <ToggleGroup fx:id="searchByType" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="byArtist" layoutX="388.0" layoutY="18.0" mnemonicParsing="false" onAction="#handleRadioButtons" prefHeight="14.0" prefWidth="64.0" text="by Artist" toggleGroup="$searchByType">
+               <font>
+                  <Font name="System Bold Italic" size="10.0" />
+               </font>
+            </RadioButton>
+            <RadioButton fx:id="byGenre" layoutX="452.0" layoutY="18.0" mnemonicParsing="false" onAction="#handleRadioButtons" prefHeight="14.0" prefWidth="65.0" text="by Genre" toggleGroup="$searchByType">
+               <font>
+                  <Font name="System Bold Italic" size="10.0" />
+               </font>
+            </RadioButton>
          </children></AnchorPane>
    </top>
    <center>
