@@ -1,8 +1,5 @@
 package account.logic;
 
-import account.gui.MainStage;
-import account.gui.login.LoginScene;
-import common.main;
 import java.io.IOException;
 
 public class Login {

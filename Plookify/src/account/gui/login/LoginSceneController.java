@@ -1,18 +1,23 @@
 package account.gui.login;
 
-import account.gui.MainStage;
-import account.gui.register.RegisterScene;
 import account.logic.Login;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
-import player.gui.trackPlayer;
+import javafx.stage.Stage;
 
 public class LoginSceneController {
 
     private Login loginHandler;
-
+    
     @FXML private TextField usernameTextField;
     @FXML private PasswordField passwordTextField;
     @FXML private Text errorText;
@@ -29,8 +34,6 @@ public class LoginSceneController {
             errorText.setText("");
             //TODO: GO TO THE MAIN WINDOW
             loginHandler.login(usernameTextField.getText(), passwordTextField.getText());
-            
-            //MainStage.loadScene(new trackPlayer().getScene(), "Plookify");
         } else {
             errorText.setText("");
             usernameTextField.setStyle("-fx-text-box-border: red ; -fx-focus-color: red ;");
@@ -49,7 +52,14 @@ public class LoginSceneController {
     }
 
     @FXML protected void registerScene() {
-        MainStage.loadScene(new RegisterScene().getScene(), "Register");
+        try {
+            Stage stage = (Stage) errorText.getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass().getResource("../register/RegisterScene.fxml"));
+            Scene scene = new Scene(root, 600, 700);
+            stage.setScene(scene);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginSceneController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public String errorCheck(String username, String password) {
