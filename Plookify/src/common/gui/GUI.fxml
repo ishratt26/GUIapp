@@ -32,7 +32,7 @@
                   <Image url="@../../resources/animation4.gif" />
                </image>
             </ImageView>
-            <RadioButton fx:id="byName" layoutX="321.0" layoutY="18.0" mnemonicParsing="false" onAction="#handleRadioButtons" prefHeight="14.0" prefWidth="67.0" text="by Name">
+            <RadioButton fx:id="byName" layoutX="321.0" layoutY="18.0" mnemonicParsing="false" onAction="#handleRadioButtons" prefHeight="14.0" prefWidth="67.0" selected="true" text="by Name">
                <font>
                   <Font name="Lucida Sans Demibold" size="10.0" />
                </font>

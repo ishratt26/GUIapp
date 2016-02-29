@@ -38,9 +38,10 @@ public class GUIController implements Initializable {
      * Initializes the controller class.
      */
     public static String text;
+    public static String searchBy;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
+       searchBy = "name";
         
     }    
         @FXML protected void AddPlaylistScene() throws IOException {
@@ -62,13 +63,13 @@ public class GUIController implements Initializable {
     @FXML
     public void handleRadioButtons(){
         if(byName.isSelected()){
-            System.out.println("byName works");
+            searchBy = "name";
         }
         else if(byArtist.isSelected()){
-            System.out.println("byArtist works");
+            searchBy = "artist";
         }
         else if(byGenre.isSelected()){
-            System.out.println("byGenre works");
+            searchBy = "genre";
         }
     
     

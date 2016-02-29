@@ -89,7 +89,15 @@ public class main extends Application
         loader.setLocation(common.main.class.getResource("gui/Search.fxml"));
         AnchorPane searchList = loader.load();
         mainLayout.setCenter(searchList);
-        
+        AddSong();
+
+    }
+    
+    public static void AddSong() throws IOException{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(common.main.class.getResource("gui/AddSongs.fxml"));
+        BorderPane addSongs = loader.load();
+        mainLayout.setRight(addSongs);
     }
     /*
     public static void radio() throws IOException
