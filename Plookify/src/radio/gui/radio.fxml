@@ -16,14 +16,19 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="442.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="radio.gui.RadioController">
    <children>
-      <TextField fx:id="textField" layoutX="57.0" layoutY="80.0" />
-      <Button fx:id="searchButton" layoutX="250.0" layoutY="80.0" mnemonicParsing="false" onAction="#searchButton" text="Search" />
-      <ImageView fitHeight="56.0" fitWidth="287.0" layoutX="33.0" layoutY="15.0">
-         <image>
-            <Image url="@../../Diagrams/Backgrounds/Untitled-2.png" />
-         </image>
-      </ImageView>
-      <ListView fx:id="listView" layoutX="57.0" layoutY="119.0" prefHeight="301.0" prefWidth="172.0" />
-      <ListView fx:id="artistView" layoutX="250.0" layoutY="119.0" prefHeight="301.0" prefWidth="172.0" />
+      <TextField fx:id="textField" layoutX="57.0" layoutY="99.0" prefHeight="26.0" prefWidth="360.0" />
+      <Button fx:id="searchButton" layoutX="430.0" layoutY="99.0" mnemonicParsing="false" onAction="#searchButton" prefHeight="26.0" prefWidth="106.0" text="Search" />
+      <ScrollPane layoutY="149.0" prefHeight="294.0" prefWidth="575.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="522.0" prefWidth="572.0">
+               <children>
+                  <ListView fx:id="listView" layoutX="56.0" layoutY="14.0" prefHeight="219.0" prefWidth="360.0" />
+                  <ListView fx:id="songView" layoutX="56.0" layoutY="258.0" prefHeight="226.0" prefWidth="360.0" />
+                  <Button fx:id="artistButton" layoutX="430.0" layoutY="14.0" mnemonicParsing="false" onAction="#artistButton" prefHeight="26.0" prefWidth="106.0" text="Select Artist" />
+                  <Button fx:id="playlistButton" layoutX="430.0" layoutY="258.0" mnemonicParsing="false" onAction="#playlistButton" prefHeight="26.0" prefWidth="106.0" text="Save Playlist" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
    </children>
 </Pane>
