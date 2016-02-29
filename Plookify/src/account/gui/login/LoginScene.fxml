@@ -12,7 +12,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" vgap="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="account.gui.login.LoginSceneActionController">
+<GridPane hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" vgap="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="account.gui.login.LoginSceneController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="88.0" minWidth="10.0" prefWidth="36.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="92.0" minWidth="0.0" prefWidth="0.0" />
@@ -60,10 +60,14 @@
          </font>
       </Hyperlink>
       <Text fx:id="errorText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="263.13671875" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-      <ImageView fitHeight="150.0" fitWidth="278.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1">
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <ImageView fitHeight="84.0" fitWidth="248.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <image>
-            <Image url="@../../../logo.png" />
+            <Image url="@../../../resources/logo.png" />
          </image>
+         <GridPane.margin>
+            <Insets left="40.0" />
+         </GridPane.margin>
       </ImageView>
    </children>
 </GridPane>

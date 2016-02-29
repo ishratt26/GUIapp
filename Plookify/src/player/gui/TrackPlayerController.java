@@ -6,9 +6,12 @@
 package player.gui;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import static java.lang.Math.floor;
 import static java.lang.String.format;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
@@ -21,9 +24,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
+import javafx.scene.media.MediaView;
 import javafx.util.Duration;
 
 /**
@@ -36,6 +41,7 @@ public class TrackPlayerController implements Initializable {
     /**
      * Initializes the controller class.
      */
+
     @FXML
     private Button play;
     @FXML
@@ -47,14 +53,21 @@ public class TrackPlayerController implements Initializable {
     @FXML
     private Button reload;
     @FXML
-    private Slider timeSlider;
+    public Slider timeSlider;
     @FXML
     private Label timeElapsed;
     
-    private Duration duration;
+    public Duration duration;
     
+   /* private final String SONG_DIR = "songs/";
+    final List<MediaPlayer> players = new ArrayList<>();
+        
+    final File dir =  new File(SONG_DIR);
     
-    String path = "/Users/Ishrat/Desktop/Software Engineering Project/NetBeansProjects/SE21/Plookify/src/resources/SeeYouAgain.mp3";
+    private MediaPlayer currentPlayer;*/
+
+    
+    String path = "songs/SeeYouAgain.mp3";
     Media media = new Media(new File(path).toURI().toString());
     MediaPlayer player = new MediaPlayer(media);
     Status status = player.getStatus();
@@ -66,11 +79,55 @@ public class TrackPlayerController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        player.currentTimeProperty().addListener(new InvalidationListener() {
+        
+        
+        /*if (!dir.exists() || !dir.isDirectory()) {
+            System.out.println("Cannot find audio source directory: " + dir);
+            Platform.exit();
+            return;
+        }
+          
+        
+        for (String file : dir.list(new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                if (name.endsWith(".mp3")) {
+                    return true;
+                }
+                return false;
+            }
+        })) {
+            players.add(createPlayer("file:/" + (dir + "\\" + file).replace("\\", "/").replaceAll(" ", "%20")));
+        }
+        if (players.isEmpty()) {
+            System.out.println("No audio found in " + dir);
+            Platform.exit();
+            return;
+        }
+        
+        
+        
+      
+        
+        for (int i = 0; i < players.size(); i++) {
+        final MediaPlayer player     = players.get(i);
+        setPlayer(player);
+        final MediaPlayer nextPlayer = players.get((i + 1) % players.size());
+        player.setOnEndOfMedia(new Runnable() {
+        @Override public void run() {
+          player.stop();
+          nextPlayer.play();
+          setPlayer(nextPlayer);
+        }
+      });
+    }
+        
+        
+        /*getPlayer().currentTimeProperty().addListener(new InvalidationListener() {
             public void invalidated(Observable ov) {
                 updateValues();
             }
-        });
+        });*/
     }  
     
     
@@ -79,33 +136,71 @@ public class TrackPlayerController implements Initializable {
     
     @FXML
     public void handleButtonAction(ActionEvent e) {
+       // MediaPlayer player = getPlayer();
+        setTimer(player);
+        
         if (e.getSource() == play) {
                 player.play();
-                duration = player.getMedia().getDuration();
-                timeSlider.valueProperty().addListener((Observable ov) -> {
-                    if (timeSlider.isValueChanging()) {
-                        // multiply duration by percentage calculated by slider position
-                        player.seek(duration.multiply(timeSlider.getValue() / 100.0));
-                    }
-                    updateValues();
-                });
-           
-
+                updateSlider(player);   
         }
         else if(e.getSource() == pause){
                 player.pause();
         }    
         else if(e.getSource() == rewind){
-            player.seek(player.getCurrentTime().divide(1.5));
+            player.stop();
+            //skipBack(player);
         }
         else if(e.getSource() == forward){
-            player.seek(player.getCurrentTime().multiply(1.5));
+            player.stop();
+            //skip(player);
+            //player.seek(player.getCurrentTime().multiply(1.5));
         }
         else if(e.getSource() == reload){
             player.seek(player.getStartTime());
         }
         
         
+    }
+    
+    private MediaPlayer createPlayer(String mediaSource) {
+    final Media media = new Media(mediaSource);
+    final MediaPlayer player = new MediaPlayer(media);
+    player.setOnError(new Runnable() {
+      @Override public void run() {
+        System.out.println("Media error occurred: " + player.getError());
+      }
+    });
+    return player;
+  }
+    
+    public void skip(MediaPlayer curPlayer){
+        
+        /*MediaPlayer nextPlayer = players.get((players.indexOf(curPlayer) + 1) % players.size());
+        setPlayer(nextPlayer);
+        nextPlayer.play();
+        setTimer(nextPlayer);
+        updateSlider(nextPlayer);*/
+    
+    }
+    
+    public void skipBack(MediaPlayer curPlayer){
+       /* MediaPlayer current = curPlayer;
+        if(players.indexOf(current)==0)
+        {
+            setPlayer(current);
+        }
+        
+        else{
+        MediaPlayer prevPlayer = players.get((players.indexOf(current) - 1) % players.size());
+        
+        current = prevPlayer;
+        setPlayer(current);
+        }
+        
+        current.play();
+        setTimer(current);
+        updateSlider(current);*/
+    
     }
     
     protected void updateValues() {
@@ -162,5 +257,31 @@ public class TrackPlayerController implements Initializable {
             }
         }
     }
+
+    /*private void setPlayer(MediaPlayer player) {
+        currentPlayer = player;
+    }
+
+    private MediaPlayer getPlayer() {
+        return currentPlayer;
+    }*/
     
+    private void setTimer(MediaPlayer player){
+        player.currentTimeProperty().addListener(new InvalidationListener() {
+            public void invalidated(Observable ov) {
+                updateValues();
+            }
+        });
+    }
+    
+    private void updateSlider(MediaPlayer player){
+        duration = player.getMedia().getDuration();
+                timeSlider.valueProperty().addListener((Observable ov) -> {
+                    if (timeSlider.isValueChanging()) {
+                        // multiply duration by percentage calculated by slider position
+                        player.seek(duration.multiply(timeSlider.getValue() / 100.0));
+                    }
+                    updateValues();
+                });
+    }
 }

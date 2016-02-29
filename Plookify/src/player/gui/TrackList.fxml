@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="528.0" prefWidth="523.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="player.gui.TrackListController">
+   <children>
+      <ListView fx:id="listview" layoutY="74.0" prefHeight="429.0" prefWidth="522.0" />
+      <ImageView fitHeight="74.0" fitWidth="266.0">
+         <image>
+            <Image url="@../../resources/track.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

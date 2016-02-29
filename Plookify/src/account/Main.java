@@ -1,9 +1,13 @@
 package account;
 
-import account.gui.MainStage;
-import account.gui.login.LoginScene;
-import account.gui.register.RegisterScene;
+import account.gui.login.LoginSceneController;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -14,10 +18,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        stage = MainStage.getStage();
-        LoginScene scene = new LoginScene();
-
-        MainStage.loadScene(scene.getScene(), "Login");
-        stage.show();
+        try {
+            stage.setTitle("Plookify");
+            Parent root = FXMLLoader.load(getClass().getResource("gui/login/LoginScene.fxml"));
+            stage.setScene(new Scene(root, 400, 600));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LoginSceneController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

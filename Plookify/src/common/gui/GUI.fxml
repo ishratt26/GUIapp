@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="common.gui.GUIController">
+   <left>
+      <AnchorPane prefHeight="495.0" prefWidth="150.0" BorderPane.alignment="CENTER" />
+   </left>
+   <top>
+      <AnchorPane prefHeight="23.0" prefWidth="800.0" style="-fx-background-color: FFFFFF;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="47.0" fitWidth="133.0">
+               <image>
+                  <Image url="@../../resources/logo.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="searchField" layoutX="152.0" layoutY="10.0" onKeyPressed="#handleKeyPress" promptText="Search tracks" />
+            <ImageView fitHeight="37.0" fitWidth="92.0" layoutX="694.0" layoutY="5.0">
+               <image>
+                  <Image url="@../../resources/button.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="45.0" fitWidth="176.0" layoutX="504.0" layoutY="1.0">
+               <image>
+                  <Image url="@../../resources/animation4.gif" />
+               </image>
+            </ImageView>
+            <RadioButton fx:id="byName" layoutX="321.0" layoutY="18.0" mnemonicParsing="false" onAction="#handleRadioButtons" prefHeight="14.0" prefWidth="67.0" selected="true" text="by Name">
+               <font>
+                  <Font name="Lucida Sans Demibold" size="10.0" />
+               </font>
+               <toggleGroup>
+                  <ToggleGroup fx:id="searchByType" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="byArtist" layoutX="388.0" layoutY="18.0" mnemonicParsing="false" onAction="#handleRadioButtons" prefHeight="14.0" prefWidth="64.0" text="by Artist" toggleGroup="$searchByType">
+               <font>
+                  <Font name="System Bold Italic" size="10.0" />
+               </font>
+            </RadioButton>
+            <RadioButton fx:id="byGenre" layoutX="452.0" layoutY="18.0" mnemonicParsing="false" onAction="#handleRadioButtons" prefHeight="14.0" prefWidth="65.0" text="by Genre" toggleGroup="$searchByType">
+               <font>
+                  <Font name="System Bold Italic" size="10.0" />
+               </font>
+            </RadioButton>
+         </children></AnchorPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="283.0" prefWidth="370.0" BorderPane.alignment="CENTER" />
+   </center>
+   <right>
+      <AnchorPane prefHeight="283.0" prefWidth="114.0" BorderPane.alignment="CENTER" />
+   </right>
+   <bottom>
+      <AnchorPane prefHeight="55.0" prefWidth="800.0" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#showtracks" prefHeight="551.0" prefWidth="529.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="playlist.gui.addplaylist.AddPlaylistController">
+   <children>
+      <ImageView fitHeight="129.0" fitWidth="408.0" layoutX="55.0" layoutY="10.0">
+         <image>
+            <Image url="@../../../resources/addplaylist.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="197.0" layoutX="29.0" layoutY="141.0">
+         <image>
+            <Image url="@../../../resources/playlistname.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="197.0" layoutX="29.0" layoutY="200.0">
+         <image>
+            <Image url="@../../../resources/selectsongs.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="playlistfield" layoutX="232.0" layoutY="141.0" onAction="#addplaylist" prefHeight="40.0" prefWidth="161.0" promptText="Playlist name">
+         <font>
+            <Font name="Big Caslon Medium" size="18.0" />
+         </font>
+      </TextField>
+      <ListView  fx:id="listview" layoutX="14.0" layoutY="255.0" prefHeight="197.0" prefWidth="506.0" />
+      <Button fx:id="addbutton" layoutX="185.0" layoutY="464.0" mnemonicParsing="false" onAction="#addplaylist" prefHeight="67.0" prefWidth="142.0" text="Add">
+         <font>
+            <Font name="Big Caslon Medium" size="31.0" />
+         </font>
+      </Button>
+      <TextField layoutX="232.0" layoutY="200.0" onAction="#showtracks" prefHeight="40.0" prefWidth="161.0" promptText="Search for tracks">
+         <font>
+            <Font name="Big Caslon Medium" size="18.0" />
+         </font>
+      </TextField>
+   </children>
+</AnchorPane>

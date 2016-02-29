@@ -1,12 +1,14 @@
 package account.logic;
 
+import java.io.IOException;
+
 public class Login {
 
     public Login() {
 
     }
 
-    public void login(String username, String password) {
+    public void login(String username, String password) throws IOException {
             System.out.println("SUCCESS!");
     }
 
