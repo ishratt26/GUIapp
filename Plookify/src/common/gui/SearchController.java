@@ -20,6 +20,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 
@@ -32,6 +33,8 @@ public class SearchController implements Initializable {
 
     @FXML
     private ListView searchList;
+    @FXML
+    private Label result;
     /**
      * Initializes the controller class.
      */
@@ -47,7 +50,7 @@ public class SearchController implements Initializable {
                 showtracksByArtist();
             }
             else if(searchBy.equals("genre")){
-                System.out.println("genre works");  
+                showtracksByGenre();  
             }
             else{
                 showtracksByName();
@@ -91,12 +94,12 @@ public class SearchController implements Initializable {
             stmt.setString(1, trackName);
             //ADD TRACKS
             ResultSet rs = stmt.executeQuery();
-            
             while (rs.next()) {
                 String track = rs.getString("trackName");
                 tracks.addAll(track);
                 searchList.setItems(tracks);
             }
+            result.setText("Results for \""+text+"\"");
             stmt.close();
             c.commit();
             c.close();
@@ -137,7 +140,7 @@ public class SearchController implements Initializable {
             c = db.getConnection();//connection to db, (db should be located in src)
             c.setAutoCommit(false);
             stmt = c.prepareStatement("select artistID from artist where artistName LIKE ?");
-            String artistName = "%"+text+"%";
+            String artistName = text;
             stmt.setString(1, artistName);
             //ADD TRACKS
             ResultSet rs = stmt.executeQuery();
@@ -156,7 +159,68 @@ public class SearchController implements Initializable {
                 tracks.addAll(track);
                 searchList.setItems(tracks);
             }
+            result.setText("Results for \""+text+"\"");
+           
+            stmt.close();
+            c.commit();
+            c.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+    }
+    
+    public void showtracksByGenre() throws IOException
+   {
+       int genreID = 0;
+        ObservableList<String> tracks = FXCollections.observableArrayList();
+        
+
+        searchList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        searchList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                /*FindTrackPath f = new FindTrackPath(newValue);
+                Track track = f.getTrack();
+                String path = track.getTrackPath();
+                Media media = new Media(new File(path).toURI().toString());
+                MediaPlayer player = new MediaPlayer(media);*/
+                
+            }
+        });
+        
+        String text;
+        text = GUIController.text;
+        //DATABASE CONNECTION
+        Database db = new Database();
+        Connection c = null;
+        PreparedStatement stmt = null;
+        try {
+            //Class.forName("org.sqlite.JDBC");
+            c = db.getConnection();//connection to db, (db should be located in src)
+            c.setAutoCommit(false);
+            stmt = c.prepareStatement("select genreID from genre where genreName LIKE ?");
+            String genreName = text;
+            stmt.setString(1, genreName);
+            //ADD TRACKS
+            ResultSet rs = stmt.executeQuery();
             
+            while (rs.next()) {
+                genreID = rs.getInt("genreID");
+                
+            }
+            
+            stmt = c.prepareStatement("select trackName from track where trackGenre LIKE ?");
+            stmt.setInt(1, genreID);
+            rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                String track = rs.getString("trackName");
+                tracks.addAll(track);
+                searchList.setItems(tracks);
+            }
+            result.setText("Results for \""+text+"\"");
            
             stmt.close();
             c.commit();

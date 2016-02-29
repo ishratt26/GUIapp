@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -9,6 +10,11 @@
 
 <AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="505.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="common.gui.SearchController">
    <children>
-      <ListView fx:id="searchList" prefHeight="500.0" prefWidth="515.0" />
+      <ListView fx:id="searchList" layoutY="32.0" prefHeight="468.0" prefWidth="515.0" />
+      <Label fx:id="result" layoutX="8.0" layoutY="8.0" prefHeight="24.0" prefWidth="174.0">
+         <font>
+            <Font name="Lucida Sans Regular" size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
