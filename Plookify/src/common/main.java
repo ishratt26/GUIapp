@@ -83,6 +83,14 @@ public class main extends Application
         mainLayout.setCenter(player);
     }
     
+        public static  void RadioScreen() throws IOException
+    {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(radio.main.class.getResource("gui/radio.fxml"));
+        Pane player = loader.load();
+        mainLayout.setCenter(player);
+    }
+    
     public static void SearchScene() throws IOException
     {
         FXMLLoader loader = new FXMLLoader();
