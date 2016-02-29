@@ -32,9 +32,13 @@ import javafx.scene.control.SelectionMode;
 public class SearchController implements Initializable {
 
     @FXML
-    private ListView searchList;
+    public ListView searchList;
+    public ListView trackQueue;
     @FXML
     private Label result;
+    
+    public static ListView selected;
+    public static ListView tracksList;
     /**
      * Initializes the controller class.
      */
@@ -55,6 +59,9 @@ public class SearchController implements Initializable {
             else{
                 showtracksByName();
             }
+            
+            selected = searchList;
+            tracksList = trackQueue;
         } catch (IOException ex) {
             Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -62,14 +69,16 @@ public class SearchController implements Initializable {
     
     public void showtracksByName() throws IOException
    {
-        ObservableList<String> tracks = FXCollections.observableArrayList();
         
+        ObservableList<String> tracks = FXCollections.observableArrayList();
+
 
         searchList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         searchList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                
                 /*FindTrackPath f = new FindTrackPath(newValue);
                 Track track = f.getTrack();
                 String path = track.getTrackPath();
