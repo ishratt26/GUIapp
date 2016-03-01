@@ -5,6 +5,8 @@
  */
 package player.gui;
 
+import common.gui.AddSongsController;
+import common.gui.SearchController;
 import java.io.File;
 import java.io.FilenameFilter;
 import static java.lang.Math.floor;
@@ -66,13 +68,12 @@ public class TrackPlayerController implements Initializable {
     
     private MediaPlayer currentPlayer;*/
 
-    
-    String path = "songs/SeeYouAgain.mp3";
+    String path = "../SE21/Plookify/src/resources/songs/SeeYouAgain.mp3";
     Media media = new Media(new File(path).toURI().toString());
     MediaPlayer player = new MediaPlayer(media);
     Status status = player.getStatus();
     
-    
+    int songNumber;
    
     
     
@@ -136,7 +137,22 @@ public class TrackPlayerController implements Initializable {
     
     @FXML
     public void handleButtonAction(ActionEvent e) {
-       // MediaPlayer player = getPlayer();
+       ArrayList<String> tracks = AddSongsController.totList;
+       ArrayList<String> trackNames = SearchController.trackNames;
+        for(String track : tracks)
+        {
+            for(int i = 0; i< trackNames.size(); i++){
+                if(track.equals(trackNames.get(i))){
+                    int ID = SearchController.trackIDs.get(i);
+                    int songNumber = ID%6;
+                    setSongNumber(songNumber);
+                }
+                
+            }
+        
+        
+        }
+        // MediaPlayer player = getPlayer();
         setTimer(player);
         
         if (e.getSource() == play) {
@@ -283,5 +299,13 @@ public class TrackPlayerController implements Initializable {
                     }
                     updateValues();
                 });
+    }
+
+    private void setID(int ID) {
+       
+    }
+
+    private void setSongNumber(int songNumber) {
+        this.songNumber = songNumber;
     }
 }

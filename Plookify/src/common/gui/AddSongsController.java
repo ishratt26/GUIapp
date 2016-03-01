@@ -5,7 +5,13 @@
  */
 package common.gui;
 
+import common.Database;
+import static common.gui.SearchController.trackIDs;
+import static common.gui.SearchController.trackNames;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ResourceBundle;
@@ -31,6 +37,7 @@ public class AddSongsController implements Initializable {
     public static ObservableList<String> nowPlayingList, removeList, oldList;
     public static ArrayList<String> list1 = new ArrayList<String>();
     public static ArrayList<String> totList = new ArrayList<String>();
+    public static ArrayList<String> pathToList = new ArrayList<String>();
     /**
      * Initializes the controller class.
      */
@@ -54,6 +61,7 @@ public class AddSongsController implements Initializable {
         
         ObservableList<String> tracks = FXCollections.observableArrayList(totList);
         SearchController.tracksList.setItems(tracks);
+        
     }
     
     @FXML
@@ -62,6 +70,11 @@ public class AddSongsController implements Initializable {
        for(String song : removeList){
             if(list1.contains(song)){
                 list1.remove(song);
+                if(!pathToList.isEmpty()){
+                   if(pathToList.contains(song)){
+                    list1.remove(song);
+                   }
+                }
             }
         }
        totList = list1;
@@ -89,13 +102,47 @@ public class AddSongsController implements Initializable {
     }
     
     public void updateListAdding(){
-        for(String song : list1){
+        for(int i=0; i<list1.size(); i++){
+            String song = list1.get(i);
             if(!totList.contains(song)){
                 totList.add(song);
+                setPathFromDatabase(song);
             }
         }
     }
     
+    public void setPathFromDatabase(String text){
+
+        //DATABASE CONNECTION
+        Database db = new Database();
+        Connection c = null;
+        PreparedStatement stmt = null;
+        try {
+            //Class.forName("org.sqlite.JDBC");
+            c = db.getConnection();//connection to db, (db should be located in src)
+            c.setAutoCommit(false);
+            stmt = c.prepareStatement("select trackPath from track where trackName LIKE ?");
+            String trackName = text;
+            stmt.setString(1, trackName);
+            //ADD TRACKS
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+               // String track = rs.getString("trackName");
+                String path = rs.getString("trackPath");              
+                pathToList.add(path);
+            }
+            
+            stmt.close();
+            c.commit();
+            c.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+
+    
+
+    }
     
     
 }

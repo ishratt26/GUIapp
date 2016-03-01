@@ -12,6 +12,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,6 +41,9 @@ public class SearchController implements Initializable {
     
     public static ListView selected;
     public static ListView tracksList;
+    public static ArrayList<Integer> trackIDs = new ArrayList<Integer>();
+    public static ArrayList<String> trackNames = new ArrayList<String>();
+    public static ArrayList<String> paths = new ArrayList<String>();
     /**
      * Initializes the controller class.
      */
@@ -106,16 +110,47 @@ public class SearchController implements Initializable {
             //Class.forName("org.sqlite.JDBC");
             c = db.getConnection();//connection to db, (db should be located in src)
             c.setAutoCommit(false);
-            stmt = c.prepareStatement("select trackName from track where trackName LIKE ?");
+            stmt = c.prepareStatement("select trackName,trackID from track where trackName LIKE ?");
             String trackName = "%"+text+"%";
             stmt.setString(1, trackName);
             //ADD TRACKS
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 String track = rs.getString("trackName");
+                int ID = rs.getInt("trackID");
+                
+                if(!trackNames.isEmpty()){
+                    if(!trackNames.contains(track)){
+                       trackNames.add(track);
+                    }
+                }
+                else{
+                    trackNames.add(track);
+                }
+                
+                if(!trackIDs.isEmpty()){
+                    if(!trackIDs.contains(ID)){
+                       trackIDs.add(ID);
+                    }
+                }
+                else{
+                    trackIDs.add(ID);
+                }
+                
                 tracks.addAll(track);
                 searchList.setItems(tracks);
             }
+            
+            
+            for(int i=0; i<trackNames.size(); i++){
+                System.out.print(""+trackNames.get(i));
+                System.out.print(" "+trackIDs.get(i));
+                System.out.println("\n");
+            }
+            
+            
+            
+            
             result.setText("Results for \""+text+"\"");
             stmt.close();
             c.commit();
@@ -167,12 +202,32 @@ public class SearchController implements Initializable {
                 
             }
             
-            stmt = c.prepareStatement("select trackName from track where trackArtist LIKE ?");
+            stmt = c.prepareStatement("select trackName, trackID from track where trackArtist LIKE ?");
             stmt.setInt(1, artistID);
             rs = stmt.executeQuery();
             
             while (rs.next()) {
                 String track = rs.getString("trackName");
+                int ID = rs.getInt("trackID");
+                
+                if(!trackNames.isEmpty()){
+                    if(!trackNames.contains(track)){
+                       trackNames.add(track);
+                    }
+                }
+                else{
+                    trackNames.add(track);
+                }
+                
+                if(!trackIDs.isEmpty()){
+                    if(!trackIDs.contains(ID)){
+                       trackIDs.add(ID);
+                    }
+                }
+                else{
+                    trackIDs.add(ID);
+                }
+                
                 tracks.addAll(track);
                 searchList.setItems(tracks);
             }
@@ -228,12 +283,32 @@ public class SearchController implements Initializable {
                 
             }
             
-            stmt = c.prepareStatement("select trackName from track where trackGenre LIKE ?");
+            stmt = c.prepareStatement("select trackName, trackID from track where trackGenre LIKE ?");
             stmt.setInt(1, genreID);
             rs = stmt.executeQuery();
             
             while (rs.next()) {
                 String track = rs.getString("trackName");
+                int ID = rs.getInt("trackID");
+                
+                if(!trackNames.isEmpty()){
+                    if(!trackNames.contains(track)){
+                       trackNames.add(track);
+                    }
+                }
+                else{
+                    trackNames.add(track);
+                }
+                
+                if(!trackIDs.isEmpty()){
+                    if(!trackIDs.contains(ID)){
+                       trackIDs.add(ID);
+                    }
+                }
+                else{
+                    trackIDs.add(ID);
+                }
+                
                 tracks.addAll(track);
                 searchList.setItems(tracks);
             }
