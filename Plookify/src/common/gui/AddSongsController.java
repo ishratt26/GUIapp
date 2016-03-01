@@ -61,18 +61,20 @@ public class AddSongsController implements Initializable {
         
         ObservableList<String> tracks = FXCollections.observableArrayList(totList);
         SearchController.tracksList.setItems(tracks);
+         
         
     }
     
     @FXML
     public void removeSong(){
        removeList= SearchController.tracksList.getSelectionModel().getSelectedItems();
-       for(String song : removeList){
+       for(int i=0; i<removeList.size(); i++){
+           String song = removeList.get(i);
             if(list1.contains(song)){
                 list1.remove(song);
                 if(!pathToList.isEmpty()){
                    if(pathToList.contains(song)){
-                    list1.remove(song);
+                    pathToList.remove(i);
                    }
                 }
             }
@@ -80,7 +82,7 @@ public class AddSongsController implements Initializable {
        totList = list1;
        ObservableList<String> tracks = FXCollections.observableArrayList(totList);
        SearchController.tracksList.setItems(tracks);
-      
+       
        
     }
     
@@ -98,6 +100,8 @@ public class AddSongsController implements Initializable {
         
         ObservableList<String> tracks = FXCollections.observableArrayList(totList);
         SearchController.tracksList.setItems(tracks);
+        
+       
         
     }
     

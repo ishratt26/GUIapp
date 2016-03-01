@@ -43,7 +43,6 @@ public class SearchController implements Initializable {
     public static ListView tracksList;
     public static ArrayList<Integer> trackIDs = new ArrayList<Integer>();
     public static ArrayList<String> trackNames = new ArrayList<String>();
-    public static ArrayList<String> paths = new ArrayList<String>();
     /**
      * Initializes the controller class.
      */
@@ -140,16 +139,6 @@ public class SearchController implements Initializable {
                 tracks.addAll(track);
                 searchList.setItems(tracks);
             }
-            
-            
-            for(int i=0; i<trackNames.size(); i++){
-                System.out.print(""+trackNames.get(i));
-                System.out.print(" "+trackIDs.get(i));
-                System.out.println("\n");
-            }
-            
-            
-            
             
             result.setText("Results for \""+text+"\"");
             stmt.close();
