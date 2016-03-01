@@ -6,6 +6,7 @@
 package common.gui;
 
 import common.Database;
+import static common.gui.AddSongsController.totList;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -62,6 +63,13 @@ public class SearchController implements Initializable {
             
             selected = searchList;
             tracksList = trackQueue;
+            if(!AddSongsController.totList.isEmpty())
+            {
+                ObservableList<String> oldList = FXCollections.observableArrayList(totList);
+                tracksList.setItems(oldList);
+                trackQueue = tracksList;
+            }
+           tracksList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         } catch (IOException ex) {
             Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
         }

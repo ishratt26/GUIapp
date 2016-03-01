@@ -63,11 +63,11 @@ public class TrackListController implements Initializable {
         listview.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                FindTrackPath f = new FindTrackPath(newValue);
+               /* FindTrackPath f = new FindTrackPath(newValue);
                 Track track = f.getTrack();
                 String path = track.getTrackPath();
                 Media media = new Media(new File(path).toURI().toString());
-                MediaPlayer player = new MediaPlayer(media);
+                MediaPlayer player = new MediaPlayer(media);*/
                 
             }
         });

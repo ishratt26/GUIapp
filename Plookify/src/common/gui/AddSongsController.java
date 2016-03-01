@@ -25,31 +25,34 @@ import javafx.scene.control.ListView;
  */
 public class AddSongsController implements Initializable {
 
-    @FXML private Button addSong, removeSong;
+    @FXML private Button addSong, removeSong, addAll;
   
     
-    public static ObservableList<String> nowPlayingList, removeList;
-    public ArrayList<String> list1;
+    public static ObservableList<String> nowPlayingList, removeList, oldList;
+    public static ArrayList<String> list1 = new ArrayList<String>();
+    public static ArrayList<String> totList = new ArrayList<String>();
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        list1 = new ArrayList<String>();
+        //list1 = new ArrayList<String>();
     }    
     
     @FXML
     public void addSong(){
         nowPlayingList = SearchController.selected.getSelectionModel().getSelectedItems();
-        String message = "";
         for(String song : nowPlayingList){
             if(!list1.contains(song)){
                 list1.add(song);
             }
         }
+        if(!list1.isEmpty()){
+            updateListAdding();
+        }
         
-        ObservableList<String> tracks = FXCollections.observableArrayList(list1);
+        ObservableList<String> tracks = FXCollections.observableArrayList(totList);
         SearchController.tracksList.setItems(tracks);
     }
     
@@ -61,9 +64,36 @@ public class AddSongsController implements Initializable {
                 list1.remove(song);
             }
         }
-       ObservableList<String> tracks = FXCollections.observableArrayList(list1);
+       totList = list1;
+       ObservableList<String> tracks = FXCollections.observableArrayList(totList);
        SearchController.tracksList.setItems(tracks);
+      
        
+    }
+    
+    @FXML
+    public void addAll(){
+        ObservableList<String> items = SearchController.selected.getItems();
+        for(String song : items){
+            if(!list1.contains(song)){
+                list1.add(song);
+            }
+        }
+        if(!list1.isEmpty()){
+            updateListAdding();
+        }
+        
+        ObservableList<String> tracks = FXCollections.observableArrayList(totList);
+        SearchController.tracksList.setItems(tracks);
+        
+    }
+    
+    public void updateListAdding(){
+        for(String song : list1){
+            if(!totList.contains(song)){
+                totList.add(song);
+            }
+        }
     }
     
     

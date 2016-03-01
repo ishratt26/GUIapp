@@ -5,16 +5,13 @@
  */
 package common.gui;
 
-import common.Database;
+
 import common.main;
-import java.io.File;
+import static common.main.AddSong;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.RadioButton;
@@ -27,7 +24,7 @@ import playlist.gui.addplaylist.AddPlaylistScene;
 /**
  * FXML Controller class
  *
- * @author monicadzhaleva
+ * 
  */
 public class GUIController implements Initializable {
 
@@ -39,6 +36,7 @@ public class GUIController implements Initializable {
      */
     public static String text;
     public static String searchBy;
+    public static ObservableList<String> list;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        searchBy = "name";
@@ -52,6 +50,7 @@ public class GUIController implements Initializable {
         
         if(keyEvent.getCode() == KeyCode.ENTER)
         {   
+          
             String text = searchField.getText();
             this.text = text;
             main.SearchScene();
