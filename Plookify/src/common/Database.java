@@ -32,64 +32,114 @@ public class Database {
 		}
 	}
 	
-	public void test_database(){
-		
-		Statement statement;
-		try {
-			statement = connection.createStatement();
-			statement.setQueryTimeout(10);
-			
-		}
-		catch (SQLException ex) {
-			System.err.println(ex.getMessage());
-		}
-		finally {
-			if (connection != null){
-				try{
-					connection.close();
-				}
-				catch(SQLException ex){
-					System.err.println(ex.getMessage());
-				}
-			}
-		}
-	}
-        
-        public ArrayList<Track> getTrack(String query) {
-            ArrayList<Track> tracks = new ArrayList<Track>();
+    public void test_database(){
+
             Statement statement;
-		try {
-			statement = connection.createStatement();
-			statement.setQueryTimeout(10);
-                        ResultSet rs = statement.executeQuery(query);
-                        while (rs.next()) {
-                            tracks.add(new Track(rs.getInt("trackID"), rs.getString("trackName"), rs.getInt("trackArtist"), rs.getInt("trackGenre"), rs.getInt("trackLength"), rs.getString("trackPath")));
-                        }
-                        rs.close();
-                        statement.close();
-		}
-		catch (SQLException ex) {
-			System.err.println(ex.getMessage());
-		}
-		finally {
-			if (connection != null){
-				try{
-					connection.close();
-				}
-				catch(SQLException ex){
-					System.err.println(ex.getMessage());
-				}
-			}
-		}
-                return tracks;
+            try {
+                    statement = connection.createStatement();
+                    statement.setQueryTimeout(10);
+
+            }
+            catch (SQLException ex) {
+                    System.err.println(ex.getMessage());
+            }
+            finally {
+                    if (connection != null){
+                            try{
+                                    connection.close();
+                            }
+                            catch(SQLException ex){
+                                    System.err.println(ex.getMessage());
+                            }
+                    }
+            }
+    }
+
+    public ArrayList<Track> getTrack(String query) {
+        ArrayList<Track> tracks = new ArrayList<Track>();
+        Statement statement;
+        try {
+                statement = connection.createStatement();
+                statement.setQueryTimeout(10);
+                ResultSet rs = statement.executeQuery(query);
+                while (rs.next()) {
+                    tracks.add(new Track(rs.getInt("trackID"), rs.getString("trackName"), rs.getInt("trackArtist"), rs.getInt("trackGenre"), rs.getInt("trackLength"), rs.getString("trackPath")));
+                }
+                rs.close();
+                statement.close();
         }
+        catch (SQLException ex) {
+                System.err.println(ex.getMessage());
+        }
+        finally {
+                if (connection != null){
+                        try{
+                                connection.close();
+                        }
+                        catch(SQLException ex){
+                                System.err.println(ex.getMessage());
+                        }
+                }
+        }
+        return tracks;
+    }
+    
+    public void createUser(String username, String firstName, String lastName, String password, String email, String address, int phoneNumber, String date) {
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.setQueryTimeout(10);
+            String sql = "";
+            if (date.equals(""))
+                sql = "INSERT INTO account (username, fullName, password, email, address, phoneNumber) VALUES ('" + username + "', '" + firstName + " " + lastName + "', '" + password + "', '" + email + "', '" + address + "', " + phoneNumber + ")";
+            else
+                sql = "INSERT INTO account (username, fullName, password, email, address, phoneNumber, paymentDate) VALUES ('" + username + "', '" + firstName + " " + lastName + "', '" + password + "', '" + email + "', '" + address + "', " + phoneNumber + ", '" + date + "')";
+            statement.executeUpdate(sql);
+            statement.close();
+        } catch(SQLException ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            if (connection != null){
+                try{
+                        connection.close();
+                }
+                catch(SQLException ex){
+                        System.err.println(ex.getMessage());
+                }
+            }
+        }
+    }   
+    
+    public boolean checkUser(String username, String password) {
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.setQueryTimeout(10);
+            ResultSet rs = statement.executeQuery("SELECT password FROM account WHERE username = '" + username + "'");
+            if (!rs.isBeforeFirst()) {
+                rs.close();
+                statement.close();
+                return false;
+            }
+            String pswd = "";
+            while (rs.next())
+                pswd = rs.getString("password");
+            rs.close();
+            statement.close();
+            if (password.equals(pswd))
+                return true;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return false;
+    }
         
-	public static Database getInstance() {
-		return INSTANCE;
-	}
-	
-	public Connection getConnection(){
-		return this.connection;
-	}
+    public static Database getInstance() {
+            return INSTANCE;
+    }
+
+    public Connection getConnection(){
+            return this.connection;
+    }
         
 }

@@ -1,5 +1,6 @@
 package account.gui.register;
 
+import account.logic.Register;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +20,7 @@ import javafx.stage.Stage;
 public class RegisterSceneController {
     
     private boolean promptPayment = false;
+    Register register;
     
     @FXML private ScrollPane content;
     @FXML private TextField usernameTextField, firstNameTextField, lastNameTextField, addressTextField, numberTextField, emailTextField;
@@ -30,6 +32,7 @@ public class RegisterSceneController {
     public RegisterSceneController() {
         Platform.runLater(new Runnable() {
             public void run() {
+                register = new Register();
                 content.requestFocus();
             }
         });
@@ -51,24 +54,23 @@ public class RegisterSceneController {
         if (errors.equals("")) {
             usernameTextField.setStyle("");
             firstNameTextField.setStyle("");
-            lastNameTextField.setText("");
-            addressTextField.setText("");
-            numberTextField.setText("");
-            emailTextField.setText("");
-            passwordField.setText("");
-            passwordConfirmField.setText("");
-            //TODO: CREATE NEW USER AND GO TO SUCCESS PAGE
+            lastNameTextField.setStyle("");
+            addressTextField.setStyle("");
+            numberTextField.setStyle("");
+            emailTextField.setStyle("");
+            passwordField.setStyle("");
+            passwordConfirmField.setStyle("");
             if (promptPayment) {
-            try {
-                Stage stage = (Stage) submitButton.getScene().getWindow();
-                Parent root = FXMLLoader.load(getClass().getResource("payment/gui/PaymentScene.fxml"));
-                Scene scene = new Scene(root, 600, 700);
-                stage.setScene(scene);
-            } catch (IOException ex) {
-                Logger.getLogger(RegisterSceneController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                try {
+                    Stage stage = (Stage) submitButton.getScene().getWindow();
+                    Parent root = FXMLLoader.load(getClass().getResource("payment/gui/PaymentScene.fxml"));
+                    Scene scene = new Scene(root, 600, 700);
+                    stage.setScene(scene);
+                } catch (IOException ex) {
+                    Logger.getLogger(RegisterSceneController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             } else {
-            //TODO: GO TO THE PLOOKIFY LOGIN WINDOW
+                register.createUser(usernameTextField.getText(), firstNameTextField.getText(), lastNameTextField.getText(), passwordField.getText(), emailTextField.getText(), addressTextField.getText(), Integer.parseInt(numberTextField.getText()), "");
             }
         } else {
             errorText.setText("");
