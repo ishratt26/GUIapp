@@ -12,7 +12,9 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,6 +26,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import player.logic.FindTrackPath;
@@ -36,65 +41,113 @@ import player.logic.Track;
  */
 public class TrackListController implements Initializable {
 
-    
-    @FXML 
-    ListView listview ;
+    @FXML
+    private TableView<Track> tableView;
+    @FXML
+    private TableColumn<Track, String> nameColumn;
+    @FXML
+    private TableColumn<Track, String> artistColumn;
+    @FXML
+    private TableColumn<Track, String> genreColumn;
+    @FXML
+    private TableColumn<Track, Integer> lengthColumn;
     /**
      * Initializes the controller class.
      */
+    public ArrayList<Track> allTracks;
+    public static ArrayList<String> trackNames;
+    public static ArrayList<String> trackArtist;
+    public static ArrayList<String> trackGenre;
+    public static ArrayList<String> trackPaths;
+    public static ArrayList<Integer> trackLength;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            // TODO
+            allTracks = new ArrayList<Track>();
+            trackNames = new ArrayList<String>();
+            trackArtist = new ArrayList<String>();
+            trackGenre = new ArrayList<String>();
+            trackLength = new ArrayList<Integer>();
+            trackPaths = new ArrayList<String>();
+
+            setTrackInfo();
+            setTracks();
             showtracks();
         } catch (IOException ex) {
             Logger.getLogger(TrackListController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }    
-    
-    
-    public void showtracks() throws IOException
-   {
-        ObservableList<String> tracks = FXCollections.observableArrayList();
-        ListView<String> selected = new ListView<>();
+    }
 
-        listview.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    public void showtracks() throws IOException {
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("trackName"));
+        artistColumn.setCellValueFactory(new PropertyValueFactory<>("trackArtist"));
+        lengthColumn.setCellValueFactory(new PropertyValueFactory<>("trackLength"));
+        genreColumn.setCellValueFactory(new PropertyValueFactory<>("trackGenre"));
 
-        listview.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-               /* FindTrackPath f = new FindTrackPath(newValue);
-                Track track = f.getTrack();
-                String path = track.getTrackPath();
-                Media media = new Media(new File(path).toURI().toString());
-                MediaPlayer player = new MediaPlayer(media);*/
-                
-            }
-        });
+        tableView.setItems(getTrack());
 
-        //DATABASE CONNECTION
+    }
+
+    public ObservableList<Track> getTrack() {
+        ObservableList<Track> tracks = FXCollections.observableArrayList();
+        for (int i = 0; i < allTracks.size(); i++) {
+            tracks.add(allTracks.get(i));
+        }
+        return tracks;
+    }
+
+    public void setTracks() {
+        for (int i = 0; i < trackNames.size(); i++) {
+            String name = trackNames.get(i);
+            String artist = trackArtist.get(i);
+            String genre = trackGenre.get(i);
+            String path = trackPaths.get(i);
+            int length = trackLength.get(i);
+            allTracks.add(new Track(name, artist, genre, length, path));
+        }
+
+    }
+
+    public void setTrackInfo() {
+
         Database db = new Database();
         Connection c = null;
-        Statement stmt = null;
+        Statement statement;
         try {
-            //Class.forName("org.sqlite.JDBC");
-            c = db.getConnection();//connection to db, (db should be located in src)
-            c.setAutoCommit(false);
-            stmt = c.createStatement();
-            //ADD TRACKS
-            ResultSet q1 = stmt.executeQuery("select trackName from track;");//(as if it's typing into terminal)
-            while (q1.next()) {
-                String track = q1.getString("trackName");
-                tracks.addAll(track);
-                listview.setItems(tracks);
+            statement = db.getConnection().createStatement();
+            statement.setQueryTimeout(10);
+            ResultSet rs = statement.executeQuery("SELECT trackName, trackLength, trackPath from track");
+            while (rs.next()) {
+                trackNames.add(rs.getString("trackName"));
+                trackLength.add(rs.getInt("trackLength"));
+                trackPaths.add(rs.getString("trackPath"));
             }
-            stmt.close();
-            c.commit();
-            c.close();
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
+
+            rs = statement.executeQuery("SELECT artistName from artist,track where trackArtist = artistID");
+            while (rs.next()) {
+                trackArtist.add(rs.getString("artistName"));
+            }
+
+            rs = statement.executeQuery("SELECT genreName from genre,track where trackGenre = genreID");
+            while (rs.next()) {
+                trackGenre.add(rs.getString("genreName"));
+            }
+
+            rs.close();
+            statement.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        } finally {
+            if (c != null) {
+                try {
+                    c.close();
+                } catch (SQLException ex) {
+                    System.err.println(ex.getMessage());
+                }
+            }
         }
+
     }
-    
+
 }

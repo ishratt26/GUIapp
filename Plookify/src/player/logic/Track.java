@@ -5,7 +5,7 @@
  */
 package player.logic;
 
-import common.*;
+
 
 /**
  *
@@ -14,13 +14,12 @@ import common.*;
 public class Track {
     private int trackID;
     private String trackName;
-    private int trackArtist;
-    private int trackGenre;
+    private String trackArtist;
+    private String trackGenre;
     private int trackLength;
     private String trackPath;
     
-    public Track(int trackID, String trackName, int trackArtist, int trackGenre, int trackLength, String trackPath){
-        this.trackID = trackID;
+    public Track(String trackName, String trackArtist, String trackGenre, int trackLength, String trackPath){
         this.trackName = trackName;
         this.trackArtist = trackArtist;
         this.trackGenre = trackGenre;
@@ -36,11 +35,11 @@ public class Track {
         return trackName;
     }
 
-    public int getTrackArtist() {
+    public String getTrackArtist() {
         return trackArtist;
     }
 
-    public int getTrackGenre() {
+    public String getTrackGenre() {
         return trackGenre;
     }
 
