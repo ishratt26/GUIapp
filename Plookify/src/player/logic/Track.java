@@ -12,7 +12,7 @@ package player.logic;
  * @author tunazzinaIshrat
  */
 public class Track {
-    private int trackID;
+    //private int trackID;
     private String trackName;
     private String trackArtist;
     private String trackGenre;
@@ -27,9 +27,9 @@ public class Track {
         this.trackPath = trackPath;
     }
 
-    public int getTrackID() {
+   /* public int getTrackID() {
         return trackID;
-    }
+    }*/
 
     public String getTrackName() {
         return trackName;
