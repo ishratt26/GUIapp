@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="account.gui.register.SuccessSceneController">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="400.0" layoutX="100.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../resources/logo.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="messageText" layoutX="100.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Thank you for choosing Plookify! Your account has been successfully created. You can now log in and enjoy the service!" textAlignment="CENTER" wrappingWidth="400.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Hyperlink layoutX="258.0" layoutY="426.0" onAction="#continueButton" text="Continue" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Hyperlink>
+   </children>
+</AnchorPane>

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package account.gui.register.payment.gui;
+package account.gui.register;
 
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;

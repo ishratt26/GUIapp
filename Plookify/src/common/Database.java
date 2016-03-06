@@ -14,6 +14,7 @@ package common;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Database {
     
@@ -132,6 +133,30 @@ public class Database {
             System.out.println(ex.getMessage());
         }
         return false;
+    }
+    
+    public void addDevice() {
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.setQueryTimeout(10);
+            Calendar cal = Calendar.getInstance();
+            long dateAdded = cal.getTime().getTime();
+            String sql = "INSERT INTO device (devCustID, deviceName, devType, dateAdded) VALUES ('" + devCustID + "', '" + deviceName + " " + devType + "', '" + dateAdded + "')";
+            statement.executeUpdate(sql);
+            statement.close();
+        } catch(SQLException ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            if (connection != null){
+                try{
+                        connection.close();
+                }
+                catch(SQLException ex){
+                        System.err.println(ex.getMessage());
+                }
+            }
+        }
     }
         
     public static Database getInstance() {
