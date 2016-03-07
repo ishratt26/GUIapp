@@ -16,10 +16,10 @@ public class Track {
     private String trackName;
     private String trackArtist;
     private String trackGenre;
-    private int trackLength;
+    private String trackLength;
     private String trackPath;
     
-    public Track(String trackName, String trackArtist, String trackGenre, int trackLength, String trackPath){
+    public Track(String trackName, String trackArtist, String trackGenre, String trackLength, String trackPath){
         this.trackName = trackName;
         this.trackArtist = trackArtist;
         this.trackGenre = trackGenre;
@@ -43,7 +43,7 @@ public class Track {
         return trackGenre;
     }
 
-    public int getTrackLength() {
+    public String getTrackLength() {
         return trackLength;
     }
 

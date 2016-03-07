@@ -42,7 +42,7 @@
             </RadioButton>
             <RadioButton fx:id="byArtist" layoutX="388.0" layoutY="18.0" mnemonicParsing="false" onAction="#handleRadioButtons" prefHeight="14.0" prefWidth="64.0" text="by Artist" toggleGroup="$searchByType">
                <font>
-                  <Font name="System Bold Italic" size="10.0" />
+                  <Font name="Lucida Sans Demibold" size="10.0" />
                </font>
             </RadioButton>
             <RadioButton fx:id="byGenre" layoutX="452.0" layoutY="18.0" mnemonicParsing="false" onAction="#handleRadioButtons" prefHeight="14.0" prefWidth="65.0" text="by Genre" toggleGroup="$searchByType">

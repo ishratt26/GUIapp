@@ -81,6 +81,8 @@ public class main extends Application
         loader.setLocation(player.Main.class.getResource("gui/TrackList.fxml"));
         Pane player = loader.load();
         mainLayout.setCenter(player);
+                AddSong();
+
     }
     
         public static  void RadioScreen() throws IOException
@@ -97,7 +99,6 @@ public class main extends Application
         loader.setLocation(player.Main.class.getResource("gui/Search.fxml"));
         AnchorPane searchList = loader.load();
         mainLayout.setCenter(searchList);
-        AddSong();
 
     }
     

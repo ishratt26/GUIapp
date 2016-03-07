@@ -50,7 +50,7 @@ public class TrackListController implements Initializable {
     public static ArrayList<String> trackArtist;
     public static ArrayList<String> trackGenre;
     public static ArrayList<String> trackPaths;
-    public static ArrayList<Integer> trackLength;
+    public static ArrayList<String> trackLength;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -59,7 +59,7 @@ public class TrackListController implements Initializable {
             trackNames = new ArrayList<String>();
             trackArtist = new ArrayList<String>();
             trackGenre = new ArrayList<String>();
-            trackLength = new ArrayList<Integer>();
+            trackLength = new ArrayList<String>();
             trackPaths = new ArrayList<String>();
 
             setTrackInfo();
@@ -94,7 +94,7 @@ public class TrackListController implements Initializable {
             String artist = trackArtist.get(i);
             String genre = trackGenre.get(i);
             String path = trackPaths.get(i);
-            int length = trackLength.get(i);
+            String length = trackLength.get(i);
             allTracks.add(new Track(name, artist, genre, length, path));
         }
 
@@ -111,7 +111,7 @@ public class TrackListController implements Initializable {
             ResultSet rs = statement.executeQuery("SELECT trackName, trackLength, trackPath from track");
             while (rs.next()) {
                 trackNames.add(rs.getString("trackName"));
-                trackLength.add(rs.getInt("trackLength"));
+                trackLength.add(rs.getString("trackLength"));
                 trackPaths.add(rs.getString("trackPath"));
             }
 

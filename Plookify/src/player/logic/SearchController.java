@@ -126,11 +126,10 @@ public class SearchController implements Initializable {
                 String track = rs.getString("trackName");
                 String artist = rs.getString("artistName");
                 String genre = rs.getString("genreName");
-                int length = rs.getInt("trackLength");
+                String length = rs.getString("trackLength");
                 String path = rs.getString("trackPath");
                 
                 tracks.add(new Track(track,artist,genre,length,path));
-               // searchList.setItems(tracks);
             }
             
             result.setText("Results for \""+text+"\"");
@@ -174,7 +173,7 @@ public class SearchController implements Initializable {
                 String track = rs.getString("trackName");
                 String artist = rs.getString("artistName");
                 String genre = rs.getString("genreName");
-                int length = rs.getInt("trackLength");
+                String length = rs.getString("trackLength");
                 String path = rs.getString("trackPath");
                 
                 tracks.add(new Track(track,artist,genre,length,path));
@@ -214,7 +213,7 @@ public class SearchController implements Initializable {
                 String track = rs.getString("trackName");
                 String artist = rs.getString("artistName");
                 String genre = rs.getString("genreName");
-                int length = rs.getInt("trackLength");
+                String length = rs.getString("trackLength");
                 String path = rs.getString("trackPath");
                 
                 tracks.add(new Track(track,artist,genre,length,path));

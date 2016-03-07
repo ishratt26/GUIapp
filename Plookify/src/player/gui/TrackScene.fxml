@@ -55,8 +55,8 @@
             <Label fx:id="timeElapsed" layoutX="266.0" layoutY="11.0" prefHeight="34.0" prefWidth="85.0" />
             <Button fx:id="play" layoutX="120.0" layoutY="9.0" mnemonicParsing="false" onAction="#play" opacity="0.0" prefHeight="35.0" prefWidth="38.0" />
             <Button fx:id="pause" layoutX="75.0" layoutY="8.0" mnemonicParsing="false" onAction="#pause" opacity="0.0" prefHeight="37.0" prefWidth="37.0" />
-            <Button fx:id="rewind" layoutX="24.0" layoutY="8.0" mnemonicParsing="false" onAction="#handleButtonAction" opacity="0.0" prefHeight="37.0" prefWidth="37.0" />
-            <Button fx:id="forward" layoutX="175.0" layoutY="8.0" mnemonicParsing="false" onAction="#handleButtonAction" opacity="0.0" prefHeight="37.0" prefWidth="37.0" />
+            <Button fx:id="rewind" layoutX="24.0" layoutY="8.0" mnemonicParsing="false" onAction="#rewind" opacity="0.0" prefHeight="37.0" prefWidth="37.0" />
+            <Button fx:id="forward" layoutX="175.0" layoutY="8.0" mnemonicParsing="false" onAction="#fastForward" opacity="0.0" prefHeight="37.0" prefWidth="37.0" />
             <Button fx:id="reload" layoutX="224.0" layoutY="9.0" mnemonicParsing="false" onAction="#reload" opacity="0.0" prefHeight="37.0" prefWidth="39.0" />
          </children>
       </AnchorPane>
