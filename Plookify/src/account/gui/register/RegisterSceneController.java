@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 public class RegisterSceneController {
     
     private boolean promptPayment = false;
-    Register registerHandler;
+    Register register;
     
     @FXML private ScrollPane content;
     @FXML private TextField usernameTextField, firstNameTextField, lastNameTextField, addressTextField, numberTextField, emailTextField;
@@ -32,7 +32,7 @@ public class RegisterSceneController {
     public RegisterSceneController() {
         Platform.runLater(new Runnable() {
             public void run() {
-                registerHandler = new Register();
+                register = new Register();
                 content.requestFocus();
             }
         });
@@ -61,25 +61,16 @@ public class RegisterSceneController {
             passwordField.setStyle("");
             passwordConfirmField.setStyle("");
             if (promptPayment) {
-                //registerHandler.createUser(usernameTextField.getText(), firstNameTextField.getText(), lastNameTextField.getText(), passwordField.getText(), emailTextField.getText(), addressTextField.getText(), Integer.parseInt(numberTextField.getText()), "");
                 try {
                     Stage stage = (Stage) submitButton.getScene().getWindow();
-                    Parent root = FXMLLoader.load(getClass().getResource("PaymentScene.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("payment/gui/PaymentScene.fxml"));
                     Scene scene = new Scene(root, 600, 700);
                     stage.setScene(scene);
                 } catch (IOException ex) {
                     Logger.getLogger(RegisterSceneController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
-                //registerHandler.createUser(usernameTextField.getText(), firstNameTextField.getText(), lastNameTextField.getText(), passwordField.getText(), emailTextField.getText(), addressTextField.getText(), Integer.parseInt(numberTextField.getText()), "");
-                try {
-                    Stage stage = (Stage) submitButton.getScene().getWindow();
-                    Parent root = FXMLLoader.load(getClass().getResource("SuccessScene.fxml"));
-                    Scene scene = new Scene(root, 600, 700);
-                    stage.setScene(scene);
-                } catch (IOException ex) {
-                    Logger.getLogger(RegisterSceneController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                register.createUser(usernameTextField.getText(), firstNameTextField.getText(), lastNameTextField.getText(), passwordField.getText(), emailTextField.getText(), addressTextField.getText(), Integer.parseInt(numberTextField.getText()), "");
             }
         } else {
             errorText.setText("");
