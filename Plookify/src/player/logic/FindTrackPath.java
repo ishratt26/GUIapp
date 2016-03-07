@@ -41,7 +41,7 @@ public class FindTrackPath {
             //ADD TRACKS
             ResultSet rs = stmt.executeQuery();//(as if it's typing into terminal)
             while (rs.next()) {
-                track = new Track(rs.getInt("trackID"), rs.getString("trackName"), rs.getInt("trackArtist"), rs.getInt("trackGenre"), rs.getInt("trackLength"), rs.getString("trackPath"));
+                //track = new Track(rs.getInt("trackID"), rs.getString("trackName"), rs.getInt("trackArtist"), rs.getInt("trackGenre"), rs.getInt("trackLength"), rs.getString("trackPath"));
                 //need to pass the path to a mediaplayer object in trackPlayerController
             }
             stmt.close();

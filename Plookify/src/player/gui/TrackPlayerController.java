@@ -5,14 +5,13 @@
  */
 package player.gui;
 
-import common.gui.AddSongsController;
-import common.gui.SearchController;
 import java.io.File;
 import java.io.FilenameFilter;
 import static java.lang.Math.floor;
 import static java.lang.String.format;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -32,6 +31,9 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.media.MediaView;
 import javafx.util.Duration;
+import player.logic.AddSongsController;
+import player.logic.SearchController;
+import player.logic.Track;
 
 /**
  * FXML Controller class
@@ -61,17 +63,33 @@ public class TrackPlayerController implements Initializable {
     
     public Duration duration;
     
-   /* private final String SONG_DIR = "songs/";
+    
+    ArrayList<Track> tracks = AddSongsController.totList;
+    final List<MediaPlayer> players = new ArrayList<>();
+    final MediaView view = new MediaView();
+    Iterator<String> itr ;
+    
+   /* 
     final List<MediaPlayer> players = new ArrayList<>();
         
     final File dir =  new File(SONG_DIR);
     
     private MediaPlayer currentPlayer;*/
 
-    String path = "../SE21/Plookify/src/resources/songs/SeeYouAgain.mp3";
-    Media media = new Media(new File(path).toURI().toString());
-    MediaPlayer player = new MediaPlayer(media);
-    Status status = player.getStatus();
+    //String path = "../SE21/Plookify/src/resources/songs/SeeYouAgain.mp3";
+    
+    //get the path from the pathToList arraylist and then covert it each time in media
+    // and then create a mediaplayer based on that 
+    
+    //
+    
+    
+    
+    
+    MediaPlayer player;
+   //Media media = new Media(new File(path).toURI().toString());
+    //MediaPlayer player = new MediaPlayer(media);
+    //Status status = player.getStatus();
     
     int songNumber;
    
@@ -81,32 +99,8 @@ public class TrackPlayerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        
-        /*if (!dir.exists() || !dir.isDirectory()) {
-            System.out.println("Cannot find audio source directory: " + dir);
-            Platform.exit();
-            return;
-        }
-          
-        
-        for (String file : dir.list(new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                if (name.endsWith(".mp3")) {
-                    return true;
-                }
-                return false;
-            }
-        })) {
-            players.add(createPlayer("file:/" + (dir + "\\" + file).replace("\\", "/").replaceAll(" ", "%20")));
-        }
-        if (players.isEmpty()) {
-            System.out.println("No audio found in " + dir);
-            Platform.exit();
-            return;
-        }
-        
-        
+       /*
+        //should I create a mediaplayer for each song in the now playing list?
         
       
         
@@ -129,6 +123,8 @@ public class TrackPlayerController implements Initializable {
                 updateValues();
             }
         });*/
+        
+        
     }  
     
     
@@ -137,22 +133,15 @@ public class TrackPlayerController implements Initializable {
     
     @FXML
     public void handleButtonAction(ActionEvent e) {
-       ArrayList<String> tracks = AddSongsController.totList;
-       ArrayList<String> trackNames = SearchController.trackNames;
-        for(String track : tracks)
-        {
-            for(int i = 0; i< trackNames.size(); i++){
-                if(track.equals(trackNames.get(i))){
-                    int ID = SearchController.trackIDs.get(i);
-                    int songNumber = ID%6;
-                    setSongNumber(songNumber);
-                }
-                
-            }
-        
-        
-        }
+       
+     /*  for(int i=0; i<paths.size(); i++){
+           players.add(createPlayer(new File(paths.get(i)).toURI().toString()));    
+       }
+       if(players.isEmpty()){
+           
+       }
         // MediaPlayer player = getPlayer();
+        
         setTimer(player);
         
         if (e.getSource() == play) {
@@ -174,8 +163,104 @@ public class TrackPlayerController implements Initializable {
         else if(e.getSource() == reload){
             player.seek(player.getStartTime());
         }
+        */
         
-        
+    }
+    
+    @FXML
+    public void play(){
+       try{
+           //itr = 
+           
+           if(player==null){
+                Track track = SearchController.nowPlayingList.getSelectionModel().getSelectedItem();
+                String path = track.getTrackPath();
+                Media media = new Media(new File(path).toURI().toString());
+                this.player = new MediaPlayer(media);
+                player.setOnReady(new Runnable() {
+                    @Override
+                    public void run() {
+
+                    setTimer(player);
+                    player.play();
+                    updateValues();
+                    updateSlider(player);
+                    }
+                
+                });
+                player.setOnEndOfMedia(new Runnable() {
+                @Override 
+                public void run() {
+                  player.stop(); 
+              }
+             });
+            }
+            else if(player.getStatus().equals(Status.PAUSED)){
+                player.play();
+            }
+            else if(player.getStatus().equals(Status.PLAYING)){
+                player.stop();
+                Track track = SearchController.nowPlayingList.getSelectionModel().getSelectedItem();
+                String path = track.getTrackPath();
+                Media media = new Media(new File(path).toURI().toString());
+                this.player = new MediaPlayer(media);
+                player.setOnReady(new Runnable() {
+                    @Override
+                    public void run() {
+
+                    setTimer(player);
+                    player.play();
+                    updateValues();
+                    updateSlider(player);
+                    }
+                
+                });
+            }
+            updateSlider(player);
+       }
+       catch(Exception e){
+           System.out.println(e.getMessage());
+       }
+       
+    }
+    
+    @FXML
+    public void pause(){
+        player.pause();
+    }
+    
+    @FXML
+    public void reload(){
+        player.seek(player.getStartTime());
+    }
+    
+    @FXML
+    public void fastForward(){
+        player.seek(player.getCurrentTime().multiply(1.5));
+    }
+    
+    @FXML
+    public void rewind(){
+        player.seek(player.getCurrentTime().divide(1.5));
+    }
+    
+    
+    public void play(String mediaFile){
+        Media media = new Media(mediaFile);
+        MediaPlayer player = new MediaPlayer(media);
+        view.setMediaPlayer(player);
+        player.play();
+        player.setOnEndOfMedia(new Runnable() {
+            @Override
+            public void run() {
+                player.stop();
+                if (itr.hasNext()) {
+                    //Plays the subsequent files
+                    play(itr.next());
+                }
+                return;
+            }
+        });
     }
     
     private MediaPlayer createPlayer(String mediaSource) {
@@ -188,7 +273,7 @@ public class TrackPlayerController implements Initializable {
     });
     return player;
   }
-    
+    @FXML
     public void skip(MediaPlayer curPlayer){
         
         /*MediaPlayer nextPlayer = players.get((players.indexOf(curPlayer) + 1) % players.size());
@@ -199,6 +284,7 @@ public class TrackPlayerController implements Initializable {
     
     }
     
+    @FXML
     public void skipBack(MediaPlayer curPlayer){
        /* MediaPlayer current = curPlayer;
         if(players.indexOf(current)==0)
@@ -301,11 +387,4 @@ public class TrackPlayerController implements Initializable {
                 });
     }
 
-    private void setID(int ID) {
-       
-    }
-
-    private void setSongNumber(int songNumber) {
-        this.songNumber = songNumber;
-    }
 }
