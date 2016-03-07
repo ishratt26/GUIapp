@@ -2,9 +2,12 @@ package account.gui.register;
 
 import account.logic.Register;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -34,6 +37,20 @@ public class RegisterSceneController {
             public void run() {
                 registerHandler = new Register();
                 content.requestFocus();
+                
+                //SO CAN ENTER NUMBERS
+                numberTextField.textProperty().addListener(new ChangeListener<String>() {
+                    @Override
+                    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                        try {
+                            if (newValue.matches("\\d*")) {
+                                int value = Integer.parseInt(newValue);
+                            } else {
+                                numberTextField.setText(oldValue);
+                            }
+                        } catch (NumberFormatException ex) {}
+                    }
+                });
             }
         });
     }
@@ -61,7 +78,7 @@ public class RegisterSceneController {
             passwordField.setStyle("");
             passwordConfirmField.setStyle("");
             if (promptPayment) {
-                //registerHandler.createUser(usernameTextField.getText(), firstNameTextField.getText(), lastNameTextField.getText(), passwordField.getText(), emailTextField.getText(), addressTextField.getText(), Integer.parseInt(numberTextField.getText()), "");
+                registerHandler.createUser(usernameTextField.getText(), firstNameTextField.getText(), lastNameTextField.getText(), passwordField.getText(), emailTextField.getText(), addressTextField.getText(), Integer.parseInt(numberTextField.getText()), Calendar.getInstance().getTime().getTime());
                 try {
                     Stage stage = (Stage) submitButton.getScene().getWindow();
                     Parent root = FXMLLoader.load(getClass().getResource("PaymentScene.fxml"));
@@ -71,7 +88,7 @@ public class RegisterSceneController {
                     Logger.getLogger(RegisterSceneController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
-                //registerHandler.createUser(usernameTextField.getText(), firstNameTextField.getText(), lastNameTextField.getText(), passwordField.getText(), emailTextField.getText(), addressTextField.getText(), Integer.parseInt(numberTextField.getText()), "");
+                registerHandler.createUser(usernameTextField.getText(), firstNameTextField.getText(), lastNameTextField.getText(), passwordField.getText(), emailTextField.getText(), addressTextField.getText(), Integer.parseInt(numberTextField.getText()), 0);
                 try {
                     Stage stage = (Stage) submitButton.getScene().getWindow();
                     Parent root = FXMLLoader.load(getClass().getResource("SuccessScene.fxml"));
@@ -114,8 +131,12 @@ public class RegisterSceneController {
             errors = errors + " \u2022 Password cannot be empty.";
         
         //TODO: USERNAME ALREADY EXISTS
+        if (registerHandler.userExists(usernameTextField.getText()))
+            errors = errors + " \u2022 This username is already taken.";
         
-        //TODO: PASSWORD ALREADY EXISTS
+        //TODO: PASSWORD CHECK INCORRECT
+        if (!(passwordField.getText().equals(passwordConfirmField.getText())))
+            errors = errors + " \u2022 Passwords do not match!";
         
         return errors;
     }

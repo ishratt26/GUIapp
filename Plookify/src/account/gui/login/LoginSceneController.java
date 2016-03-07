@@ -10,10 +10,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import playlist.gui.main;
 
 public class LoginSceneController {
 
@@ -34,9 +32,6 @@ public class LoginSceneController {
             passwordTextField.setStyle("");
             errorText.setText("");
             //TODO: GO TO THE MAIN WINDOW
-            Stage stage = (Stage) usernameTextField.getScene().getWindow();
-            stage.close();
-            main.main(new String[0]);
         } else {
             errorText.setText("");
             usernameTextField.setStyle("-fx-text-box-border: red ; -fx-focus-color: red ;");

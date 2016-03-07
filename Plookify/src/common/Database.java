@@ -56,17 +56,46 @@ public class Database {
             }
     }
 
+    /*public ArrayList<Track> getTrack(String query) {
+        ArrayList<Track> tracks = new ArrayList<Track>();
+        Statement statement;
+        try {
+                statement = connection.createStatement();
+                statement.setQueryTimeout(10);
+                ResultSet rs = statement.executeQuery(query);
+                while (rs.next()) {
+                    tracks.add(new Track(rs.getInt("trackID"), rs.getString("trackName"), rs.getInt("trackArtist"), rs.getInt("trackGenre"), rs.getInt("trackLength"), rs.getString("trackPath")));
+                }
+                rs.close();
+                statement.close();
+        }
+        catch (SQLException ex) {
+                System.err.println(ex.getMessage());
+        }
+        finally {
+                if (connection != null){
+                        try{
+                                connection.close();
+                        }
+                        catch(SQLException ex){
+                                System.err.println(ex.getMessage());
+                        }
+                }
+        }
+        return tracks;
+    }
+*/
     
-    public void createUser(String username, String firstName, String lastName, String password, String email, String address, int phoneNumber, String date) {
+    public void createUser(String username, String firstName, String lastName, String password, String email, String address, int phoneNumber, long date) {
         Statement statement;
         try {
             statement = connection.createStatement();
             statement.setQueryTimeout(10);
             String sql = "";
-            if (date.equals(""))
+            if (date == 0)
                 sql = "INSERT INTO account (username, fullName, password, email, address, phoneNumber) VALUES ('" + username + "', '" + firstName + " " + lastName + "', '" + password + "', '" + email + "', '" + address + "', " + phoneNumber + ")";
             else
-                sql = "INSERT INTO account (username, fullName, password, email, address, phoneNumber, paymentDate) VALUES ('" + username + "', '" + firstName + " " + lastName + "', '" + password + "', '" + email + "', '" + address + "', " + phoneNumber + ", '" + date + "')";
+                sql = "INSERT INTO account (username, fullName, password, email, address, phoneNumber, paymentDate) VALUES ('" + username + "', '" + firstName + " " + lastName + "', '" + password + "', '" + email + "', '" + address + "', " + phoneNumber + ", " + date + ")";
             statement.executeUpdate(sql);
             statement.close();
         } catch(SQLException ex) {
@@ -107,6 +136,23 @@ public class Database {
         return false;
     }
     
+    public boolean usernameExists(String username) {
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.setQueryTimeout(10);
+            ResultSet rs = statement.executeQuery("SELECT username FROM account WHERE username = '" + username + "'");
+            if (!rs.isBeforeFirst()) {
+                rs.close();
+                statement.close();
+                return false;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return true;
+    }
+    
     public void addDevice() {
         Statement statement;
         try {
@@ -114,8 +160,8 @@ public class Database {
             statement.setQueryTimeout(10);
             Calendar cal = Calendar.getInstance();
             long dateAdded = cal.getTime().getTime();
-            String sql = "INSERT INTO device (devCustID, deviceName, devType, dateAdded) VALUES ('" + devCustID + "', '" + deviceName + " " + devType + "', '" + dateAdded + "')";
-            statement.executeUpdate(sql);
+            //String sql = "INSERT INTO device (devCustID, deviceName, devType, dateAdded) VALUES ('" + devCustID + "', '" + deviceName + " " + devType + "', '" + dateAdded + "')";
+            //statement.executeUpdate(sql);
             statement.close();
         } catch(SQLException ex) {
             System.out.println(ex.getMessage());
