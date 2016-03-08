@@ -56,6 +56,7 @@ public class main extends Application
         loader.setLocation(playlist.main.class.getResource("gui/addplaylist/addPlaylist.fxml"));
         AnchorPane playlist = loader.load();
         mainLayout.setCenter(playlist);
+        UserPanel();
         
     }
        
@@ -65,6 +66,7 @@ public class main extends Application
         loader.setLocation(common.main.class.getResource("gui/homeScreen.fxml"));
         AnchorPane playlist = loader.load();
         mainLayout.setCenter(playlist);
+        UserPanel();
        }
        
     public void player() throws IOException
@@ -81,7 +83,8 @@ public class main extends Application
         loader.setLocation(player.Main.class.getResource("gui/TrackList.fxml"));
         Pane player = loader.load();
         mainLayout.setCenter(player);
-                AddSong();
+        UserPanel();
+                
 
     }
     
@@ -91,6 +94,7 @@ public class main extends Application
         loader.setLocation(radio.main.class.getResource("gui/radio.fxml"));
         Pane player = loader.load();
         mainLayout.setCenter(player);
+        UserPanel();
     }
     
     public static void SearchScene() throws IOException
@@ -99,6 +103,7 @@ public class main extends Application
         loader.setLocation(player.Main.class.getResource("gui/Search.fxml"));
         AnchorPane searchList = loader.load();
         mainLayout.setCenter(searchList);
+        AddSong();
 
     }
     
@@ -107,6 +112,13 @@ public class main extends Application
         loader.setLocation(player.Main.class.getResource("gui/AddSongs.fxml"));
         BorderPane addSongs = loader.load();
         mainLayout.setRight(addSongs);
+    }
+    
+    public static void UserPanel() throws IOException{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(common.main.class.getResource("gui/UserPanel.fxml"));
+        BorderPane userPanel = loader.load();
+        mainLayout.setRight(userPanel);
     }
     /*
     public static void radio() throws IOException

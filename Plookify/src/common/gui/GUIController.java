@@ -6,6 +6,7 @@
 package common.gui;
 
 
+import common.Plookify;
 import common.main;
 import static common.main.AddSong;
 import java.io.IOException;
@@ -53,7 +54,7 @@ public class GUIController implements Initializable {
           
             String text = searchField.getText();
             this.text = text;
-            main.SearchScene();
+            Plookify.SearchScene();
                 
         }
     

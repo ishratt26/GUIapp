@@ -16,12 +16,12 @@
             <Font name="Lucida Sans Regular" size="14.0" />
          </font>
       </Label>
-      <TableView fx:id="searchResult" layoutY="32.0" prefHeight="247.0" prefWidth="515.0">
+      <TableView fx:id="searchResult" layoutX="2.0" layoutY="32.0" prefHeight="247.0" prefWidth="505.0">
         <columns>
           <TableColumn fx:id="nameColumn" prefWidth="172.0" text="Name" />
-          <TableColumn fx:id="lengthColumn" prefWidth="83.0" text="Length" />
+          <TableColumn fx:id="lengthColumn" prefWidth="84.0" text="Length" />
             <TableColumn fx:id="artistColumn" prefWidth="154.0" text="Artist" />
-            <TableColumn fx:id="genreColumn" prefWidth="110.0" text="Genre" />
+            <TableColumn fx:id="genreColumn" prefWidth="93.0" text="Genre" />
         </columns>
       </TableView>
       <Label layoutX="193.0" layoutY="287.0" prefHeight="20.0" prefWidth="129.0" text="Now Playing playlist" textAlignment="CENTER">
@@ -40,12 +40,12 @@
             </LinearGradient>
          </textFill>
       </Label>
-      <TableView fx:id="nowPlaying" layoutY="314.0" prefHeight="186.0" prefWidth="515.0">
+      <TableView fx:id="nowPlaying" layoutX="2.0" layoutY="314.0" prefHeight="186.0" prefWidth="505.0">
         <columns>
           <TableColumn fx:id="NameColumn" prefWidth="172.0" text="Name" />
-          <TableColumn fx:id="LengthColumn" prefWidth="83.0" text="Length" />
+          <TableColumn fx:id="LengthColumn" prefWidth="84.0" text="Length" />
             <TableColumn fx:id="ArtistColumn" prefWidth="154.0" text="Artist" />
-            <TableColumn fx:id="GenreColumn" prefWidth="110.0" text="Genre" />
+            <TableColumn fx:id="GenreColumn" prefWidth="93.0" text="Genre" />
         </columns>
       </TableView>
    </children>
