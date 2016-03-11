@@ -80,14 +80,6 @@ public class AddSongsController implements Initializable {
        totList = list1;
        ObservableList<Track> tracks = FXCollections.observableArrayList(totList);
        SearchController.nowPlayingList.setItems(tracks);
-       /*SearchController.nowPlayingList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Boolean>() {
-                
-           @Override
-           public void changed(ObservableValue ov,Boolean old_val, Boolean new_val) {
-                        System.out.println(new_val);
-                }
-            });*/
-       
        
     }
     
@@ -126,7 +118,6 @@ public class AddSongsController implements Initializable {
        long min = TimeUnit.MINUTES.toMillis(mins);
        long sec = TimeUnit.SECONDS.toMillis(secs);
        long tot = min + sec;
-        //System.out.println(mins + ":" + secs); 
         Duration dur = new Duration(tot);
         controller.playAt(dur);
         

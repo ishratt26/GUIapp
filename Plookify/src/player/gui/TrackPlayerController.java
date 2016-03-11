@@ -75,9 +75,9 @@ public class TrackPlayerController implements Initializable {
     
     @FXML
     public void play(){
-       try{
-           
-           if(player==null){
+        try {
+
+            if (player == null) {
                 Track track = SearchController.nowPlayingList.getSelectionModel().getSelectedItem();
                 this.path = track.getTrackPath();
                 media = new Media(new File(path).toURI().toString());
@@ -86,61 +86,57 @@ public class TrackPlayerController implements Initializable {
                     @Override
                     public void run() {
 
-                    setTimer(player);
-                    player.play();
-                    updateValues();
-                    updateSlider(player);
+                        setTimer(player);
+                        player.play();
+                        updateValues();
+                        updateSlider(player);
                     }
-                
+
                 });
                 player.setOnEndOfMedia(new Runnable() {
-                @Override 
-                public void run() {
-                  player.stop(); 
-              }
-             });
-            }
-            else if(player.getStatus().equals(Status.PAUSED)){
-               Track track = SearchController.nowPlayingList.getSelectionModel().getSelectedItem();
-               String path1 = track.getTrackPath();
-               if(path.equals(path1)){
+                    @Override
+                    public void run() {
+                        player.stop();
+                    }
+                });
+            } else if (player.getStatus().equals(Status.PAUSED)) {
+                Track track = SearchController.nowPlayingList.getSelectionModel().getSelectedItem();
+                String path1 = track.getTrackPath();
+                if (path.equals(path1)) {
                     player.play();
                     System.out.println(path1);
-                }
-               else{
+                } else {
                     player.stop();
                     media = new Media(new File(path1).toURI().toString());
                     this.player = new MediaPlayer(media);
                     this.path = path1;
                     player.setOnReady(new Runnable() {
-                    @Override
-                    public void run() {
+                        @Override
+                        public void run() {
 
-                    setTimer(player);
-                    player.play();
-                    updateValues();
-                    updateSlider(player);
-                    }
-                
-                });
-               }
-            }
-            else if(player.getStatus().equals(Status.PLAYING)){
+                            setTimer(player);
+                            player.play();
+                            updateValues();
+                            updateSlider(player);
+                        }
+
+                    });
+                }
+            } else if (player.getStatus().equals(Status.PLAYING)) {
                 player.stop();
                 Track track = SearchController.nowPlayingList.getSelectionModel().getSelectedItem();
-                String path = track.getTrackPath();
+                path = track.getTrackPath();
                 media = new Media(new File(path).toURI().toString());
                 this.player = new MediaPlayer(media);
                 player.setOnReady(new Runnable() {
                     @Override
                     public void run() {
-
-                    setTimer(player);
-                    player.play();
-                    updateValues();
-                    updateSlider(player);
+                        setTimer(player);
+                        player.play();
+                        updateValues();
+                        updateSlider(player);
                     }
-                
+
                 });
             }
             updateSlider(player);
@@ -172,28 +168,24 @@ public class TrackPlayerController implements Initializable {
     }
     
     public void playAt(Duration d){
-                Track track = SearchController.nowPlayingList.getSelectionModel().getSelectedItem();
-                if(player != null && player.getStatus().equals(MediaPlayer.Status.PLAYING)){
-                    player.stop();
-                }
-                path = track.getTrackPath();
-                media = new Media(new File(path).toURI().toString());
-                player = new MediaPlayer(media);
-                player.setStartTime(d);
+        Track track = SearchController.nowPlayingList.getSelectionModel().getSelectedItem();
+        if (player != null && player.getStatus().equals(MediaPlayer.Status.PLAYING)) {
+            player.stop();
+        }
+        path = track.getTrackPath();
+        media = new Media(new File(path).toURI().toString());
+        player = new MediaPlayer(media);
+        player.setOnReady(new Runnable() {
+            @Override
+            public void run() {
+                player.seek(d);
                 player.play();
                 System.out.println(d);
-                player.setOnReady(new Runnable() {
-                    @Override
-                    public void run() {
-                    //player.seek(d);
-                    //player.setStartTime(d);
-                    setTimer(player);
-                    //player.play();
-                    //updateValues();
-                    updateSlider(player);
-                    }
-                
-                });
+                setTimer(player);
+                updateSlider(player);
+            }
+
+        });  
     }
     
     
@@ -289,7 +281,6 @@ public class TrackPlayerController implements Initializable {
                 updateValues();
             }
         });
-        player.seek(duration);
     }
     
     private void updateSlider(MediaPlayer player){
