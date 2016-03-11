@@ -6,34 +6,26 @@
 package player.gui;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import static java.lang.Math.floor;
 import static java.lang.String.format;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.media.MediaView;
 import javafx.util.Duration;
-import player.logic.AddSongsController;
 import player.logic.SearchController;
 import player.logic.Track;
+import player.logic.storedController;
 
 /**
  * FXML Controller class
@@ -62,120 +54,33 @@ public class TrackPlayerController implements Initializable {
     private Label timeElapsed;
     
     public Duration duration;
+    public Slider slider;
+    public Label elapsed;
+    public String path;
+    public Media media;
     
-    
-    ArrayList<Track> tracks = AddSongsController.totList;
-    final List<MediaPlayer> players = new ArrayList<>();
     final MediaView view = new MediaView();
-    Iterator<String> itr ;
-    
-   /* 
-    final List<MediaPlayer> players = new ArrayList<>();
-        
-    final File dir =  new File(SONG_DIR);
-    
-    private MediaPlayer currentPlayer;*/
-
-    //String path = "../SE21/Plookify/src/resources/songs/SeeYouAgain.mp3";
-    
-    //get the path from the pathToList arraylist and then covert it each time in media
-    // and then create a mediaplayer based on that 
-    
-    //
-    
-    
-    
-    
     MediaPlayer player;
-   //Media media = new Media(new File(path).toURI().toString());
-    //MediaPlayer player = new MediaPlayer(media);
-    //Status status = player.getStatus();
-    
-    int songNumber;
    
     
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-       /*
-        //should I create a mediaplayer for each song in the now playing list?
-        
-      
-        
-        for (int i = 0; i < players.size(); i++) {
-        final MediaPlayer player     = players.get(i);
-        setPlayer(player);
-        final MediaPlayer nextPlayer = players.get((i + 1) % players.size());
-        player.setOnEndOfMedia(new Runnable() {
-        @Override public void run() {
-          player.stop();
-          nextPlayer.play();
-          setPlayer(nextPlayer);
-        }
-      });
-    }
-        
-        
-        /*getPlayer().currentTimeProperty().addListener(new InvalidationListener() {
-            public void invalidated(Observable ov) {
-                updateValues();
-            }
-        });*/
-        
-        
+        slider = timeSlider;
+        elapsed = timeElapsed; 
+        storedController.getInstance().setController(this);
     }  
     
-    
-    
-
-    
-    @FXML
-    public void handleButtonAction(ActionEvent e) {
-       
-     /*  for(int i=0; i<paths.size(); i++){
-           players.add(createPlayer(new File(paths.get(i)).toURI().toString()));    
-       }
-       if(players.isEmpty()){
-           
-       }
-        // MediaPlayer player = getPlayer();
-        
-        setTimer(player);
-        
-        if (e.getSource() == play) {
-                player.play();
-                updateSlider(player);   
-        }
-        else if(e.getSource() == pause){
-                player.pause();
-        }    
-        else if(e.getSource() == rewind){
-            player.stop();
-            //skipBack(player);
-        }
-        else if(e.getSource() == forward){
-            player.stop();
-            //skip(player);
-            //player.seek(player.getCurrentTime().multiply(1.5));
-        }
-        else if(e.getSource() == reload){
-            player.seek(player.getStartTime());
-        }
-        */
-        
-    }
     
     @FXML
     public void play(){
        try{
-           //itr = 
            
            if(player==null){
                 Track track = SearchController.nowPlayingList.getSelectionModel().getSelectedItem();
-                String path = track.getTrackPath();
-                Media media = new Media(new File(path).toURI().toString());
+                this.path = track.getTrackPath();
+                media = new Media(new File(path).toURI().toString());
                 this.player = new MediaPlayer(media);
                 player.setOnReady(new Runnable() {
                     @Override
@@ -196,13 +101,35 @@ public class TrackPlayerController implements Initializable {
              });
             }
             else if(player.getStatus().equals(Status.PAUSED)){
-                player.play();
+               Track track = SearchController.nowPlayingList.getSelectionModel().getSelectedItem();
+               String path1 = track.getTrackPath();
+               if(path.equals(path1)){
+                    player.play();
+                    System.out.println(path1);
+                }
+               else{
+                    player.stop();
+                    media = new Media(new File(path1).toURI().toString());
+                    this.player = new MediaPlayer(media);
+                    this.path = path1;
+                    player.setOnReady(new Runnable() {
+                    @Override
+                    public void run() {
+
+                    setTimer(player);
+                    player.play();
+                    updateValues();
+                    updateSlider(player);
+                    }
+                
+                });
+               }
             }
             else if(player.getStatus().equals(Status.PLAYING)){
                 player.stop();
                 Track track = SearchController.nowPlayingList.getSelectionModel().getSelectedItem();
                 String path = track.getTrackPath();
-                Media media = new Media(new File(path).toURI().toString());
+                media = new Media(new File(path).toURI().toString());
                 this.player = new MediaPlayer(media);
                 player.setOnReady(new Runnable() {
                     @Override
@@ -244,35 +171,32 @@ public class TrackPlayerController implements Initializable {
         player.seek(player.getCurrentTime().divide(1.5));
     }
     
-    
-    public void play(String mediaFile){
-        Media media = new Media(mediaFile);
-        MediaPlayer player = new MediaPlayer(media);
-        view.setMediaPlayer(player);
-        player.play();
-        player.setOnEndOfMedia(new Runnable() {
-            @Override
-            public void run() {
-                player.stop();
-                if (itr.hasNext()) {
-                    //Plays the subsequent files
-                    play(itr.next());
+    public void playAt(Duration d){
+                Track track = SearchController.nowPlayingList.getSelectionModel().getSelectedItem();
+                if(player != null && player.getStatus().equals(MediaPlayer.Status.PLAYING)){
+                    player.stop();
                 }
-                return;
-            }
-        });
+                path = track.getTrackPath();
+                media = new Media(new File(path).toURI().toString());
+                player = new MediaPlayer(media);
+                player.setStartTime(d);
+                player.play();
+                System.out.println(d);
+                player.setOnReady(new Runnable() {
+                    @Override
+                    public void run() {
+                    //player.seek(d);
+                    //player.setStartTime(d);
+                    setTimer(player);
+                    //player.play();
+                    //updateValues();
+                    updateSlider(player);
+                    }
+                
+                });
     }
     
-    private MediaPlayer createPlayer(String mediaSource) {
-    final Media media = new Media(mediaSource);
-    final MediaPlayer player = new MediaPlayer(media);
-    player.setOnError(new Runnable() {
-      @Override public void run() {
-        System.out.println("Media error occurred: " + player.getError());
-      }
-    });
-    return player;
-  }
+    
     @FXML
     public void skip(MediaPlayer curPlayer){
         
@@ -306,15 +230,14 @@ public class TrackPlayerController implements Initializable {
     }
     
     protected void updateValues() {
-        if (timeElapsed != null&&timeSlider != null) {
+        if (elapsed != null&&slider != null) {
             Platform.runLater(new Runnable() {
-
                 public void run() {
                     Duration currentTime = player.getCurrentTime();
-                    timeElapsed.setText(formatTime(currentTime, duration));
-                    timeSlider.setDisable(duration.isUnknown());
-                    if (!timeSlider.isDisabled() && duration.greaterThan(Duration.ZERO) && !timeSlider.isValueChanging()) {
-                        timeSlider.setValue(currentTime.divide(duration).toMillis() * 100.0);
+                    elapsed.setText(formatTime(currentTime, duration));
+                    slider.setDisable(duration.isUnknown());
+                    if (!slider.isDisabled() && duration.greaterThan(Duration.ZERO) && !slider.isValueChanging()) {
+                        slider.setValue(currentTime.divide(duration).toMillis() * 100.0);
                     }
                     
                 }
@@ -322,7 +245,7 @@ public class TrackPlayerController implements Initializable {
         }
     }
     
-    private static String formatTime(Duration elapsed, Duration duration) {
+    private String formatTime(Duration elapsed, Duration duration) {
         int intElapsed = (int) floor(elapsed.toSeconds());
         int elapsedHours = intElapsed / (60 * 60);
         if (elapsedHours > 0) {
@@ -360,28 +283,23 @@ public class TrackPlayerController implements Initializable {
         }
     }
 
-    /*private void setPlayer(MediaPlayer player) {
-        currentPlayer = player;
-    }
-
-    private MediaPlayer getPlayer() {
-        return currentPlayer;
-    }*/
-    
     private void setTimer(MediaPlayer player){
         player.currentTimeProperty().addListener(new InvalidationListener() {
             public void invalidated(Observable ov) {
                 updateValues();
             }
         });
+        player.seek(duration);
     }
     
     private void updateSlider(MediaPlayer player){
         duration = player.getMedia().getDuration();
-                timeSlider.valueProperty().addListener((Observable ov) -> {
-                    if (timeSlider.isValueChanging()) {
+            System.out.println(duration);
+                slider.valueProperty().addListener((Observable ov) -> {
+                    if (slider.isValueChanging()) {
                         // multiply duration by percentage calculated by slider position
-                        player.seek(duration.multiply(timeSlider.getValue() / 100.0));
+                        player.seek(duration.multiply(slider.getValue() / 100.0));
+                        //System.out.println(duration);
                     }
                     updateValues();
                 });

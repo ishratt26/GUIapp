@@ -8,15 +8,11 @@ package player.logic;
 import common.Database;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
-import javafx.beans.Observable;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -40,6 +36,7 @@ public class AddSongsController implements Initializable {
     public ObservableList<Track> nowPlayingList, removeList, oldList;
     public static ArrayList<Track> list1 = new ArrayList<Track>();
     public static ArrayList<Track> totList = new ArrayList<Track>();
+    private TrackPlayerController controller = storedController.getInstance().getController();
     
     public static long mins;
     public static long secs;
@@ -62,9 +59,11 @@ public class AddSongsController implements Initializable {
         if(!list1.isEmpty()){
             updateListAdding();
         }
+
         //db connection and insert into database
         ObservableList<Track> tracks = FXCollections.observableArrayList(totList);
         SearchController.nowPlayingList.setItems(tracks);
+        SearchController.selectedList.getSelectionModel().clearSelection();
          
         
     }
@@ -106,7 +105,7 @@ public class AddSongsController implements Initializable {
         
         ObservableList<Track> tracks = FXCollections.observableArrayList(totList);
         SearchController.nowPlayingList.setItems(tracks);
-        
+        SearchController.selectedList.getSelectionModel().clearSelection();
        
         
     }
@@ -127,22 +126,24 @@ public class AddSongsController implements Initializable {
        long min = TimeUnit.MINUTES.toMillis(mins);
        long sec = TimeUnit.SECONDS.toMillis(secs);
        long tot = min + sec;
-        System.out.println(mins + ":" + secs); 
+        //System.out.println(mins + ":" + secs); 
         Duration dur = new Duration(tot);
-        TrackPlayerController.playAt(dur);
+        controller.playAt(dur);
         
     }
     
-    public void addToDb(){
+    public void addToDb(String userID){
         Database db = new Database();
         Connection c = null;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         try{
             c  = db.getConnection();
             stmt.setQueryTimeout(10);
             c.setAutoCommit(false);
-            stmt = c.createStatement();
-            String query = "INSERT into nowPlaying('') VALUES ()";
+            String query = "INSERT into nowPlaying(ID,userID) VALUES (null,?)"; 
+            stmt = c.prepareStatement(query);
+            stmt.setString(1,userID);
+            stmt.executeQuery();
             
         }
         catch(SQLException e ){

@@ -21,6 +21,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -85,6 +86,7 @@ public class SearchController implements Initializable {
             genreColumn.setCellValueFactory(new PropertyValueFactory<>("trackGenre"));
             
             selectedList = searchResult;
+            selectedList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
             
             NameColumn.setCellValueFactory(new PropertyValueFactory<>("trackName"));
             ArtistColumn.setCellValueFactory(new PropertyValueFactory<>("trackArtist"));
@@ -92,7 +94,7 @@ public class SearchController implements Initializable {
             GenreColumn.setCellValueFactory(new PropertyValueFactory<>("trackGenre"));
            
             nowPlayingList = nowPlaying;
-            
+            nowPlayingList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
             if(!AddSongsController.totList.isEmpty())
             {
                 ObservableList<Track> oldList = FXCollections.observableArrayList(totList);
