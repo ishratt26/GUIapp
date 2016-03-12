@@ -5,6 +5,7 @@
  */
 package player.gui;
 
+import common.gui.HomeScreenController;
 import java.io.File;
 import static java.lang.Math.floor;
 import static java.lang.String.format;
@@ -23,7 +24,6 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.media.MediaView;
 import javafx.util.Duration;
-import player.logic.SearchController;
 import player.logic.Track;
 import player.logic.storedController;
 
@@ -78,7 +78,7 @@ public class TrackPlayerController implements Initializable {
         try {
 
             if (player == null) {
-                Track track = SearchController.nowPlayingList.getSelectionModel().getSelectedItem();
+                Track track = HomeScreenController.nowPlayingList.getSelectionModel().getSelectedItem();
                 this.path = track.getTrackPath();
                 media = new Media(new File(path).toURI().toString());
                 this.player = new MediaPlayer(media);
@@ -100,11 +100,10 @@ public class TrackPlayerController implements Initializable {
                     }
                 });
             } else if (player.getStatus().equals(Status.PAUSED)) {
-                Track track = SearchController.nowPlayingList.getSelectionModel().getSelectedItem();
+                Track track = HomeScreenController.nowPlayingList.getSelectionModel().getSelectedItem();
                 String path1 = track.getTrackPath();
                 if (path.equals(path1)) {
                     player.play();
-                    System.out.println(path1);
                 } else {
                     player.stop();
                     media = new Media(new File(path1).toURI().toString());
@@ -124,7 +123,7 @@ public class TrackPlayerController implements Initializable {
                 }
             } else if (player.getStatus().equals(Status.PLAYING)) {
                 player.stop();
-                Track track = SearchController.nowPlayingList.getSelectionModel().getSelectedItem();
+                Track track = HomeScreenController.nowPlayingList.getSelectionModel().getSelectedItem();
                 path = track.getTrackPath();
                 media = new Media(new File(path).toURI().toString());
                 this.player = new MediaPlayer(media);
@@ -142,7 +141,7 @@ public class TrackPlayerController implements Initializable {
             updateSlider(player);
        }
        catch(Exception e){
-           System.out.println(e.getMessage());
+
        }
        
     }
@@ -168,7 +167,7 @@ public class TrackPlayerController implements Initializable {
     }
     
     public void playAt(Duration d){
-        Track track = SearchController.nowPlayingList.getSelectionModel().getSelectedItem();
+        Track track = HomeScreenController.nowPlayingList.getSelectionModel().getSelectedItem();
         if (player != null && player.getStatus().equals(MediaPlayer.Status.PLAYING)) {
             player.stop();
         }
@@ -180,7 +179,6 @@ public class TrackPlayerController implements Initializable {
             public void run() {
                 player.seek(d);
                 player.play();
-                System.out.println(d);
                 setTimer(player);
                 updateSlider(player);
             }
@@ -285,12 +283,10 @@ public class TrackPlayerController implements Initializable {
     
     private void updateSlider(MediaPlayer player){
         duration = player.getMedia().getDuration();
-            System.out.println(duration);
                 slider.valueProperty().addListener((Observable ov) -> {
                     if (slider.isValueChanging()) {
                         // multiply duration by percentage calculated by slider position
                         player.seek(duration.multiply(slider.getValue() / 100.0));
-                        //System.out.println(duration);
                     }
                     updateValues();
                 });

@@ -6,6 +6,7 @@
 package player.gui;
 
 import common.Database;
+import static common.gui.HomeScreenController.totList;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -20,6 +21,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -42,6 +45,10 @@ public class TrackListController implements Initializable {
     private TableColumn<Track, String> genreColumn;
     @FXML
     private TableColumn<Track, Integer> lengthColumn;
+    @FXML
+    private ContextMenu options;
+    @FXML
+    private MenuItem option;
     /**
      * Initializes the controller class.
      */
@@ -140,5 +147,14 @@ public class TrackListController implements Initializable {
         }
 
     }
+    
+    @FXML
+    public void addTrackToNowPlayingPlaylist(){
+        Track track = tableView.getSelectionModel().getSelectedItem();
+            if(!totList.contains(track)){
+                totList.add(track);
+            }
+    }
+    
 
 }

@@ -5,8 +5,6 @@
  */
 package common;
 
-import static common.main.AddSong;
-import static common.main.UserPanel;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -27,7 +25,7 @@ public class Plookify {
         try {
         mainLayout = new BorderPane();
         mainLayout = FXMLLoader.load(main.class.getResource("gui/GUI.fxml"));
-        
+        UserPanel();
         playlist();
         player();
         homeScreen();
@@ -64,14 +62,9 @@ public class Plookify {
     {
         AnchorPane searchList = FXMLLoader.load(player.Main.class.getResource("gui/Search.fxml"));
         mainLayout.setCenter(searchList);
-        AddSong();
 
     }
     
-    public static void AddSong() throws IOException{
-        BorderPane addSongs = FXMLLoader.load(player.Main.class.getResource("gui/AddSongs.fxml"));
-        mainLayout.setRight(addSongs);
-    }
     
     public static Scene getScene() {
         return scene;

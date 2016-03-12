@@ -5,6 +5,8 @@
  */
 package player.logic;
 
+import java.util.Objects;
+
 
 
 /**
@@ -26,7 +28,8 @@ public class Track {
         this.trackLength = trackLength;
         this.trackPath = trackPath;
     }
-
+    
+   
    /* public int getTrackID() {
         return trackID;
     }*/
@@ -50,5 +53,29 @@ public class Track {
     public String getTrackPath() {
         return trackPath;
     }
+    
+    @Override
+    public boolean equals(Object object) {
+
+        if (object != null && object instanceof Track) {
+            Track track = (Track) object;
+            if (trackName == null) {
+                return (track.trackName == null);
+            }
+            else {
+                return trackName.equals(track.trackName);
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.trackName);
+        return hash;
+    }
+    
     
 }

@@ -7,11 +7,13 @@ package player.logic;
 
 import common.gui.GUIController;
 import common.Database;
+import common.gui.HomeScreenController;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -20,12 +22,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import static player.logic.AddSongsController.totList;
+import javafx.stage.Stage;
+import static common.gui.HomeScreenController.list1;
+import static common.gui.HomeScreenController.totList;
 
 /**
  * FXML Controller class
@@ -38,21 +44,25 @@ public class SearchController implements Initializable {
     @FXML TableView<Track> searchResult;
     @FXML TableView<Track> nowPlaying;
     
-    @FXML private TableColumn<Track, String> nameColumn, NameColumn;
-    @FXML private TableColumn<Track, String> artistColumn, ArtistColumn;
-    @FXML private TableColumn<Track, String> genreColumn, GenreColumn;
-    @FXML private TableColumn<Track, Integer> lengthColumn, LengthColumn;
-    
-    
-    
+    @FXML private TableColumn<Track, String> nameColumn;
+    @FXML private TableColumn<Track, String> artistColumn;
+    @FXML private TableColumn<Track, String> genreColumn;
+    @FXML private TableColumn<Track, Integer> lengthColumn;
+
     @FXML
     private Label result;
+    @FXML
+    private ContextMenu options;
+    @FXML
+    private MenuItem option1;
+    @FXML
+    private MenuItem option2;
     
     public static TableView<Track> selectedList;
-    public static TableView<Track> nowPlayingList;
+    public ObservableList<Track> nowPlayingList;
     public static ArrayList<Integer> trackIDs = new ArrayList<Integer>();
     
-    
+    public static Stage stage;
     public ArrayList<Track> allTracks;
     public static ArrayList<String> trackNames;
     public static ArrayList<String> trackArtist;
@@ -87,20 +97,6 @@ public class SearchController implements Initializable {
             
             selectedList = searchResult;
             selectedList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-            
-            NameColumn.setCellValueFactory(new PropertyValueFactory<>("trackName"));
-            ArtistColumn.setCellValueFactory(new PropertyValueFactory<>("trackArtist"));
-            LengthColumn.setCellValueFactory(new PropertyValueFactory<>("trackLength"));
-            GenreColumn.setCellValueFactory(new PropertyValueFactory<>("trackGenre"));
-           
-            nowPlayingList = nowPlaying;
-            nowPlayingList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-            if(!AddSongsController.totList.isEmpty())
-            {
-                ObservableList<Track> oldList = FXCollections.observableArrayList(totList);
-                nowPlayingList.setItems(oldList);
-                nowPlaying = nowPlayingList;
-            }
         } catch (IOException ex) {
             Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -234,5 +230,66 @@ public class SearchController implements Initializable {
    
    }
     
-  
+   @FXML
+    public void addSong(){
+        nowPlayingList = selectedList.getSelectionModel().getSelectedItems();
+        for(Track track : nowPlayingList){
+            if(!totList.contains(track)){
+                totList.add(track);
+            }
+        }
+
+        //db connection and insert into database
+        
+        ObservableList<Track> tracks = FXCollections.observableArrayList(totList);
+        HomeScreenController.nowPlayingList.setItems(tracks);
+        selectedList.getSelectionModel().clearSelection();
+         
+        
+    }
+    
+    @FXML
+    public void addAll(){
+        ObservableList<Track> items = selectedList.getItems();
+        for(Track song : items){
+            if(!totList.contains(song)){
+                totList.add(song);
+            }
+        }
+        
+        ObservableList<Track> tracks = FXCollections.observableArrayList(totList);
+        HomeScreenController.nowPlayingList.setItems(tracks);
+        selectedList.getSelectionModel().clearSelection();
+       
+        
+    }
+    
+    public void updateListAdding(){
+        for(int i=0; i<list1.size(); i++){
+            Track song = list1.get(i);
+            if(!totList.contains(song)){
+                totList.add(song);
+            }
+        }
+    }
+    
+    public void addToDb(String userID){
+        Database db = new Database();
+        Connection c = null;
+        PreparedStatement stmt = null;
+        try{
+            c  = db.getConnection();
+            stmt.setQueryTimeout(10);
+            c.setAutoCommit(false);
+            String query = "INSERT into nowPlayingPlaylist(userID) VALUES (?) "; 
+            stmt = c.prepareStatement(query);
+            stmt.setString(1,userID);
+            stmt.executeQuery();
+            
+        }
+        catch(SQLException e ){
+        
+        }
+    
+    }
 }

@@ -21,6 +21,13 @@
             <TableColumn fx:id="artistColumn" minWidth="8.0" prefWidth="124.0" text="Artist" />
             <TableColumn fx:id="genreColumn" prefWidth="126.0" text="Genre" />
         </columns>
+         <contextMenu>
+            <ContextMenu fx:id="options">
+              <items>
+                <MenuItem fx:id="option" mnemonicParsing="false" onAction="#addTrackToNowPlayingPlaylist" text="Add to Now Playing list" />
+              </items>
+            </ContextMenu>
+         </contextMenu>
       </TableView>
    </children>
 </AnchorPane>

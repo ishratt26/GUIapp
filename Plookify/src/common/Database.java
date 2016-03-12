@@ -56,35 +56,6 @@ public class Database {
             }
     }
 
-    /*public ArrayList<Track> getTrack(String query) {
-        ArrayList<Track> tracks = new ArrayList<Track>();
-        Statement statement;
-        try {
-                statement = connection.createStatement();
-                statement.setQueryTimeout(10);
-                ResultSet rs = statement.executeQuery(query);
-                while (rs.next()) {
-                    tracks.add(new Track(rs.getInt("trackID"), rs.getString("trackName"), rs.getInt("trackArtist"), rs.getInt("trackGenre"), rs.getInt("trackLength"), rs.getString("trackPath")));
-                }
-                rs.close();
-                statement.close();
-        }
-        catch (SQLException ex) {
-                System.err.println(ex.getMessage());
-        }
-        finally {
-                if (connection != null){
-                        try{
-                                connection.close();
-                        }
-                        catch(SQLException ex){
-                                System.err.println(ex.getMessage());
-                        }
-                }
-        }
-        return tracks;
-    }
-*/
     
     public void createUser(String username, String firstName, String lastName, String password, String email, String address, int phoneNumber, long date) {
         Statement statement;
