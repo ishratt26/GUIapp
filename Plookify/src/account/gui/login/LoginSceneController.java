@@ -1,6 +1,8 @@
 package account.gui.login;
 
 import account.logic.Login;
+import common.CurrentUser;
+import common.Database;
 import common.Plookify;
 import common.main;
 import java.io.IOException;
@@ -34,6 +36,10 @@ public class LoginSceneController {
             passwordTextField.setStyle("");
             errorText.setText("");
             //TODO: GO TO THE MAIN WINDOW
+            CurrentUser.username = usernameTextField.getText();
+            CurrentUser.fullName = new Database().getUserInfo(CurrentUser.username, "fullName");
+            CurrentUser.customerID = new Database().getUserInfo(CurrentUser.username, "ID");
+            CurrentUser.isPremium = new Database().isPremium(CurrentUser.username);
             Stage stage = (Stage) usernameTextField.getScene().getWindow();
             Plookify.createMainWindow();
             stage.setScene(Plookify.getScene());
