@@ -1,17 +1,14 @@
 package player;
 
-import java.io.File;
-import java.io.FilenameFilter;
-import java.util.ArrayList;
-import java.util.List;
-import player.gui.MainStage;
+import account.gui.login.LoginSceneController;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
-import player.gui.TrackScene;
 
 public class Main extends Application {
     
@@ -23,10 +20,14 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        stage = MainStage.getStage();
-        TrackScene scene = new TrackScene();
-        MainStage.loadScene(scene.getScene(), "Track Player");
-        stage.show();
+        try {
+            stage.setTitle("Plookify");
+            Parent root = FXMLLoader.load(account.Main.class.getResource("gui/login/LoginScene.fxml"));
+            stage.setScene(new Scene(root, 400, 600));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LoginSceneController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
 }

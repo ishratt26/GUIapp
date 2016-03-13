@@ -8,7 +8,6 @@ package common.gui;
 
 import common.Plookify;
 import common.main;
-import static common.main.AddSong;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -54,7 +53,7 @@ public class GUIController implements Initializable {
           
             String text = searchField.getText();
             this.text = text;
-            Plookify.SearchScene();
+            main.SearchScene();
                 
         }
     

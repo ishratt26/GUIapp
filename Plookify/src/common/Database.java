@@ -56,35 +56,6 @@ public class Database {
             }
     }
 
-    /*public ArrayList<Track> getTrack(String query) {
-        ArrayList<Track> tracks = new ArrayList<Track>();
-        Statement statement;
-        try {
-                statement = connection.createStatement();
-                statement.setQueryTimeout(10);
-                ResultSet rs = statement.executeQuery(query);
-                while (rs.next()) {
-                    tracks.add(new Track(rs.getInt("trackID"), rs.getString("trackName"), rs.getInt("trackArtist"), rs.getInt("trackGenre"), rs.getInt("trackLength"), rs.getString("trackPath")));
-                }
-                rs.close();
-                statement.close();
-        }
-        catch (SQLException ex) {
-                System.err.println(ex.getMessage());
-        }
-        finally {
-                if (connection != null){
-                        try{
-                                connection.close();
-                        }
-                        catch(SQLException ex){
-                                System.err.println(ex.getMessage());
-                        }
-                }
-        }
-        return tracks;
-    }
-*/
     
     public void createUser(String username, String firstName, String lastName, String password, String email, String address, int phoneNumber, long date) {
         Statement statement;
@@ -110,7 +81,36 @@ public class Database {
                 }
             }
         }
-    }   
+    }  
+    
+    public String getUserInfo(String username, String column) {
+        Statement statement;
+        String result = "";
+        try {
+            statement = connection.createStatement();
+            statement.setQueryTimeout(10);
+            ResultSet rs = statement.executeQuery("SELECT * FROM account WHERE username = '" + username + "'");
+            if (!rs.isBeforeFirst()) {
+                rs.close();
+                statement.close();
+                return null;
+            }
+            while (rs.next())
+                result = rs.getString(column);
+            statement.close();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.err.println(ex.getMessage());
+                }
+            }
+        }
+        return result;
+    }
     
     public boolean checkUser(String username, String password) {
         Statement statement;
@@ -134,6 +134,51 @@ public class Database {
             System.out.println(ex.getMessage());
         }
         return false;
+    }
+    
+    public boolean isPremium(String username) {
+        Statement statement;
+        boolean result = false;
+        try {
+            statement = connection.createStatement();
+            statement.setQueryTimeout(10);
+            ResultSet rs = statement.executeQuery("SELECT * FROM account WHERE username = '" + username + "'");
+            /*
+            if (!rs.isBeforeFirst()) {
+                rs.close();
+                statement.close();
+                return false;
+            } */
+            boolean doExit = false;
+            Calendar cal = Calendar.getInstance();
+            while (rs.next()) {
+                if (rs.getDate("paymentDate") != null) {
+                    cal.setTime(rs.getDate("paymentDate"));
+                } else {
+                    doExit = true;
+                }
+            }
+            
+            if (doExit) {
+                rs.close();
+                statement.close();
+                return false;
+            }
+            
+            System.out.println("WAS PAID: " + cal.getTime());
+            cal.add(Calendar.DAY_OF_WEEK, 30);
+            System.out.println("EXPIRES: " + cal.getTime());
+            Calendar cal2 = Calendar.getInstance();
+            System.out.println("TODAY: " + cal2.getTime());
+            if (cal2.compareTo(cal) > 0) {
+                result = false;
+            } else {
+                result = true;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return result;
     }
     
     public boolean usernameExists(String username) {

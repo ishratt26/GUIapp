@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="133.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <center>
-      <AnchorPane prefHeight="495.0" prefWidth="105.0" BorderPane.alignment="CENTER" />
-   </center>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="133.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="common.gui.UserPanelController">
+   <top>
+      <AnchorPane prefHeight="495.0" prefWidth="105.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text fx:id="customerUsername" layoutX="4.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username: " wrappingWidth="126.13671875" />
+            <Text fx:id="customerID" layoutX="4.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID:" wrappingWidth="126.13671875" />
+            <ImageView fitHeight="102.0" fitWidth="127.0" layoutX="16.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../resources/userLogo.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="usernameFullName" layoutX="4.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Full Name" wrappingWidth="126.13671875" />
+            <Text fx:id="usernameIsPremium" layoutX="4.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Premium:" wrappingWidth="126.13671875" />
+            <Button layoutX="12.0" layoutY="223.0" mnemonicParsing="false" onAction="#manageDevicesButton" prefHeight="25.0" prefWidth="110.0" text="Manage Devices" />
+         </children></AnchorPane>
+   </top>
 </BorderPane>

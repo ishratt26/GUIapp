@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="player.gui.PlaySongAtController">
+   <children>
+      <TextField fx:id="minutes" layoutX="167.0" layoutY="64.0" prefHeight="26.0" prefWidth="46.0" />
+      <TextField fx:id="seconds" layoutX="167.0" layoutY="111.0" prefHeight="26.0" prefWidth="46.0" />
+      <Label alignment="CENTER" layoutX="79.0" layoutY="14.0" prefHeight="34.0" prefWidth="143.0" text="Start song at" />
+      <Label layoutX="79.0" layoutY="69.0" prefHeight="16.0" prefWidth="57.0" text="minutes :" />
+      <Label layoutX="79.0" layoutY="116.0" prefHeight="16.0" prefWidth="63.0" text="seconds :" />
+      <Button fx:id="playFrom" layoutX="99.0" layoutY="158.0" mnemonicParsing="false" onAction="#playFrom" prefHeight="28.0" prefWidth="102.0" text="Play ">
+         <effect>
+            <DropShadow color="#6df3ff" height="13.41" radius="4.3075" width="5.82" />
+         </effect>
+         <font>
+            <Font name="Big Caslon Medium" size="13.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startX="0.9038461538461539">
+               <stops>
+                  <Stop color="#448e9c" />
+                  <Stop color="#448f9e" offset="0.00749063670411985" />
+                  <Stop color="#303a40" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+   </children>
+</AnchorPane>

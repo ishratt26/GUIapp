@@ -16,37 +16,21 @@
             <Font name="Lucida Sans Regular" size="14.0" />
          </font>
       </Label>
-      <TableView fx:id="searchResult" layoutX="2.0" layoutY="32.0" prefHeight="247.0" prefWidth="505.0">
+      <TableView fx:id="searchResult" layoutX="1.0" layoutY="32.0" prefHeight="471.0" prefWidth="506.0">
         <columns>
           <TableColumn fx:id="nameColumn" prefWidth="172.0" text="Name" />
           <TableColumn fx:id="lengthColumn" prefWidth="84.0" text="Length" />
             <TableColumn fx:id="artistColumn" prefWidth="154.0" text="Artist" />
             <TableColumn fx:id="genreColumn" prefWidth="93.0" text="Genre" />
         </columns>
-      </TableView>
-      <Label layoutX="193.0" layoutY="287.0" prefHeight="20.0" prefWidth="129.0" text="Now Playing playlist" textAlignment="CENTER">
-         <effect>
-            <DropShadow />
-         </effect>
-         <font>
-            <Font name="Lucida Sans Regular" size="13.0" />
-         </font>
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0" startX="0.9423076923076924">
-               <stops>
-                  <Stop color="#448f9e" />
-                  <Stop color="#303a40" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </textFill>
-      </Label>
-      <TableView fx:id="nowPlaying" layoutX="2.0" layoutY="314.0" prefHeight="186.0" prefWidth="505.0">
-        <columns>
-          <TableColumn fx:id="NameColumn" prefWidth="172.0" text="Name" />
-          <TableColumn fx:id="LengthColumn" prefWidth="84.0" text="Length" />
-            <TableColumn fx:id="ArtistColumn" prefWidth="154.0" text="Artist" />
-            <TableColumn fx:id="GenreColumn" prefWidth="93.0" text="Genre" />
-        </columns>
+         <contextMenu>
+            <ContextMenu fx:id="options">
+              <items>
+                  <MenuItem fx:id="option1" mnemonicParsing="false" onAction="#addSong" text="Add song to Now Playing list" />
+                <MenuItem fx:id="options2" mnemonicParsing="false" onAction="#addAll" text="Add all songs to Now Playing list" />
+              </items>
+            </ContextMenu>
+         </contextMenu>
       </TableView>
    </children>
 </AnchorPane>
