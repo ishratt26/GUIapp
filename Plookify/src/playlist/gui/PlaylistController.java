@@ -6,6 +6,7 @@
 package playlist.gui;
 
 
+import common.Plookify;
 import common.main;
 import java.io.IOException;
 import java.net.URL;
@@ -14,6 +15,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -23,6 +26,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -67,6 +71,15 @@ public class PlaylistController implements Initializable {
                 data.addAll(playlists);
             }
             friendsList.setItems(data);
+            
+              ListView<String> selected = new ListView<>();
+           
+            friendsList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+                @Override
+             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                 PlaylistDisplayController.setPlaylistName(newValue);
+                  }
+                });
             q1.close();
             stmt.close();
             c.close();
@@ -106,14 +119,17 @@ public class PlaylistController implements Initializable {
 
     }
         @FXML protected void AddPlaylistScene() throws IOException {
-        main.addingPlaylist();
+        Plookify.addingPlaylist();
         }
     
       @FXML protected void HomeScene() throws IOException {
-        main.homeScreen();
+        Plookify.homeScreen();
         }
        @FXML protected void TrackScene() throws IOException {
-        main.TrackScreen();
+        Plookify.TrackScreen();
+        }
+         @FXML protected void DisplayTracks() throws IOException {
+        Plookify.DisplayPlaylistScene();
         }
     
 }

@@ -126,7 +126,7 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="157.0" prefWidth="150.0">
                                  <children>
-                                    <ListView fx:id="friendsList" layoutY="6.0" prefHeight="231.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <ListView fx:id="friendsList" layoutY="6.0" onMouseClicked="#DisplayTracks" prefHeight="231.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children></AnchorPane>
                         </content>
                       </Tab>
