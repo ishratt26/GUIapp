@@ -26,6 +26,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import player.logic.SearchController;
 import player.logic.Track;
 
 /**
@@ -53,16 +54,19 @@ public class TrackListController implements Initializable {
      * Initializes the controller class.
      */
     public ArrayList<Track> allTracks;
+    public static ArrayList<Integer> trackIDs;
     public static ArrayList<String> trackNames;
     public static ArrayList<String> trackArtist;
     public static ArrayList<String> trackGenre;
     public static ArrayList<String> trackPaths;
     public static ArrayList<String> trackLength;
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
             allTracks = new ArrayList<Track>();
+            trackIDs = new ArrayList<Integer>();
             trackNames = new ArrayList<String>();
             trackArtist = new ArrayList<String>();
             trackGenre = new ArrayList<String>();
@@ -97,12 +101,13 @@ public class TrackListController implements Initializable {
 
     public void setTracks() {
         for (int i = 0; i < trackNames.size(); i++) {
+            int ID = trackIDs.get(i);
             String name = trackNames.get(i);
             String artist = trackArtist.get(i);
             String genre = trackGenre.get(i);
             String path = trackPaths.get(i);
             String length = trackLength.get(i);
-            allTracks.add(new Track(name, artist, genre, length, path));
+            allTracks.add(new Track(ID,name, artist, genre, length, path));
         }
 
     }
@@ -115,8 +120,9 @@ public class TrackListController implements Initializable {
         try {
             statement = db.getConnection().createStatement();
             statement.setQueryTimeout(10);
-            ResultSet rs = statement.executeQuery("SELECT trackName, trackLength, trackPath from track");
+            ResultSet rs = statement.executeQuery("SELECT trackID, trackName, trackLength, trackPath from track");
             while (rs.next()) {
+                trackIDs.add(rs.getInt("trackID"));
                 trackNames.add(rs.getString("trackName"));
                 trackLength.add(rs.getString("trackLength"));
                 trackPaths.add(rs.getString("trackPath"));
@@ -153,6 +159,7 @@ public class TrackListController implements Initializable {
         Track track = tableView.getSelectionModel().getSelectedItem();
             if(!totList.contains(track)){
                 totList.add(track);
+                //SearchController.addToDb(track.getTrackID());
             }
     }
     

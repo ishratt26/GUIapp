@@ -32,6 +32,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import static common.gui.HomeScreenController.list1;
 import static common.gui.HomeScreenController.totList;
+import java.sql.Statement;
 
 /**
  * FXML Controller class
@@ -69,11 +70,14 @@ public class SearchController implements Initializable {
     public static ArrayList<String> trackGenre;
     public static ArrayList<String> trackPaths;
     public static ArrayList<Integer> trackLength;
+    
+    public static int userID;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        userID = 1;
         String searchBy = GUIController.searchBy;
         try {
             // TODO
@@ -121,13 +125,14 @@ public class SearchController implements Initializable {
             //ADD TRACKS
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
+                int ID = rs.getInt("trackID");
                 String track = rs.getString("trackName");
                 String artist = rs.getString("artistName");
                 String genre = rs.getString("genreName");
                 String length = rs.getString("trackLength");
                 String path = rs.getString("trackPath");
                 
-                tracks.add(new Track(track,artist,genre,length,path));
+                tracks.add(new Track(ID,track,artist,genre,length,path));
             }
             
             result.setText("Results for \""+text+"\"");
@@ -168,14 +173,14 @@ public class SearchController implements Initializable {
             //ADD TRACKS
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
+                int ID = rs.getInt("trackID");
                 String track = rs.getString("trackName");
                 String artist = rs.getString("artistName");
                 String genre = rs.getString("genreName");
                 String length = rs.getString("trackLength");
                 String path = rs.getString("trackPath");
                 
-                tracks.add(new Track(track,artist,genre,length,path));
-               // searchList.setItems(tracks);
+                tracks.add(new Track(ID,track,artist,genre,length,path));
             }
             
             result.setText("Results for \""+text+"\"");
@@ -199,8 +204,7 @@ public class SearchController implements Initializable {
         Connection c = null;
         PreparedStatement stmt = null;
         try {
-            //Class.forName("org.sqlite.JDBC");
-            c = db.getConnection();//connection to db, (db should be located in src)
+            c = db.getConnection();
             c.setAutoCommit(false);
             stmt = c.prepareStatement("select * from track t1 left join artist a1 on t1.trackArtist = a1.artistID left join genre g1 on t1.trackGenre = g1.genreID where genreName LIKE ?");
             String trackName = text+"%";
@@ -208,14 +212,14 @@ public class SearchController implements Initializable {
             //ADD TRACKS
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
+                int ID = rs.getInt("trackID");
                 String track = rs.getString("trackName");
                 String artist = rs.getString("artistName");
                 String genre = rs.getString("genreName");
                 String length = rs.getString("trackLength");
                 String path = rs.getString("trackPath");
                 
-                tracks.add(new Track(track,artist,genre,length,path));
-               // searchList.setItems(tracks);
+                tracks.add(new Track(ID,track,artist,genre,length,path));
             }
             
             result.setText("Results for \""+text+"\"");
@@ -232,14 +236,16 @@ public class SearchController implements Initializable {
     
    @FXML
     public void addSong(){
+        int trackID = 0;
         nowPlayingList = selectedList.getSelectionModel().getSelectedItems();
         for(Track track : nowPlayingList){
             if(!totList.contains(track)){
                 totList.add(track);
+                trackID = track.getTrackID();
+               // addToDb(trackID);
             }
         }
-
-        //db connection and insert into database
+        
         
         ObservableList<Track> tracks = FXCollections.observableArrayList(totList);
         HomeScreenController.nowPlayingList.setItems(tracks);
@@ -250,12 +256,18 @@ public class SearchController implements Initializable {
     
     @FXML
     public void addAll(){
+        ArrayList<Integer> ids = new ArrayList<Integer>();
         ObservableList<Track> items = selectedList.getItems();
         for(Track song : items){
             if(!totList.contains(song)){
                 totList.add(song);
+                //ids.add(song.getTrackID());
             }
         }
+        
+       /* for(int i=0; i<ids.size(); i++){
+            addToDb(ids.get(i));
+        }*/
         
         ObservableList<Track> tracks = FXCollections.observableArrayList(totList);
         HomeScreenController.nowPlayingList.setItems(tracks);
@@ -273,23 +285,25 @@ public class SearchController implements Initializable {
         }
     }
     
-    public void addToDb(String userID){
+    public static void addToDb(int trackID){
         Database db = new Database();
         Connection c = null;
-        PreparedStatement stmt = null;
+        Statement stmt = null;
         try{
             c  = db.getConnection();
-            stmt.setQueryTimeout(10);
+           // stmt.setQueryTimeout(10);
             c.setAutoCommit(false);
-            String query = "INSERT into nowPlayingPlaylist(userID) VALUES (?) "; 
-            stmt = c.prepareStatement(query);
-            stmt.setString(1,userID);
-            stmt.executeQuery();
-            
+            stmt = c.createStatement();
+            String query = "INSERT INTO nowPlayingPlaylist (accountID,trackID) VALUES ('" + userID + "', '" + trackID + "')"; 
+            stmt.executeUpdate(query);
+            stmt.close();
+            c.commit();
+            c.close();
         }
         catch(SQLException e ){
-        
+            System.out.println(e.getMessage());
         }
     
     }
+
 }

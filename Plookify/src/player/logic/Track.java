@@ -14,14 +14,15 @@ import java.util.Objects;
  * @author tunazzinaIshrat
  */
 public class Track {
-    //private int trackID;
+    private int trackID;
     private String trackName;
     private String trackArtist;
     private String trackGenre;
     private String trackLength;
     private String trackPath;
     
-    public Track(String trackName, String trackArtist, String trackGenre, String trackLength, String trackPath){
+    public Track(int trackID, String trackName, String trackArtist, String trackGenre, String trackLength, String trackPath){
+        this.trackID = trackID;
         this.trackName = trackName;
         this.trackArtist = trackArtist;
         this.trackGenre = trackGenre;
@@ -30,9 +31,9 @@ public class Track {
     }
     
    
-   /* public int getTrackID() {
+    public int getTrackID() {
         return trackID;
-    }*/
+    }
 
     public String getTrackName() {
         return trackName;

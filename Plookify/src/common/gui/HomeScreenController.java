@@ -5,8 +5,13 @@
  */
 package common.gui;
 
+import common.Database;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -24,6 +29,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import player.logic.SearchController;
 import static player.logic.SearchController.stage;
 import player.logic.Track;
 
@@ -48,13 +54,16 @@ public class HomeScreenController implements Initializable {
     
     public static TableView<Track> nowPlayingList;
     public ObservableList<Track> nowPlayinglist, removeList;
+    ArrayList<Integer> ids = new ArrayList<Integer>();
     public static ArrayList<Track> list1 = new ArrayList<Track>();
     public static ArrayList<Track> totList = new ArrayList<Track>();
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        //getUserID();
         NameColumn.setCellValueFactory(new PropertyValueFactory<>("trackName"));
         ArtistColumn.setCellValueFactory(new PropertyValueFactory<>("trackArtist"));
         LengthColumn.setCellValueFactory(new PropertyValueFactory<>("trackLength"));
@@ -62,6 +71,7 @@ public class HomeScreenController implements Initializable {
 
         nowPlayingList = nowPlaying;
         nowPlayingList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        //showTracksFromDb();
         
         if(!totList.isEmpty())
             {
@@ -89,11 +99,61 @@ public class HomeScreenController implements Initializable {
        for(int i=0; i<removeList.size(); i++){
            Track song = removeList.get(i);
             if(totList.contains(song)){
-                totList.remove(song);  
+                totList.remove(song);
+               // removeFromDb(song.getTrackID());
             }
         }
        ObservableList<Track> tracks = FXCollections.observableArrayList(totList);
        nowPlayingList.setItems(tracks);  
+    }
+
+    private void removeFromDb(int trackID) {
+        Database db = new Database();
+        Connection c = null;
+        Statement stmt = null;
+        try{
+            c  = db.getConnection();
+           // stmt.setQueryTimeout(10);
+            c.setAutoCommit(false);
+            stmt = c.createStatement();
+            String query = "DELETE FROM nowPlayingPlaylist where trackID = '" + trackID + "'"; 
+            stmt.executeUpdate(query);
+            stmt.close();
+            c.commit();
+            c.close();
+        }
+        catch(SQLException e ){
+            System.out.println(e.getMessage());
+        }
+    
+    }
+    
+    public void showTracksFromDb(){
+        Database db = new Database();
+        Connection c = null;
+        Statement stmt = null;
+        try{
+            c  = db.getConnection();
+           // stmt.setQueryTimeout(10);
+            c.setAutoCommit(false);
+            stmt = c.createStatement();
+            String query = "SELECT trackID FROM nowPlayingPlaylist where accountID = '" + SearchController.userID + "'"; 
+            ResultSet q1 = stmt.executeQuery(query);
+             while (q1.next()) {
+                int trackID = q1.getInt("trackID");
+                ids.add(trackID);
+               } 
+             //need to continue from here (another query? another method?)
+            
+            stmt.close();
+            c.commit();
+            c.close();
+        }
+        catch(SQLException e ){
+            System.out.println(e.getMessage());
+        }
+    
+    
     }
     
 }
