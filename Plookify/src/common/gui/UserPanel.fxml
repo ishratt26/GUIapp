@@ -14,14 +14,14 @@
          <children>
             <Text fx:id="customerUsername" layoutX="4.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username: " wrappingWidth="126.13671875" />
             <Text fx:id="customerID" layoutX="4.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID:" wrappingWidth="126.13671875" />
-            <ImageView fitHeight="102.0" fitWidth="127.0" layoutX="16.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="102.0" fitWidth="127.0" layoutX="16.0" layoutY="14.0" opacity="0.44" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../resources/userLogo.png" />
+                  <Image url="@../../resources/icon.png" />
                </image>
             </ImageView>
             <Text fx:id="usernameFullName" layoutX="4.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Full Name" wrappingWidth="126.13671875" />
-            <Text fx:id="usernameIsPremium" layoutX="4.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Premium:" wrappingWidth="126.13671875" />
-            <Button layoutX="12.0" layoutY="223.0" mnemonicParsing="false" onAction="#manageDevicesButton" prefHeight="25.0" prefWidth="110.0" text="Manage Devices" />
+            <Text fx:id="usernameIsPremium" layoutX="3.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Premium:" wrappingWidth="126.13671875" />
+            <Button layoutX="4.0" layoutY="258.0" mnemonicParsing="false" onAction="#manageDevicesButton" prefHeight="25.0" prefWidth="110.0" text="Manage Devices" />
          </children></AnchorPane>
    </top>
 </BorderPane>

@@ -111,12 +111,17 @@ public class PlaylistDisplayController implements Initializable {
              while(q2.next())
              {
                  int trackID=q2.getInt("trackID");
-                 System.out.println(trackID);
                  trackIDs.add(trackID);
+
+                 
              }
+             System.out.println(trackIDs);
              for(int i=0; i<trackIDs.size(); i++)
              {
-                 ResultSet q3=stmt.executeQuery("SELECT * from track WHERE trackID="+trackIDs.get(i)+";");
+                 int currentTrack=trackIDs.get(i);
+                 System.out.println(currentTrack);
+                 
+                 ResultSet q3=stmt.executeQuery("SELECT * FROM track WHERE trackID="+currentTrack+";");
                  while(q3.next())
                  {
                       song=q3.getString("trackName"); /// get the song name
@@ -137,34 +142,26 @@ public class PlaylistDisplayController implements Initializable {
                  ResultSet q5 =stmt.executeQuery("SELECT genreName from genre WHERE genreID="+genreID+";");
                  String genre=q4.getString("genreName"); // get the genre name
                  
-                  data.add(new Track(song, artist, genre, length, path));
+                  data.add(new Track(0, song, artist, genre, length, path));
 
                     nameColumn.setCellValueFactory(new PropertyValueFactory<>("trackName"));
                     artistColumn.setCellValueFactory(new PropertyValueFactory<>("trackArtist"));
                     lengthColumn.setCellValueFactory(new PropertyValueFactory<>("trackLength"));
                     genreColumn.setCellValueFactory(new PropertyValueFactory<>("trackGenre"));
                      tableView.setItems(data);  
-
-                 
-                 
-                 
-                 
-                 
-                 q1.close();
-                 stmt.close();
-                 c.close();
-                 
-                 
                  
             }
-                    
-             System.out.println(trackIDs);
+             q1.close();
+             c.close();
+             stmt.close();
             }catch(Exception e){}
             
         
     
     }
     
+    
+     
     
     public void renamePlaylist()
     {
@@ -204,6 +201,8 @@ public class PlaylistDisplayController implements Initializable {
      @FXML public void refreshScreen() throws IOException {
             Plookify.playlist();
         }
+    
+    
     
     
    
