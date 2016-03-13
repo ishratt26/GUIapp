@@ -6,9 +6,11 @@
 package playlist.gui;
 
 import common.Database;
+import common.Plookify;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -23,6 +25,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import player.gui.TrackListController;
 import static player.gui.TrackListController.trackArtist;
@@ -51,9 +54,19 @@ public class PlaylistDisplayController implements Initializable {
     private TableColumn<Track, String> genreColumn;
     @FXML
     private TableColumn<Track, Integer> lengthColumn;
-    
+    ArrayList<Integer> trackIDs=new ArrayList<Integer>();
+
+
      @FXML
     public Label playlist;
+    private static String name;
+    int artistID;
+    int genreID;
+    String song;
+    String length;
+    String path;
+    @FXML
+    public TextField newname;
     
     public static ArrayList<Track> allTracks;
     public static ArrayList<String> trackNames;
@@ -64,6 +77,7 @@ public class PlaylistDisplayController implements Initializable {
    
     public static void setPlaylistName(String newValue) {
     System.out.println(newValue);
+    name=newValue;
     }
     
     
@@ -71,83 +85,128 @@ public class PlaylistDisplayController implements Initializable {
     
         @Override
     public void initialize(URL url, ResourceBundle rb) {
-            allTracks = new ArrayList<Track>();
+          
+           allTracks = new ArrayList<Track>();
             trackNames = new ArrayList<String>();
             trackArtist = new ArrayList<String>();
             trackGenre = new ArrayList<String>();
             trackLength = new ArrayList<String>();
             trackPaths = new ArrayList<String>();
 
-            setTrackInfo();
-            setTracks();
-            showtracks();
-    }    
+        
+        playlist.setText(name);
+            ObservableList<Track> data=FXCollections.observableArrayList();
+            Connection c=null;
+            Statement stmt=null;
+            try
+            {
+                Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:plookifyDB.sqlite");//connection to db, (db should be located in src)
+            c.setAutoCommit(false);
+            stmt=c.createStatement();     
+            ResultSet q1=stmt.executeQuery("SELECT playlistID from playlist WHERE playlistName = '" + name +"';");
+            int playID=q1.getInt("playlistID");
 
-    private void setTrackInfo() {
-    Database db = new Database();
-        Connection c = null;
-        Statement statement;
-        try {
-            statement = db.getConnection().createStatement();
-            statement.setQueryTimeout(10);
-            ResultSet rs = statement.executeQuery("SELECT trackName, trackLength, trackPath from track");
-            while (rs.next()) {
-                trackNames.add(rs.getString("trackName"));
-                trackLength.add(rs.getString("trackLength"));
-                trackPaths.add(rs.getString("trackPath"));
+             ResultSet q2= stmt.executeQuery("SELECT trackID from playlistTracks WHERE playlistID= " + playID +";");
+             while(q2.next())
+             {
+                 int trackID=q2.getInt("trackID");
+                 System.out.println(trackID);
+                 trackIDs.add(trackID);
+             }
+             for(int i=0; i<trackIDs.size(); i++)
+             {
+                 ResultSet q3=stmt.executeQuery("SELECT * from track WHERE trackID="+trackIDs.get(i)+";");
+                 while(q3.next())
+                 {
+                      song=q3.getString("trackName"); /// get the song name
+                      length=q3.getString("trackLength"); //get the song length
+                      path=q3.getString("trackPath"); //get the song path
+                     String artist=null;
+                     String genre=null;
+                     artistID=q3.getInt("trackArtist");
+                     genreID=q3.getInt("trackGenre");
+                   
+                     
+                     
+                 
+                 }
+                  ResultSet q4 =stmt.executeQuery("SELECT artistName from artist WHERE artistID="+artistID+";");
+                 String artist=q4.getString("artistName");  //get the artist name
+                    
+                 ResultSet q5 =stmt.executeQuery("SELECT genreName from genre WHERE genreID="+genreID+";");
+                 String genre=q4.getString("genreName"); // get the genre name
+                 
+                  data.add(new Track(song, artist, genre, length, path));
+
+                    nameColumn.setCellValueFactory(new PropertyValueFactory<>("trackName"));
+                    artistColumn.setCellValueFactory(new PropertyValueFactory<>("trackArtist"));
+                    lengthColumn.setCellValueFactory(new PropertyValueFactory<>("trackLength"));
+                    genreColumn.setCellValueFactory(new PropertyValueFactory<>("trackGenre"));
+                     tableView.setItems(data);  
+
+                 
+                 
+                 
+                 
+                 
+                 q1.close();
+                 stmt.close();
+                 c.close();
+                 
+                 
+                 
             }
-
-            rs = statement.executeQuery("SELECT artistName from artist,track where trackArtist = artistID");
-            while (rs.next()) {
-                trackArtist.add(rs.getString("artistName"));
-            }
-
-            rs = statement.executeQuery("SELECT genreName from genre,track where trackGenre = genreID");
-            while (rs.next()) {
-                trackGenre.add(rs.getString("genreName"));
-            }
-
-            rs.close();
-            statement.close();
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        } finally {
-            if (c != null) {
-                try {
-                    c.close();
-                } catch (SQLException ex) {
-                    System.err.println(ex.getMessage());
-                }
-            }
-        }    
-    }
-
-      public void setTracks() {
-        for (int i = 0; i < trackNames.size(); i++) {
-            String name = trackNames.get(i);
-            String artist = trackArtist.get(i);
-            String genre = trackGenre.get(i);
-            String path = trackPaths.get(i);
-            String length = trackLength.get(i);
-            allTracks.add(new Track(name, artist, genre, length, path));
-        }
-
-    }
-    public void showtracks() {
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("trackName"));
-        artistColumn.setCellValueFactory(new PropertyValueFactory<>("trackArtist"));
-        lengthColumn.setCellValueFactory(new PropertyValueFactory<>("trackLength"));
-        genreColumn.setCellValueFactory(new PropertyValueFactory<>("trackGenre"));
-        tableView.setItems(getTrack());  
+                    
+             System.out.println(trackIDs);
+            }catch(Exception e){}
+            
+        
+    
     }
     
-        public ObservableList<Track> getTrack() {
-        ObservableList<Track> tracks = FXCollections.observableArrayList();
-        for (int i = 0; i < allTracks.size(); i++) {
-            tracks.add(allTracks.get(i));
-        }
-        return tracks;
-    }
+    
+    public void renamePlaylist()
+    {
+        
+        String newName=newname.getText();
+        System.out.println(name);
+        System.out.println(newName);
+        
+            Connection c=null;
+            Statement stmt=null;
+            try
+            {
+                Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:plookifyDB.sqlite");//connection to db, (db should be located in src)
+            c.setAutoCommit(false);
+            stmt=c.createStatement();  
+            ResultSet u1=stmt.executeQuery("SELECT playlistID from playlist WHERE playlistName = '" + name +"';");
+            int playID=u1.getInt("playlistID");
+                System.out.println(playID);
+                
+                
+                
+           String sql =("UPDATE playlist" + " SET playlistName = '"+ newName +"' WHERE playlistID = " + playID +";");
+            stmt.executeUpdate(sql); 
+            c.commit();
+            playlist.setText(newName);
+            name=newName;
+           refreshScreen();
+            }catch(Exception e)
+            {
+                System.exit(0);
+            }
 
-     
+        
+    }
+    
+     @FXML public void refreshScreen() throws IOException {
+            Plookify.playlist();
+        }
+    
+    
+   
 }
+
+

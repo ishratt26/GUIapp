@@ -47,7 +47,7 @@ public class PlaylistController implements Initializable {
     //MAIN METHOD
         @FXML private ListView<String> friendsList;
         @FXML private ListView privatelist;
-
+        private String name;
     public void run() {
         
         ObservableList<String> data=FXCollections.observableArrayList();
@@ -74,12 +74,7 @@ public class PlaylistController implements Initializable {
             
               ListView<String> selected = new ListView<>();
            
-            friendsList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-                @Override
-             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                 PlaylistDisplayController.setPlaylistName(newValue);
-                  }
-                });
+       
             q1.close();
             stmt.close();
             c.close();
@@ -129,6 +124,9 @@ public class PlaylistController implements Initializable {
         Plookify.TrackScreen();
         }
          @FXML protected void DisplayTracks() throws IOException {
+             name=friendsList.getSelectionModel().getSelectedItem();
+             System.out.println(name);
+             PlaylistDisplayController.setPlaylistName(name);
         Plookify.DisplayPlaylistScene();
         }
     

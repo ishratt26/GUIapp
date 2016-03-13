@@ -5,6 +5,7 @@
  */
 package playlist.gui.addplaylist;
 
+import common.Plookify;
 import common.main;
 import playlist.gui.MainStage;
 import java.io.IOException;
@@ -41,7 +42,7 @@ public class AddPlaylistController implements Initializable {
         @FXML private TextField playlistfield;
         @FXML private Button addbutton;
         @FXML private ListView listview;
-
+        @FXML private TextField artist;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -92,7 +93,10 @@ public class AddPlaylistController implements Initializable {
     public void showtracks() throws IOException
    {
      ObservableList<String> tracks=FXCollections.observableArrayList();
-             ListView<String> selected = new ListView<>();
+     
+     
+     
+     ListView<String> selected = new ListView<>();
 
             listview.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
            
@@ -102,7 +106,7 @@ public class AddPlaylistController implements Initializable {
         System.out.println(newValue);
     }
 });
-
+            String artistname=artist.getText();
             //DATABASE CONNECTION
         Connection c = null;
         Statement stmt = null;
@@ -114,12 +118,17 @@ public class AddPlaylistController implements Initializable {
             System.out.println("Opened database successfully");
             stmt = c.createStatement();
     //ADD TRACKS
-               ResultSet q1 = stmt.executeQuery("select trackName from track;");//(as if it's typing into terminal)
+            ResultSet q1 = stmt.executeQuery( "select artistID from artist where artistName ='"+artistname+"';");//get artistID from artist table
                while (q1.next()) {
-                String track = q1.getString("trackName");
-                System.out.println(track);
-                tracks.addAll(track);
-                listview.setItems(tracks);
+                int id = q1.getInt("artistID");
+                 ResultSet q2 = stmt.executeQuery( "select trackName from track where trackArtist ="+id+";"); 
+                while(q2.next())
+                {
+                    String track = q2.getString("trackName");
+                    System.out.println(track);
+             tracks.addAll(track);
+              listview.setItems(tracks);
+                }
                }                            
             stmt.close();
             c.commit();
@@ -134,7 +143,7 @@ public class AddPlaylistController implements Initializable {
    
     
    @FXML public void refreshScreen() throws IOException {
-            main.playlist();
+            Plookify.playlist();
         }
     
 }

@@ -28,13 +28,13 @@
             <Font name="Big Caslon Medium" size="18.0" />
          </font>
       </TextField>
-      <ListView  fx:id="listview" layoutX="14.0" layoutY="255.0" prefHeight="197.0" prefWidth="506.0" />
+      <ListView fx:id="listview" layoutX="14.0" layoutY="255.0" prefHeight="197.0" prefWidth="506.0" />
       <Button fx:id="addbutton" layoutX="185.0" layoutY="464.0" mnemonicParsing="false" onAction="#addplaylist" prefHeight="67.0" prefWidth="142.0" text="Add">
          <font>
             <Font name="Big Caslon Medium" size="31.0" />
          </font>
       </Button>
-      <TextField layoutX="232.0" layoutY="200.0" onAction="#showtracks" prefHeight="40.0" prefWidth="161.0" promptText="Search for tracks">
+      <TextField fx:id="artist" layoutX="232.0" layoutY="200.0" onAction="#showtracks" prefHeight="40.0" prefWidth="161.0" promptText="Search for Artist">
          <font>
             <Font name="Big Caslon Medium" size="18.0" />
          </font>

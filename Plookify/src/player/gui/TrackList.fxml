@@ -14,12 +14,12 @@
             <Image url="@../../resources/track.png" />
          </image>
       </ImageView>
-      <TableView fx:id="tableView" layoutX="1.0" layoutY="74.0" prefHeight="429.0" prefWidth="522.0">
+      <TableView fx:id="tableView" layoutX="1.0" layoutY="74.0" prefHeight="429.0" prefWidth="515.0">
         <columns>
           <TableColumn fx:id="nameColumn" prefWidth="183.0" text="Name" />
           <TableColumn fx:id="lengthColumn" prefWidth="89.0" text="Length" />
             <TableColumn fx:id="artistColumn" minWidth="8.0" prefWidth="124.0" text="Artist" />
-            <TableColumn fx:id="genreColumn" prefWidth="126.0" text="Genre" />
+            <TableColumn fx:id="genreColumn" prefWidth="120.0" text="Genre" />
         </columns>
       </TableView>
    </children>

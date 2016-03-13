@@ -18,9 +18,9 @@
             <TableColumn fx:id="genreColumn" prefWidth="144.0" text="Genre" />
         </columns>
       </TableView>
-      <TextField layoutX="273.0" layoutY="12.0" prefHeight="26.0" prefWidth="124.0" />
-      <Button layoutX="403.0" layoutY="12.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="124.0" text="Rename Playlist" />
-      <Label fx:id="playlist" layoutX="7.0" layoutY="12.0" prefHeight="26.0" prefWidth="115.0" text="Playlist">
+      <TextField fx:id="newname" layoutX="273.0" layoutY="12.0" prefHeight="26.0" prefWidth="124.0" />
+      <Button layoutX="403.0" layoutY="12.0" mnemonicParsing="false" onAction="#renamePlaylist" prefHeight="26.0" prefWidth="124.0" text="Rename Playlist" />
+      <Label fx:id="playlist" layoutX="7.0" layoutY="12.0" prefHeight="27.0" prefWidth="255.0" text="Playlist">
          <font>
             <Font name="Big Caslon Medium" size="21.0" />
          </font>

@@ -8,11 +8,14 @@ package common;
 import static common.main.AddSong;
 import static common.main.UserPanel;
 import java.io.IOException;
+import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 /**
  *
@@ -23,6 +26,7 @@ public class Plookify {
     private static Scene scene;
     private static BorderPane mainLayout;
     
+   
     public static void createMainWindow() {
         try {
         mainLayout = new BorderPane();
@@ -96,5 +100,16 @@ public class Plookify {
         mainLayout.setCenter(player);
         UserPanel();
     }
+
+    public static void DisplayPlaylistScene() throws IOException {
+ FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(radio.main.class.getResource("gui/radio.fxml"));
+        Pane player = FXMLLoader.load(playlist.main.class.getResource("gui/PlaylistDisplay.fxml"));
+        mainLayout.setCenter(player);
+
+
+    }
+
+  
     
 }
