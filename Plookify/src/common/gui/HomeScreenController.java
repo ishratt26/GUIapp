@@ -147,7 +147,7 @@ public class HomeScreenController implements Initializable {
                 String genre = rs.getString("genreName");
                 String length = rs.getString("trackLength");
                 String path = rs.getString("trackPath");
-                
+                //changing something
                 totList.add(new Track(ID,track,artist,genre,length,path));
                } 
             
