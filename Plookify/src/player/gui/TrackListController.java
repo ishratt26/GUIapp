@@ -159,7 +159,7 @@ public class TrackListController implements Initializable {
         Track track = tableView.getSelectionModel().getSelectedItem();
             if(!totList.contains(track)){
                 totList.add(track);
-                SearchController.addToDb(track.getTrackID());
+              //  SearchController.addToDb(track.getTrackID());
             }
     }
     

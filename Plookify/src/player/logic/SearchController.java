@@ -293,6 +293,7 @@ public class SearchController implements Initializable {
         try{
             c  = db.getConnection();
            // stmt.setQueryTimeout(10);
+            //trying to see
             c.setAutoCommit(false);
             stmt = c.createStatement();
             String query = "INSERT INTO nowPlayingPlaylist (accountID,trackID) VALUES ('" + CurrentUser.customerID + "', '" + trackID + "')"; 
