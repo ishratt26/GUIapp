@@ -5,6 +5,7 @@
  */
 package common.gui;
 
+import common.CurrentUser;
 import common.Database;
 import java.io.IOException;
 import java.net.URL;
@@ -137,13 +138,18 @@ public class HomeScreenController implements Initializable {
            // stmt.setQueryTimeout(10);
             c.setAutoCommit(false);
             stmt = c.createStatement();
-            String query = "SELECT trackID FROM nowPlayingPlaylist where accountID = '" + SearchController.userID + "'"; 
-            ResultSet q1 = stmt.executeQuery(query);
-             while (q1.next()) {
-                int trackID = q1.getInt("trackID");
-                ids.add(trackID);
+            String query = "SELECT * from track t,nowPlayingPlaylist n where accountID = '"+ CurrentUser.customerID + "' and n.trackID = t.trackID"; 
+            ResultSet rs = stmt.executeQuery(query);
+             while (rs.next()) {
+                int ID = rs.getInt("trackID");
+                String track = rs.getString("trackName");
+                String artist = rs.getString("artistName");
+                String genre = rs.getString("genreName");
+                String length = rs.getString("trackLength");
+                String path = rs.getString("trackPath");
+                
+                totList.add(new Track(ID,track,artist,genre,length,path));
                } 
-             //need to continue from here (another query? another method?)
             
             stmt.close();
             c.commit();

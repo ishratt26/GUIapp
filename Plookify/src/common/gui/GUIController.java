@@ -53,7 +53,7 @@ public class GUIController implements Initializable {
           
             String text = searchField.getText();
             this.text = text;
-            main.SearchScene();
+            Plookify.SearchScene();
                 
         }
     

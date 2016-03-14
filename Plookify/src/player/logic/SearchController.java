@@ -5,6 +5,7 @@
  */
 package player.logic;
 
+import common.CurrentUser;
 import common.gui.GUIController;
 import common.Database;
 import common.gui.HomeScreenController;
@@ -294,7 +295,7 @@ public class SearchController implements Initializable {
            // stmt.setQueryTimeout(10);
             c.setAutoCommit(false);
             stmt = c.createStatement();
-            String query = "INSERT INTO nowPlayingPlaylist (accountID,trackID) VALUES ('" + userID + "', '" + trackID + "')"; 
+            String query = "INSERT INTO nowPlayingPlaylist (accountID,trackID) VALUES ('" + CurrentUser.customerID + "', '" + trackID + "')"; 
             stmt.executeUpdate(query);
             stmt.close();
             c.commit();
